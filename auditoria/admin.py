@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import Staff, DailyAssignment, AuditLog
 
-# Register your models here.
+admin.site.register(Staff)
+admin.site.register(DailyAssignment)
+admin.site.register(AuditLog)

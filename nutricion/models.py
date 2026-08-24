@@ -1,5 +1,7 @@
 import uuid
 from django.db import models
+from procesamiento.models import MilkStage, TargetType
+
 
 class Patient(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -18,11 +20,16 @@ class Patient(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.first_name
+
+
 class FeedingPlan(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     patient_id = models.ForeignKey(Patient, on_delete=models.PROTECT)
     formula_id = models.ForeignKey('inventario.Formula', on_delete=models.PROTECT, null=True, blank=True)
-    milk_type = models.CharField(max_length=20, null=True, blank=True)
+    milk_stage = models.CharField(max_length=20, null=True, blank=True, choices=MilkStage.choices)
+    target = models.CharField(max_length=20, null=True, blank=True, choices=TargetType.choices)
     feeding_type = models.CharField(max_length=30, null=False)
     volume_ml_per_feed = models.DecimalField(max_digits=6, decimal_places=2, null=False)
     feeds_per_day = models.IntegerField(null=False)
@@ -34,6 +41,10 @@ class FeedingPlan(models.Model):
     status = models.CharField(max_length=20, null=False, default='active')
     notes = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.patient_id} - {self.feeding_type}"
+
 
 class NutritionTracking(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -52,3 +63,6 @@ class NutritionTracking(models.Model):
     notes = models.TextField(null=True, blank=True)
     recorded_by = models.CharField(max_length=100, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.patient_id} - {self.measurement_date}"
