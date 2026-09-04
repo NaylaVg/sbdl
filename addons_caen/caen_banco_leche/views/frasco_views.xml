@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_caen_frasco_list" model="ir.ui.view">
+        <field name="name">caen.frasco.list</field>
+        <field name="model">caen.frasco</field>
+        <field name="arch" type="xml">
+            <list string="Frascos">
+                <field name="name"/>
+                <field name="donor_id"/>
+                <field name="visit_id"/>
+                <field name="volume_ml"/>
+                <field name="milk_stage"/>
+                <field name="target"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_caen_frasco_form" model="ir.ui.view">
+        <field name="name">caen.frasco.form</field>
+        <field name="model">caen.frasco</field>
+        <field name="arch" type="xml">
+            <form string="Frasco de Leche">
+                <header>
+                    <button name="action_pasteurizar" type="object"
+                            string="Pasteurizar" class="oe_highlight"
+                            invisible="state != 'raw'"/>
+                    <button name="action_fraccionar" type="object"
+                            string="Fraccionar" class="oe_highlight"
+                            invisible="state != 'pasteurized'"/>
+                    <button name="action_entregar" type="object"
+                            string="Entregar" class="oe_highlight"
+                            invisible="state != 'fractioned'"/>
+                    <button name="action_descartar" type="object"
+                            string="Descartar"
+                            invisible="state in ['delivered', 'discarded']"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group string="Datos del frasco">
+                            <field name="name" readonly="1"/>
+                            <field name="donor_id" readonly="state != 'raw'"/>
+                            <field name="volume_ml" readonly="state != 'raw'" string="Volumen (ml)"/>
+                            <field name="extraction_date" readonly="state != 'raw'"/>
+                            <field name="visit_id" readonly="state != 'raw'"/>
+                        </group>
+                        <group string="Clasificación">
+                            <field name="milk_stage" readonly="state != 'raw'"/>
+                            <field name="target" readonly="state != 'raw'"/>
+                            <field name="center_id" readonly="state != 'raw'"/>
+                        </group>
+                        <group string="Stock (automático)" invisible="not lot_id">
+                            <field name="lot_id"/>
+                            <field name="product_id"/>
+                            <field name="current_location_id"/>
+                        </group>
+                    </group>
+
+                    <!-- Aviso contextual por estado -->
+                    <div class="alert alert-info" role="alert"
+                         invisible="state not in ['raw', 'pasteurized', 'fractioned']">
+                        <p><b>Estado actual:</b>
+                           <span invisible="state != 'raw'">Leche Cruda - esperando pasteurización</span>
+                           <span invisible="state != 'pasteurized'">Leche Pasteurizada - lista para fraccionar</span>
+                           <span invisible="state != 'fractioned'">Leche Fraccionada - lista para entregar</span>
+                        </p>
+                    </div>
+
+                    <!-- Indicador de aptitud de la donante (solo visible en crudo) -->
+                    <div class="alert" role="alert" invisible="state != 'raw'">
+                        <p class="mt-3">
+                           <span class="text-muted">Donante apta para pasteurizar:</span>
+                           <field name="donor_apta" widget="boolean_toggle" readonly="1"/>
+                        </p>
+                    </div>
+
+                    <!-- Advertencia si la donante NO es apta y el frasco está crudo -->
+                    <div class="alert alert-danger" role="alert"
+                         invisible="state != 'raw' or donor_apta">
+                        <p><b>¡Atención!</b> Esta donante aún NO está apta.
+                        Complete las <b>7 serologías</b> y tenga un <b>consentimiento vigente</b> antes de pasteurizar.</p>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_caen_frasco" model="ir.actions.act_window">
+        <field name="name">Frascos de leche</field>
+        <field name="res_model">caen.frasco</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_caen_frasco"
+              name="Frascos"
+              parent="menu_caen_procesos"
+              action="action_caen_frasco"/>
+</odoo>

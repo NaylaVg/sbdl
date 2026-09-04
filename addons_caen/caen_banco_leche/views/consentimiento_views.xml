@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_caen_consentimiento_list" model="ir.ui.view">
+        <field name="name">caen.consentimiento.list</field>
+        <field name="model">caen.consentimiento</field>
+        <field name="arch" type="xml">
+            <list string="Consentimientos">
+                <field name="donor_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_caen_consentimiento_form" model="ir.ui.view">
+        <field name="name">caen.consentimiento.form</field>
+        <field name="model">caen.consentimiento</field>
+        <field name="arch" type="xml">
+            <form string="Consentimiento">
+                <sheet>
+                    <group>
+<field name="donor_id"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="bottles_to_print"/>
+                        <field name="photo_permission"/>
+                        <field name="state"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_caen_consentimiento" model="ir.actions.act_window">
+        <field name="name">Consentimientos</field>
+        <field name="res_model">caen.consentimiento</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_caen_consentimiento"
+              name="Consentimientos"
+              parent="menu_caen_donantes"
+              action="action_caen_consentimiento"/>
+</odoo>

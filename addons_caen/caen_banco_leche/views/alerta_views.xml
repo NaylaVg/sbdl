@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Lista de alertas -->
+    <record id="view_caen_alerta_list" model="ir.ui.view">
+        <field name="name">caen.alerta.list</field>
+        <field name="model">caen.alerta</field>
+        <field name="arch" type="xml">
+            <list string="Alertas" decoration-danger="severity == 'critical'" decoration-warning="severity == 'warning'">
+                <field name="create_date" string="Fecha"/>
+                <field name="alert_type" string="Tipo"/>
+                <field name="severity" string="Severidad" widget="badge" decoration-danger="severity == 'critical'" decoration-warning="severity == 'warning'" decoration-info="severity == 'info'"/>
+                <field name="description" string="Descripción"/>
+                <field name="donor_id" string="Donante"/>
+                <field name="state" string="Estado" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Formulario de alerta -->
+    <record id="view_caen_alerta_form" model="ir.ui.view">
+        <field name="name">caen.alerta.form</field>
+        <field name="model">caen.alerta</field>
+        <field name="arch" type="xml">
+            <form string="Alerta" create="false" edit="false">
+                <header>
+                    <button name="action_acknowledge" type="object" string="Reconocer"
+                            invisible="state != 'active'" class="oe_highlight"/>
+                    <button name="action_resolve" type="object" string="Marcar como Resuelta"
+                            invisible="state == 'resolved'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="alert_type" string="Tipo"/>
+                            <field name="severity" string="Severidad" widget="badge"/>
+                            <field name="donor_id" string="Donante"/>
+                        </group>
+                        <group>
+                            <field name="related_model" string="Modelo"/>
+                            <field name="related_id" string="ID"/>
+                            <field name="create_date" string="Fecha"/>
+                        </group>
+                    </group>
+                    <group string="Descripción">
+                        <field name="description" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Acción -->
+    <record id="action_caen_alerta" model="ir.actions.act_window">
+        <field name="name">Alertas</field>
+        <field name="res_model">caen.alerta</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', '=', 'active')]</field>
+        <field name="context">{'search_default_active': 1}</field>
+        <field name="target">current</field>
+    </record>
+
+    <!-- Menú -->
+    <menuitem id="menu_caen_alerta"
+              name="Alertas"
+              parent="menu_caen_root"
+              action="action_caen_alerta"
+              sequence="0"/>
+</odoo>

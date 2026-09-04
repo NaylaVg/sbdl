@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_caen_dashboard_form" model="ir.ui.view">
+        <field name="name">caen.dashboard.form</field>
+        <field name="model">caen.dashboard</field>
+        <field name="arch" type="xml">
+            <form string="Dashboard CAEN" create="false" edit="false">
+                <sheet>
+                    <div class="oe_button_box" name="buttons">
+                        <button name="action_donantes" type="object" class="oe_stat_button" icon="fa-users">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Donantes Activas</span>
+                            </div>
+                        </button>
+                        <button name="action_serologias_pendientes" type="object" class="oe_stat_button" icon="fa-medkit">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Serologías Pendientes</span>
+                            </div>
+                        </button>
+                        <button name="action_frascos_crudos" type="object" class="oe_stat_button" icon="fa-flask">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Frascos Crudos</span>
+                            </div>
+                        </button>
+                        <button name="action_pasteurizaciones" type="object" class="oe_stat_button" icon="fa-thermometer-half">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Pasteurizaciones</span>
+                            </div>
+                        </button>
+                        <button name="action_biberones" type="object" class="oe_stat_button" icon="fa-tint">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Biberones</span>
+                            </div>
+                        </button>
+                        <button name="action_pacientes" type="object" class="oe_stat_button" icon="fa-heart">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Pacientes</span>
+                            </div>
+                        </button>
+                        <button name="action_consentimientos" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Consentimientos</span>
+                            </div>
+                        </button>
+                        <button name="action_alertas" type="object" class="oe_stat_button" icon="fa-exclamation-triangle">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Alertas</span>
+                            </div>
+                        </button>
+                        <button name="action_generar_alertas" type="object" class="oe_stat_button" icon="fa-refresh">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Refrescar Alertas</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="note">
+                        <p><b>Sugerencia:</b> hacé click en cualquiera de las tarjetas para ver el detalle filtrado.</p>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_caen_dashboard" model="ir.actions.act_window">
+        <field name="name">Dashboard</field>
+        <field name="res_model">caen.dashboard</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+    </record>
+
+    <data>
+        <record id="dashboard_caen_default" model="caen.dashboard">
+            <field name="name">Dashboard CAEN</field>
+        </record>
+    </data>
+</odoo>

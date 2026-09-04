@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_caen_bitacora_list" model="ir.ui.view">
+        <field name="name">caen.bitacora.list</field>
+        <field name="model">caen.bitacora</field>
+        <field name="arch" type="xml">
+            <list string="Bitácora" create="false" edit="false" delete="false">
+                <field name="create_date" string="Fecha"/>
+                <field name="create_uid" string="Usuario"/>
+                <field name="record_model"/>
+                <field name="record_id"/>
+                <field name="record_name"/>
+                <field name="action_type"/>
+                <field name="changes"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_caen_bitacora" model="ir.actions.act_window">
+        <field name="name">Bitácora de cambios</field>
+        <field name="res_model">caen.bitacora</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <menuitem id="menu_caen_bitacora"
+              name="Bitácora"
+              parent="menu_caen_root"
+              action="action_caen_bitacora"
+              sequence="100"/>
+</odoo>

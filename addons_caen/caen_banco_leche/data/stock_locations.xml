@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Ubicación raíz del Banco de Leche -->
+    <record id="stock_location_banco_leche" model="stock.location">
+        <field name="name">Banco de Leche Humana</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="stock.stock_location_stock"/>
+    </record>
+
+    <record id="stock_location_recepcion" model="stock.location">
+        <field name="name">Recepción Crudos</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="stock_location_banco_leche"/>
+    </record>
+
+    <record id="stock_location_heladera_cruda" model="stock.location">
+        <field name="name">Heladera Leche Cruda</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="stock_location_banco_leche"/>
+    </record>
+
+    <record id="stock_location_pasteurizacion" model="stock.location">
+        <field name="name">Pasteurización</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="stock_location_banco_leche"/>
+    </record>
+
+    <record id="stock_location_heladera_pasty" model="stock.location">
+        <field name="name">Heladera Leche Pasteurizada</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="stock_location_banco_leche"/>
+    </record>
+
+    <record id="stock_location_fraccionamiento" model="stock.location">
+        <field name="name">Fraccionamiento</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="stock_location_banco_leche"/>
+    </record>
+
+    <record id="stock_location_distribucion" model="stock.location">
+        <field name="name">Distribución / Entrega</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="stock_location_banco_leche"/>
+    </record>
+
+    <record id="stock_location_descarte" model="stock.location">
+        <field name="name">Descarte</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="stock_location_banco_leche"/>
+    </record>
+
+    <!-- Categoría -->
+    <record id="product_category_leche" model="product.category">
+        <field name="name">Leche Humana</field>
+    </record>
+
+    <!-- Producto: Leche Cruda (consu + is_storable para que trackee stock) -->
+    <record id="product_leche_cruda" model="product.template">
+        <field name="name">Leche Cruda</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True"/>
+        <field name="categ_id" ref="product_category_leche"/>
+        <field name="tracking">lot</field>
+    </record>
+
+    <!-- Producto: Leche Pasteurizada -->
+    <record id="product_leche_pasteurizada" model="product.template">
+        <field name="name">Leche Pasteurizada</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True"/>
+        <field name="categ_id" ref="product_category_leche"/>
+        <field name="tracking">lot</field>
+    </record>
+
+    <!-- Producto: Biberón -->
+    <record id="product_biberon" model="product.template">
+        <field name="name">Biberón Leche Humana</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True"/>
+        <field name="categ_id" ref="product_category_leche"/>
+        <field name="tracking">lot</field>
+    </record>
+</odoo>

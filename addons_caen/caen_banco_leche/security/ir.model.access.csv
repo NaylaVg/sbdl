@@ -1,0 +1,16 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_caen_donante,caen.donante,model_caen_donante,base.group_user,1,1,1,1
+access_caen_consentimiento,caen.consentimiento,model_caen_consentimiento,base.group_user,1,1,1,1
+access_caen_serologia,caen.serologia,model_caen_serologia,base.group_user,1,1,1,1
+access_caen_frasco,caen.frasco,model_caen_frasco,base.group_user,1,1,1,1
+access_caen_pasteurizacion,caen.pasteurizacion,model_caen_pasteurizacion,base.group_user,1,1,1,1
+access_caen_fraccionamiento,caen.fraccionamiento,model_caen_fraccionamiento,base.group_user,1,1,1,1
+access_caen_biberon,caen.biberon,model_caen_biberon,base.group_user,1,1,1,1
+access_caen_paciente,caen.paciente,model_caen_paciente,base.group_user,1,1,1,1
+access_caen_plan_alimentacion,caen.plan_alimentacion,model_caen_plan_alimentacion,base.group_user,1,1,1,1
+access_caen_seguimiento_nutricional,caen.seguimiento_nutricional,model_caen_seguimiento_nutricional,base.group_user,1,1,1,1
+access_caen_dashboard,caen.dashboard,model_caen_dashboard,base.group_user,1,0,1,0
+access_caen_visita,caen.visita,model_caen_visita,base.group_user,1,1,1,1
+access_caen_distribucion,caen.distribucion,model_caen_distribucion,base.group_user,1,1,1,1
+access_caen_alerta,caen.alerta,model_caen_alerta,base.group_user,1,1,1,1
+access_caen_bitacora,caen.bitacora,model_caen_bitacora,base.group_user,1,0,0,0

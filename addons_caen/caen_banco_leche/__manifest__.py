@@ -1,0 +1,53 @@
+{
+    'name': 'CAEN Banco de Leche Humana',
+    'version': '1.0',
+    'category': 'Operations',
+    'summary': 'Gestión integral del Banco de Leche Humana del Hospital Perrando',
+    'description': """
+Sistema CAEN - Banco de Leche Humana
+====================================
+Sistema web para gestionar la trazabilidad completa:
+madre -> frasco -> pasteurización -> fraccionamiento -> entrega -> bebé.
+
+- Gestión de donantes, consentimientos y serologías
+- Control de frascos, pasteurización y fraccionamiento (con códigos QR)
+- Control de stock con alarmas automáticas
+- Gestión nutricional de pacientes (percentiles OMS)
+- Auditoría total e inmutable
+    """,
+    'author': 'Hospital Dr. J. C. Perrando',
+    'website': '',
+    'depends': [
+        'base',
+        'contacts',
+        'stock',
+        'mrp',
+        'hr',
+        'uom',
+    ],
+    'data': [
+        'views/dashboard_views.xml',
+        'views/menu_views.xml',
+        'security/ir.model.access.csv',
+        'views/donante_views.xml',
+        'views/visita_views.xml',
+        'views/consentimiento_views.xml',
+        'views/serologia_views.xml',
+        'views/frasco_views.xml',
+        'views/pasteurizacion_views.xml',
+        'views/fraccionamiento_views.xml',
+        'views/distribucion_views.xml',
+        'views/paciente_views.xml',
+        'views/nutricion_views.xml',
+        'views/distribucion_views.xml',
+        'views/bitacora_views.xml',
+        'views/alerta_views.xml',
+        'views/reportes_views.xml',
+        'data/stock_locations.xml',
+        'data/cron_alertas.xml',
+        'data/filtros.xml',
+    ],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+}

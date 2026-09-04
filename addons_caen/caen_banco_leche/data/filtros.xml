@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- FILTROS DONANTES -->
+    <record id="filter_donante_activas" model="ir.filters">
+        <field name="name">Solo Activas</field>
+        <field name="model_id">caen.donante</field>
+        <field name="domain">[('state', '=', 'active')]</field>
+    </record>
+    <record id="filter_donante_apta" model="ir.filters">
+        <field name="name">Solo Aptas para Donar</field>
+        <field name="model_id">caen.donante</field>
+        <field name="domain">[('apta_donar', '=', True)]</field>
+    </record>
+    <record id="filter_donante_no_apta" model="ir.filters">
+        <field name="name">No Aptas (con pendientes)</field>
+        <field name="model_id">caen.donante</field>
+        <field name="domain">[('apta_donar', '=', False), ('state', '=', 'active')]</field>
+    </record>
+
+    <!-- FILTROS SEROLOGÍAS -->
+    <record id="filter_serologia_pendientes" model="ir.filters">
+        <field name="name">Solo Pendientes</field>
+        <field name="model_id">caen.serologia</field>
+        <field name="domain">[('result', '=', 'pending')]</field>
+    </record>
+    <record id="filter_serologia_positivas" model="ir.filters">
+        <field name="name">Solo Positivas (No aptas)</field>
+        <field name="model_id">caen.serologia</field>
+        <field name="domain">[('result', '=', 'positive')]</field>
+    </record>
+    <record id="filter_serologia_ok" model="ir.filters">
+        <field name="name">Solo Aprobadas</field>
+        <field name="model_id">caen.serologia</field>
+        <field name="domain">[('result', '=', 'ok')]</field>
+    </record>
+
+    <!-- FILTROS FRASCOS -->
+    <record id="filter_frasco_crudos" model="ir.filters">
+        <field name="name">Solo Crudos</field>
+        <field name="model_id">caen.frasco</field>
+        <field name="domain">[('state', '=', 'raw')]</field>
+    </record>
+    <record id="filter_frasco_pasteurizados" model="ir.filters">
+        <field name="name">Solo Pasteurizados</field>
+        <field name="model_id">caen.frasco</field>
+        <field name="domain">[('state', '=', 'pasteurized')]</field>
+    </record>
+    <record id="filter_frasco_entregados" model="ir.filters">
+        <field name="name">Solo Entregados</field>
+        <field name="model_id">caen.frasco</field>
+        <field name="domain">[('state', '=', 'delivered')]</field>
+    </record>
+    <record id="filter_frasco_descartados" model="ir.filters">
+        <field name="name">Solo Descartados</field>
+        <field name="model_id">caen.frasco</field>
+        <field name="domain">[('state', '=', 'discarded')]</field>
+    </record>
+    <record id="filter_frasco_prematuro" model="ir.filters">
+        <field name="name">Solo para Prematuros</field>
+        <field name="model_id">caen.frasco</field>
+        <field name="domain">[('target', '=', 'preterm')]</field>
+    </record>
+    <record id="filter_frasco_calostro" model="ir.filters">
+        <field name="name">Solo Calostro</field>
+        <field name="model_id">caen.frasco</field>
+        <field name="domain">[('milk_stage', '=', 'colostrum')]</field>
+    </record>
+
+    <!-- FILTROS CONSENTIMIENTOS -->
+    <record id="filter_consentimiento_vigentes" model="ir.filters">
+        <field name="name">Solo Vigentes</field>
+        <field name="model_id">caen.consentimiento</field>
+        <field name="domain">[('state', '=', 'active')]</field>
+    </record>
+    <record id="filter_consentimiento_vencidos" model="ir.filters">
+        <field name="name">Solo Vencidos</field>
+        <field name="model_id">caen.consentimiento</field>
+        <field name="domain">[('state', '=', 'expired')]</field>
+    </record>
+
+    <!-- FILTROS ALERTAS -->
+    <record id="filter_alerta_solo_criticas" model="ir.filters">
+        <field name="name">Solo Criticas</field>
+        <field name="model_id">caen.alerta</field>
+        <field name="domain">[('severity', '=', 'critical')]</field>
+    </record>
+    <record id="filter_alerta_solo_stock" model="ir.filters">
+        <field name="name">Solo Alertas de Stock</field>
+        <field name="model_id">caen.alerta</field>
+        <field name="domain">[('alert_type', '=', 'stock_bajo')]</field>
+    </record>
+</odoo>

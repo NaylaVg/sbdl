@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_caen_root"
+              name="Banco de Leche"
+              web_icon="caen_banco_leche,static/description/icon.png"
+              action="action_caen_dashboard"
+              sequence="10"/>
+
+    <menuitem id="menu_caen_donantes"
+              name="Donantes y Consentimientos"
+              parent="menu_caen_root"
+              sequence="1"/>
+    <menuitem id="menu_caen_procesos"
+              name="Procesamiento"
+              parent="menu_caen_root"
+              sequence="2"/>
+    <menuitem id="menu_caen_nutricion"
+              name="Nutrición"
+              parent="menu_caen_root"
+              sequence="3"/>
+</odoo>

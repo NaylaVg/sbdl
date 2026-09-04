@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="seq_caen_distribucion" model="ir.sequence">
+        <field name="name">CAEN Distribución</field>
+        <field name="code">caen.distribucion</field>
+        <field name="padding">4</field>
+    </record>
+
+    <record id="view_caen_distribucion_list" model="ir.ui.view">
+        <field name="name">caen.distribucion.list</field>
+        <field name="model">caen.distribucion</field>
+        <field name="arch" type="xml">
+            <list string="Distribuciones">
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="frasco_id"/>
+                <field name="distribution_date"/>
+                <field name="volume_ml"/>
+                <field name="milk_stage"/>
+                <field name="staff_id"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_caen_distribucion_form" model="ir.ui.view">
+        <field name="name">caen.distribucion.form</field>
+        <field name="model">caen.distribucion</field>
+        <field name="arch" type="xml">
+            <form string="Distribución de leche">
+                <header>
+                    <button name="action_confirmar" type="object"
+                            string="Confirmar" class="oe_highlight"
+                            invisible="state == 'done'"/>
+                    <field name="state" widget="statusbar" readonly="1"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group string="Entrega">
+                            <field name="name"/>
+                            <field name="patient_id" readonly="state == 'done'"/>
+                            <field name="frasco_id" readonly="state == 'done'"/>
+                            <field name="distribution_date" readonly="state == 'done'"/>
+                        </group>
+                        <group string="Datos del producto">
+                            <field name="volume_ml"/>
+                            <field name="milk_stage"/>
+                            <field name="target"/>
+                            <field name="staff_id" readonly="state == 'done'"/>
+                        </group>
+                    </group>
+                    <group string="Notas">
+                        <field name="notes"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_caen_distribucion" model="ir.actions.act_window">
+        <field name="name">Distribuciones</field>
+        <field name="res_model">caen.distribucion</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_caen_distribucion"
+              name="Distribuciones"
+              parent="menu_caen_procesos"
+              sequence="4"
+              action="action_caen_distribucion"/>
+</odoo>

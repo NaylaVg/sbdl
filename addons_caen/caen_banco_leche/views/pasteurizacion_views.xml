@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_caen_pasteurizacion_list" model="ir.ui.view">
+        <field name="name">caen.pasteurizacion.list</field>
+        <field name="model">caen.pasteurizacion</field>
+        <field name="arch" type="xml">
+            <list string="Pasteurizaciones">
+                <field name="batch_id"/>
+                <field name="new_barcode"/>
+                <field name="method"/>
+                <field name="volume_after"/>
+                <field name="culture_24h"/>
+                <field name="culture_48h"/>
+                <field name="processed_at"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_caen_pasteurizacion_form" model="ir.ui.view">
+        <field name="name">caen.pasteurizacion.form</field>
+        <field name="model">caen.pasteurizacion</field>
+        <field name="arch" type="xml">
+            <form string="Pasteurización">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="batch_id"/>
+                            <field name="new_barcode"/>
+                            <field name="method"/>
+                            <field name="processed_by"/>
+                            <field name="processed_at"/>
+                        </group>
+                        <group>
+                            <field name="ac_dornic"/>
+                            <field name="cream_percentage"/>
+                            <field name="fat_percentage"/>
+                            <field name="kcal_per_liter"/>
+                            <field name="culture_24h"/>
+                            <field name="culture_48h"/>
+                        </group>
+                    </group>
+                    <group string="Volúmenes">
+                        <field name="volume_before"/>
+                        <field name="volume_after"/>
+                        <field name="discard_volume"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_caen_pasteurizacion" model="ir.actions.act_window">
+        <field name="name">Pasteurizaciones</field>
+        <field name="res_model">caen.pasteurizacion</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_caen_pasteurizacion"
+              name="Pasteurizaciones"
+              parent="menu_caen_procesos"
+              action="action_caen_pasteurizacion"/>
+</odoo>

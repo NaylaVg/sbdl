@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_caen_fraccionamiento_list" model="ir.ui.view">
+        <field name="name">caen.fraccionamiento.list</field>
+        <field name="model">caen.fraccionamiento</field>
+        <field name="arch" type="xml">
+            <list string="Fraccionamientos">
+                <field name="pasteurization_id"/>
+                <field name="fractionation_date"/>
+                <field name="staff_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_caen_fraccionamiento_form" model="ir.ui.view">
+        <field name="name">caen.fraccionamiento.form</field>
+        <field name="model">caen.fraccionamiento</field>
+        <field name="arch" type="xml">
+            <form string="Fraccionamiento">
+                <sheet>
+                    <group>
+                        <field name="pasteurization_id"/>
+                        <field name="fractionation_date"/>
+                        <field name="staff_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Biberones generados">
+                            <field name="bottle_ids">
+                                <list string="Biberones" editable="bottom">
+                                    <field name="qr_code"/>
+                                    <field name="volume_ml"/>
+                                    <field name="milk_stage"/>
+                                    <field name="target"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_caen_fraccionamiento" model="ir.actions.act_window">
+        <field name="name">Fraccionamientos</field>
+        <field name="res_model">caen.fraccionamiento</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_caen_fraccionamiento"
+              name="Fraccionamientos"
+              parent="menu_caen_procesos"
+              action="action_caen_fraccionamiento"/>
+</odoo>
