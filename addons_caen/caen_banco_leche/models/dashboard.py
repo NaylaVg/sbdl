@@ -2,6 +2,8 @@ from odoo import models, fields, api
 
 
 class DashboardCaen(models.Model):
+    # el dashboard es una pantalla resumen con los contadores de cada
+    # seccion, los campos se calculan y no se guardan
     _name = 'caen.dashboard'
     _description = 'Dashboard del Banco de Leche'
     _rec_name = 'name'
@@ -16,6 +18,7 @@ class DashboardCaen(models.Model):
     consentimientos_activos = fields.Integer(string='Consentimientos Activos', compute='_compute_stats')
     alertas_activas = fields.Integer(string='Alertas Activas', compute='_compute_stats')
 
+    # cuenta los registros de cada modelo segun su estado
     @api.depends()
     def _compute_stats(self):
         for rec in self:
@@ -28,6 +31,8 @@ class DashboardCaen(models.Model):
             rec.consentimientos_activos = self.env['caen.consentimiento'].search_count([('state', '=', 'active')])
             rec.alertas_activas = self.env['caen.alerta'].search_count([('state', '=', 'active')])
 
+    # metodos action_: cada uno abre la pantalla correspondiente cuando el
+    # usuario hace click en el contador del dashboard
     def action_donantes(self):
         return {
             'type': 'ir.actions.act_window',

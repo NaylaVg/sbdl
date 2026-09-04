@@ -103,9 +103,9 @@ pero si queres que detecte modulos nuevos o actualice algo le pones
 -u python odoo-bin -c odoo.conf -u caen_banco_leche -d bdl_odoo
 
 despues entras a http://localhost:8069 y ahi en el menu lateral ya aparece "banco de leche"
-con todos los submenus que creamos
+con todos los submenus
 
-# modelos que creamos
+# modelos creados
 
 donante -> madre donante con sus datos y relacion con consentimientos serologias y frascos
 consentimiento -> autorizacion para donar con vigencia y cant de frascos a imprimir
@@ -117,22 +117,20 @@ paciente -> bebe receptor con datos de nacimiento y planes de alimentacion
 plan_alimentacion -> plan individual por paciente con volumen y frecuencia
 seguimiento_nutricional -> registros de peso talla y z scores oms
 
-# lo que descubrimos al testear
+# test
 
-para instalar el modulo hay que activar el entorno virtual primero, si no no funciona
-.\venv\Scripts\Activate.ps1
-
-si el servidor esta caido levantalo con el python del venv directamente
+si el servidor esta caido levantalo con el python del venv, en mi caso es:
 start-process -filepath "C:\Users\lucas\Desktop\code\BDL odoo\odoo\venv\Scripts\python.exe" -argumentlist "odoo-bin","-c","odoo.conf","-d","bdl_odoo" -workingdirectory "C:\Users\lucas\Desktop\code\BDL odoo\odoo" -windowstyle hidden
 
-para instalar el modulo por primera vez o despues de cambios grandes usamos
+para instalar el modulo por primera vez o despues de grandes cambios usa:
 python odoo-bin -c odoo.conf -d bdl_odoo -i caen_banco_leche --stop-after-init
 el --stop-after-init hace que odoo instale y se apague solo, sirve para testear sin dejar el servidor corriendo
+(completamente opcional pero si sos un colgado como yo sirve una banda)
 
-# errores que salieron y como los arreglamos
+# errores que salieron #parte2 
 
 1 los one2many en donante.py usaban "donante_id" pero en los otros modelos el campo se llama "donor_id"
-   hay que poner el mismo nombre en el one2many que en el many2one del modelo hijo
+   hay que poner el mismo nombre en el one2many que en el many2one del modelo hijo (probablemente me quede con el ingles para mayor profesionalismo)
 
 2 en odoo 19 el tag <tree> ya no existe, hay que usar <list>
    todos los xml tenian <tree> y hay que cambiarlos a <list>
@@ -143,7 +141,7 @@ el --stop-after-init hace que odoo instale y se apague solo, sirve para testear 
 4 el odoo.conf necesita que el addons_path apunte a addons_caen tambien
    addons_path = addons,addons_caen
 
-# datos de prueba que cargamos para verificar que todo funciona
+# datos de prueba para verificar que todo funciona
 
 donantes creados: 3 
 serologias: 14 (7 por donante, estudios hiv hep b hep c htlv toxo chagas vdrl) -> con la logica nueva, hoy 1 esta pendiente (htlv de lucia)
@@ -151,14 +149,11 @@ consentimientos: 2 (ambos activos con cant de frascos)
 frascos: 3 con codigo qr -> se puede crear cualquiera sea el estado de la donante
 pasteurizacion: 1 con acidez dornic 18.5, % crema, grasa, kcal/l 583.7, cultivos 24h y 48h ok
 
-# la logica de "apta para donar" que nos pidio el cliente
+# la logica de "apta para donar"
 
 cualquier madre puede donar, no se le impide crear un frasco aunque le falte algo
 pero su leche NO se puede pasteurizar (o sea, no se puede usar para los bebes)
 hasta que tenga las 7 serologias en OK y un consentimiento vigente
-
-o sea: donar se puede, APROVECHAR la leche no, hasta que este todo ok
-esto se controla en el momento de pasteurizar, si la donante no esta apta tira error
 
 en la ficha de la donante aparecen 3 campos calculados:
 serologias aptas / serologias pendientes / apta para donar (si/no)
@@ -170,10 +165,6 @@ crudo -> pasteurizado -> fraccionado -> entregado
 (descartar se puede siempre, ej si falla un cultivo)
 odoo solo muestra el boton que corresponde al estado actual y controla que no saltes pasos
 
-# dashboard sin numeros
-
-en el dashboard las tarjetas ya NO muestran cantidad, solo el nombre de la seccion
-si queres saber cuantos hay, entras a esa seccion, asi como dijo el cliente
 
 # stock real con el modulo stock de odoo
 
@@ -197,11 +188,11 @@ asi odoo lleva el stock real (en litros, se convierte de ml) y podes ver
 el inventario en el modulo de inventario/stock de odoo
 
 la form del frasco ahora muestra:
-- Lote/QR Stock (generado automaticamente con el codigo QR)
+- Lote/QR Stock (generado automaticamente con el codigo QR, en teoria)
 - Producto (cambia segun la etapa del frasco)
 - Ubicacion actual (donde esta el frasco fisicamente en el deposito)
 
-# para cargar datos de prueba usamos xmlrpc
+# para cargar datos de prueba: xmlrpc
 
 hay un archivo test_data.py que hace eso, se ejecuta con el python del venv
 c:\Users\lucas\Desktop\code\BDL odoo\odoo\venv\Scripts\python.exe c:\Users\lucas\Desktop\code\BDL odoo\odoo\test_data.py
@@ -215,7 +206,7 @@ hay un cron que corre todos los dias y genera alertas segun:
    genera una alerta de tipo "warning" diciendo que falta esa serologia
 
 2. consentimientos por vencer: si un consentimiento vence en 30 dias o menos
-   genera alerta, y si vence en 7 o menos dias es "critical"
+   genera alerta, y si vence en 7 o menos dias es "critical", esto es pa probar nomas no se si realmente sea asi supongo que no
 
 3. consentimientos vencidos: si un consentimiento ya vencio se marca como
    expirado automaticamente y genera alerta "critical"
@@ -231,21 +222,10 @@ las alertas se pueden ver desde:
 cada alerta tiene: tipo, severidad (info/warning/critical), donante asociada,
 descripción, y estado (activa/reconocida/resuelta)
 
-# errores adicionales de odoo 19 que encontramos
-
-- el campo "numbercall" ya no existe en ir.cron, hay que quitarlo del xml
-- el campo "type" de product.template solo acepta "consu", "service", "combo"
-  (ya no acepta "product"). para hacer un producto almacenable hay que usar
-  type="consu" + is_storable="True"
-- los campos "property_cost_method" y "uom_po_id" ya no existen en Odoo 19
-- los metodos de python que empiezan con _ son privados y no se pueden llamar
-  via xmlrpc, hay que crear un wrapper publico sin el underscore
-- las ubicaciones de stock deben tener la misma company_id que su padre
-  (no se puede poner company_id=False si el padre tiene una empresa)
 
 # reportes
 
-dentro de Banco de Leche > menu "Reportes" (aparece en el "More Menu" o ) hay:
+dentro de Banco de Leche > menu "Reportes" (aparece en el "More Menu") hay:
 
 frascos:
 - Frascos por Donante (vista pivot: donante vs estado, con volumen)
@@ -304,23 +284,8 @@ alertas:
 estos son filtros compartidos (los ve cualquier usuario) con un click
 aplican el filtro automaticamente sin cargar vistas
 
-# estado actual del sistema
 
-el sistema esta funcional con:
-- 3 donantes (Maria apta, Lucia no apta, Ana apta)
-- 21 serologías (1 pendiente: HTLV de Lucia)
-- 3 consentimientos activos
-- frascos con workflow completo y stock integrado
-- alertas automáticas con cron diario
-- reportes pivot y gráfico
-- filtros guardados en cada pantalla
-- formularios dinámicos con visibilidad según estado y aptitud
-- visitas de donación con frascos asociados
-- distribuciones de leche a pacientes
-- bitácora inmutable de cambios (audit trail)
-- dashboard con accesos directos
-
-# formularios dinámicos (visibilidad condicional)
+# formularios dinámicos (visibilidad)
 
 los formularios muestran solo lo relevante según el estado de cada registro.
 
@@ -337,7 +302,7 @@ frasco:
   consentimiento vigente antes de pasteurizar."
 
 donante:
-- la pestaña "Frascos" del notebook solo aparece si la donante tiene frascos
+- la pestaña "Frascos" solo aparece si la donante tiene frascos
   (n_frascos > 0); si no tiene, se oculta para no mostrar una lista vacía
 
 # visitas de donación (modelo caen.visita)
@@ -407,13 +372,13 @@ se registra automáticamente al:
 - confirmar una distribución
 
 # verificación
-
+esto se movera siempre hacia abajo de manera que sea mas facil encontrarlo por si me olvido
 para verificar que todo funciona se puede abrir el navegador en
-http://localhost:8069/odoo/ y navegar por cada sección. el servidor
-se levanta con:
+http://localhost:8069/odoo/
+el servidor se levanta con:
 python odoo-bin -c odoo.conf -d bdl_odoo
 
-# errores adicionales de odoo 19 que encontramos
+# errores adicionales a tratar
 
 - el campo "numbercall" ya no existe en ir.cron, hay que quitarlo del xml
 - el campo "type" de product.template solo acepta "consu", "service", "combo"

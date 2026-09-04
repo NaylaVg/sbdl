@@ -3,17 +3,23 @@ from odoo.exceptions import ValidationError
 
 
 class Visita(models.Model):
+    # representa cada vez que una donante viene al banco a donar
+    # agrupa los frascos que se extraen en esa visita
     _name = 'caen.visita'
     _description = 'Visita de donación'
     _rec_name = 'name'
+    # ordeno por fecha, las mas nuevas primero
     _order = 'visit_date desc'
 
+    # referencia autogenerada (VIS-0001), el usuario no la escribe
     name = fields.Char(string='Referencia', readonly=True, copy=False)
     donor_id = fields.Many2one('caen.donante', string='Donante', required=True)
     center_id = fields.Many2one('res.partner', string='Centro de recolección')
+    # por defecto uso la fecha y hora actuales
     visit_date = fields.Datetime(
         string='Fecha y hora de la visita', required=True,
         default=lambda self: fields.Datetime.now())
+    # ciclo de vida de la visita
     state = fields.Selection([
         ('scheduled', 'Programada'),
         ('in_progress', 'En curso'),
@@ -21,13 +27,17 @@ class Visita(models.Model):
         ('cancelled', 'Cancelada'),
     ], string='Estado', default='scheduled')
 
+    # los frascos que se donaron en esta visita
     batch_ids = fields.One2many('caen.frasco', 'visit_id', string='Frascos donados')
+    # campos calculados que resumen la visita
     n_frascos = fields.Integer(string='Cantidad de frascos', compute='_compute_n_frascos')
     volumen_total_ml = fields.Integer(
         string='Volumen total (ml)', compute='_compute_n_frascos')
+    # si la donante era apta al momento de la visita
     apta_donar = fields.Boolean(string='Donante apta', related='donor_id.apta_donar')
     observations = fields.Text(string='Observaciones')
 
+    # al crearla sin referencia le genero el numero secuencial VIS-####
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
@@ -36,12 +46,15 @@ class Visita(models.Model):
                 vals['name'] = f'VIS-{seq:0>4d}'
         return super().create(vals_list)
 
+    # cuenta los frascos y suma el volumen de la visita
     @api.depends('batch_ids', 'batch_ids.volume_ml')
     def _compute_n_frascos(self):
         for rec in self:
             rec.n_frascos = len(rec.batch_ids)
             rec.volumen_total_ml = sum(rec.batch_ids.mapped('volume_ml'))
 
+    # botones del flujo de la visita, cada uno cambia el estado y
+    # registra el evento en la bitacora
     def action_marcar_en_curso(self):
         for rec in self:
             if rec.state == 'scheduled':
@@ -67,8 +80,9 @@ class Visita(models.Model):
         self.env['caen.bitacora']._registrar(
             'caen.visita', self.id, self.name, action_type, changes)
 
+    # abre el formulario de frasco ya precargado con la donante, el centro,
+    # la fecha de la visita y el vinculo a esta visita
     def action_agregar_frasco(self):
-        """Crea un frasco en estado crudo vinculado a esta visita."""
         self.ensure_one()
         if self.state == 'cancelled':
             raise ValidationError('No se pueden agregar frascos a una visita cancelada.')

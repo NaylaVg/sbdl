@@ -2,6 +2,8 @@ from odoo import api, fields, models
 
 
 class Fraccionamiento(models.Model):
+    # registro del fraccionamiento: se divide la leche pasteurizada
+    # de un frasco en varios biberones mas chicos
     _name = 'caen.fraccionamiento'
     _description = 'Registro de fraccionamiento de leche'
 
@@ -10,11 +12,13 @@ class Fraccionamiento(models.Model):
     fractionation_date = fields.Date(string='Fecha del fraccionamiento')
     staff_id = fields.Many2one('hr.employee', string='Responsable')
 
+    # los biberones que salieron del fraccionamiento
     bottle_ids = fields.One2many('caen.biberon', 'fractionation_id',
                                  string='Biberones generados')
 
 
 class Biberon(models.Model):
+    # un biberon individual con su propio qr, resultado del fraccionamiento
     _name = 'caen.biberon'
     _description = 'Biberón fraccionado'
 

@@ -39,7 +39,6 @@ madre -> frasco -> pasteurización -> fraccionamiento -> entrega -> bebé.
         'views/distribucion_views.xml',
         'views/paciente_views.xml',
         'views/nutricion_views.xml',
-        'views/distribucion_views.xml',
         'views/bitacora_views.xml',
         'views/alerta_views.xml',
         'views/reportes_views.xml',
