@@ -2,54 +2,76 @@
 <odoo>
 
     <!-- ============================================= -->
+    <!-- CATEGORIA Y PRIVILEGIO PARA LOS USUARIOS       -->
+    <!-- ============================================= -->
+    <record id="category_caen" model="ir.module.category">
+        <field name="name">Banco de Leche</field>
+        <field name="sequence">1</field>
+    </record>
+    <record id="privilege_caen" model="res.groups.privilege">
+        <field name="name">Permisos</field>
+        <field name="category_id" ref="category_caen"/>
+    </record>
+
+    <!-- ============================================= -->
     <!-- PERMISOS INDIVIDUALES                         -->
-    <!-- cada uno controla un area especifica           -->
     <!-- ============================================= -->
 
     <record id="perm_donantes" model="res.groups">
         <field name="name">CAEN Donantes</field>
+        <field name="privilege_id" ref="privilege_caen"/>
     </record>
     <record id="perm_consentimientos" model="res.groups">
         <field name="name">CAEN Consentimientos</field>
+        <field name="privilege_id" ref="privilege_caen"/>
     </record>
     <record id="perm_visitas" model="res.groups">
         <field name="name">CAEN Visitas</field>
+        <field name="privilege_id" ref="privilege_caen"/>
     </record>
     <record id="perm_laboratorio" model="res.groups">
         <field name="name">CAEN Laboratorio</field>
+        <field name="privilege_id" ref="privilege_caen"/>
     </record>
     <record id="perm_frascos" model="res.groups">
         <field name="name">CAEN Frascos</field>
+        <field name="privilege_id" ref="privilege_caen"/>
     </record>
     <record id="perm_pasteurizacion" model="res.groups">
         <field name="name">CAEN Pasteurizacion</field>
+        <field name="privilege_id" ref="privilege_caen"/>
     </record>
     <record id="perm_distribucion" model="res.groups">
         <field name="name">CAEN Distribucion</field>
+        <field name="privilege_id" ref="privilege_caen"/>
     </record>
     <record id="perm_pacientes" model="res.groups">
         <field name="name">CAEN Pacientes</field>
+        <field name="privilege_id" ref="privilege_caen"/>
     </record>
     <record id="perm_nutricion" model="res.groups">
         <field name="name">CAEN Nutricion</field>
+        <field name="privilege_id" ref="privilege_caen"/>
     </record>
     <record id="perm_stock" model="res.groups">
         <field name="name">CAEN Inventario</field>
+        <field name="privilege_id" ref="privilege_caen"/>
     </record>
     <record id="perm_alertas" model="res.groups">
         <field name="name">CAEN Alertas</field>
+        <field name="privilege_id" ref="privilege_caen"/>
     </record>
     <record id="perm_reportes" model="res.groups">
         <field name="name">CAEN Reportes</field>
+        <field name="privilege_id" ref="privilege_caen"/>
     </record>
     <record id="perm_bitacora" model="res.groups">
         <field name="name">CAEN Bitacora</field>
+        <field name="privilege_id" ref="privilege_caen"/>
     </record>
 
     <!-- ============================================= -->
     <!-- ROLES PREDEFINIDOS                            -->
-    <!-- cada rol hereda (implied_ids) los permisos     -->
-    <!-- que le corresponden, el jefe puede ajustarlos  -->
     <!-- ============================================= -->
 
     <!-- ADMIN: todos los permisos -->

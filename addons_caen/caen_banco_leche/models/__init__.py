@@ -12,3 +12,4 @@ from . import paciente
 from . import nutricion
 from . import dashboard
 from . import alerta
+from . import res_users

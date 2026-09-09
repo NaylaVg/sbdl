@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- vista heredada de res.users para agregar la pestana Permisos CAEN -->
+    <record id="view_users_form_caen" model="ir.ui.view">
+        <field name="name">res.users.form.caen</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <!-- agrego la pestana despues de Access Rights -->
+            <xpath expr="//page[@name='access_rights']" position="after">
+                <page string="Permisos CAEN" name="caen_permissions">
+                    <!-- selector de rol predefinido con radio buttons -->
+                    <group string="Rol predefinido">
+                        <field name="caen_role" widget="radio"/>
+                    </group>
+                    <!-- casillas de permisos individuales -->
+                    <!-- se marcan/desmarcan automaticamente al cambiar el rol -->
+                    <!-- filtradas por privilege_id para mostrar solo los permisos CAEN -->
+                    <group string="Permisos (se marcan automaticamente al elegir rol)">
+                        <field name="group_ids" widget="many2many_checkboxes"
+                               nolabel="1" colspan="2"
+                               domain="[('privilege_id', '=', %(caen_banco_leche.privilege_caen)d)]"
+                               options="{'no_create': True, 'no_create_edit': True}"/>
+                    </group>
+                </page>
+            </xpath>
+
+            <!-- oculto pestaña Preferences que no sirve -->
+            <xpath expr="//page[@name='preferences']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

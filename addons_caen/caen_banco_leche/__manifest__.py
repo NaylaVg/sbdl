@@ -44,6 +44,7 @@ madre -> frasco -> pasteurización -> fraccionamiento -> entrega -> bebé.
         'views/alerta_views.xml',
         'views/reportes_views.xml',
         'views/stock_views.xml',
+        'views/usuarios_caen_views.xml',
 
         'data/stock_locations.xml',
         'data/cron_alertas.xml',
@@ -52,6 +53,7 @@ madre -> frasco -> pasteurización -> fraccionamiento -> entrega -> bebé.
     'assets': {
         'web.assets_backend': [
             'caen_banco_leche/static/src/css/caen_style.css',
+            'caen_banco_leche/static/src/js/caen_role_watcher.js',
             'caen_banco_leche/static/src/xml/caen_profile.xml',
         ],
     },

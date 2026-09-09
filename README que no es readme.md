@@ -425,6 +425,74 @@ si se agrega un modulo nuevo habria que agregar el link a mano en caen_profile.x
 
 
 
+# sistema de usuarios y permisos
+
+como funciona la creacion de usuarios:
+1. el admin o el jefe van a usuarios y le dan a new
+2. escriben nombre y email/login 
+3. guardan
+
+para que el usuario ingrese por primera vez:
+el admin va al usuario, le da a acciones, enviar email para restablecer contraseña
+o le dice al usuario que vaya a mi perfil, cambiar contraseña
+esto es mas seguro xq el admin no tiene que saber la contraseña del otro
+ IGUAL ESTO LO TENGO QUE CAMBIAR DE ALGUNA FORMA 
+
+## roles predefinidos
+(importante chequear si esto deberia de ser asi o no)
+hay 6 roles predefinidos y 1 personalizado:
+- caen administrador: todos los permisos 
+- caen jefe: todos los permisos 
+- caen enfermera: donantes, consentimientos, visitas, frascos, inventario, alertas
+- caen tecnico de laboratorio: laboratorio, donantes, inventario, alertas, reportes
+- caen nutricionista: pacientes, nutricion, distribucion, inventario, alertas, reportes
+- caen recepcionista: donantes, consentimientos, inventario, alertas
+- personalizado: 0 permisos, el jefe elige desde cero
+
+## permisos individuales (13)
+(importante consultar si esta bien asi o se quita el agrupamiento, que es lo que me agrada mas a mi al menos)
+cada permiso controla un area del sistema:
+- caen donantes: ver y modificar donantes
+- caen consentimientos: ver y modificar consentimientos
+- caen visitas: ver y modificar visitas de donacion
+- caen laboratorio: ver y modificar serologias y pasteurizaciones
+- caen frascos: ver y modificar frascos
+- caen pasteurizacion: ver y modificar fraccionamiento y biberones
+- caen distribucion: ver y modificar distribuciones
+- caen pacientes: ver y modificar pacientes
+- caen nutricion: ver y modificar planes de alimentacion y seguimiento
+- caen inventario: ver stock de leche cruda y pasteurizada
+- caen alertas: ver y gestionar alertas
+- caen reportes: acceder a reportes
+- caen bitacora: ver la bitacora de auditoria
+(ta madre me olvide darle bitacora a todos)
+
+## como se asignan los permisos
+
+el jefe o admin elige un rol en la pestana permisos caen
+1. el campo caen_role se guarda en el usuario
+2. el onchange en python actualiza las casillas en tiempo real
+3. al guardar, _apply_caen_role sincroniza group_ids con los permisos del rol
+4. si elige personalizado, las casillas quedan vacias y el jefe elige a mano
+
+## archivos involucrados
+
+- security/security.xml: define los 13 permisos, 6 roles, la categoria banco de leche y el privilegio
+- models/res_users.py: campo caen_role, create/write para sincronizar, onchange para casillas
+- views/usuarios_caen_views.xml: hereda el form de usuarios, agrega pestana permisos caen
+- static/src/js/caen_role_watcher.js: servicio que recarga la pagina al cambiar el rol
+
+## en odoo los grupos cambiaron
+
+ya no se usa category_id en res.groups sino privilege_id
+la jerarquia es:
+ir.module.category -> res.groups.privilege -> res.groups
+en el form de usuarios se ven agrupados por privilege
+
+nuestro privilege se llama permisos y esta bajo la categoria banco de leche
+los 13 permisos y los 6 roles usan privilege_id = privilege_caen
+
+
 
 # verificación
 esto se movera siempre hacia abajo de manera que sea mas facil encontrarlo por si me olvido
