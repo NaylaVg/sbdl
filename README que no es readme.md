@@ -371,12 +371,6 @@ se registra automáticamente al:
 - cambiar de etapa de la visita (En curso, Completar, Cancelar)
 - confirmar una distribución
 
-# verificación
-esto se movera siempre hacia abajo de manera que sea mas facil encontrarlo por si me olvido
-para verificar que todo funciona se puede abrir el navegador en
-http://localhost:8069/odoo/
-el servidor se levanta con:
-python odoo-bin -c odoo.conf -d bdl_odoo
 
 # errores adicionales a tratar
 
@@ -401,3 +395,40 @@ python odoo-bin -c odoo.conf -d bdl_odoo
 - _log_access = False impide usar create_uid/create_date en vistas list;
   quitar esa restricción si se necesitan esos campos en las vistas
 
+# sidebar lateral
+
+la navbar original de odoo se reconfiguro como sidebar vertical a la izquierda
+
+estructura:
+- caja de perfil reservada arriba (15vh, fondo oscuro, por ahora solo dice "Perfil")
+- debajo estan los botones de todos los modulos con iconos
+- los modulos con submenus usan acordeon (<details>/<summary> de html puro xq el nativo de odoo era un asco)
+
+esto esta en:
+- static/src/css/caen_style.css -> estilos de la sidebar
+- static/src/xml/caen_profile.xml -> hereda web.NavBar y pone el html del sidebar
+
+como funciona:
+- el template caen_profile.xml hace xpath sobre <nav> del NavBar y pone el html
+- el css oculta todo lo original de odoo (apps menu, brand, breadcrumbs, systray, sections, toggle)
+- el css muestra .caen-sidebar con display flex
+- los links son href directos a las acciones de odoo (/odoo/action-XXX)
+- los ID de acciones se obtuvieron de la API /web/webclient/load_menus
+
+acordeon:
+- se usa <details>/<summary> nativo de html5
+- al clickear un modulo con submenus se abre y muestra los hijos en forma de acordeon (nativamente es una panel emergente bastante molesto y estupidamente feo, despidan al que decidio eso)
+- la flechita se usa con fontawesome (\f054) y gira cuando se abre
+
+
+si se agrega un modulo nuevo habria que agregar el link a mano en caen_profile.xml
+
+
+
+
+# verificación
+esto se movera siempre hacia abajo de manera que sea mas facil encontrarlo por si me olvido
+para verificar que todo funciona se puede abrir el navegador en
+http://localhost:8069/odoo/
+el servidor se levanta con:
+python odoo-bin -c odoo.conf -d bdl_odoo

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-inherit="web.NavBar" t-inherit-mode="extension">
+        <xpath expr="//nav" position="before">
+            <div class="caen-sidebar">
+                <div class="caen-sidebar-profile-box">Perfil</div>
+                <nav class="caen-sidebar-nav">
+                    <a class="caen-sidebar-btn" href="/odoo/action-411">
+                        <i class="fa fa-home caen-sidebar-icon"/><span>Tablero</span>
+                    </a>
+                    <a class="caen-sidebar-btn" href="/odoo/action-414">
+                        <i class="fa fa-exclamation-triangle caen-sidebar-icon"/><span>Alertas</span>
+                    </a>
+                    <details class="caen-sidebar-group">
+                        <summary class="caen-sidebar-btn">
+                            <i class="fa fa-users caen-sidebar-icon"/><span>Donantes y Consentimientos</span>
+                        </summary>
+                        <div class="caen-sidebar-submenu">
+                            <a class="caen-sidebar-child" href="/odoo/action-426">Visitas de Donación</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-403">Donantes</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-404">Consentimientos</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-405">Serologías</a>
+                        </div>
+                    </details>
+                    <details class="caen-sidebar-group">
+                        <summary class="caen-sidebar-btn">
+                            <i class="fa fa-cogs caen-sidebar-icon"/><span>Procesamiento</span>
+                        </summary>
+                        <div class="caen-sidebar-submenu">
+                            <a class="caen-sidebar-child" href="/odoo/action-406">Frascos</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-407">Pasteurizaciones</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-408">Fraccionamientos</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-429">Distribuciones</a>
+                        </div>
+                    </details>
+                    <details class="caen-sidebar-group">
+                        <summary class="caen-sidebar-btn">
+                            <i class="fa fa-heartbeat caen-sidebar-icon"/><span>Nutrición</span>
+                        </summary>
+                        <div class="caen-sidebar-submenu">
+                            <a class="caen-sidebar-child" href="/odoo/action-409">Pacientes</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-410">Planes de Alimentación</a>
+                        </div>
+                    </details>
+                    <details class="caen-sidebar-group">
+                        <summary class="caen-sidebar-btn">
+                            <i class="fa fa-bar-chart caen-sidebar-icon"/><span>Reportes</span>
+                        </summary>
+                        <div class="caen-sidebar-submenu">
+                            <a class="caen-sidebar-child" href="/odoo/action-416">Frascos por Donante</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-417">Frascos por Estado</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-418">Serologías por Resultado</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-419">Serologías Pendientes</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-420">Inventario por Ubicación</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-421">Inventario Leche Cruda</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-422">Inventario Leche Pasteurizada</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-423">Donantes por Aptitud</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-424">Historial de Alertas</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-425">Reporte de Nutrición</a>
+                        </div>
+                    </details>
+                    <a class="caen-sidebar-btn" href="/odoo/action-431">
+                        <i class="fa fa-cube caen-sidebar-icon"/><span>Inventario</span>
+                    </a>
+                    <a class="caen-sidebar-btn" href="/odoo/action-70">
+                        <i class="fa fa-user caen-sidebar-icon"/><span>Usuarios</span>
+                    </a>
+                    <a class="caen-sidebar-btn" href="/odoo/action-430">
+                        <i class="fa fa-book caen-sidebar-icon"/><span>Bitácora</span>
+                    </a>
+                </nav>
+            </div>
+        </xpath>
+    </t>
+</templates>

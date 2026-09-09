@@ -50,7 +50,7 @@
                             <field name="target" readonly="state != 'raw'"/>
                             <field name="center_id" readonly="state != 'raw'"/>
                         </group>
-                        <group string="Stock (automático)" invisible="not lot_id">
+                        <group string="Inventario (automático)" invisible="not lot_id">
                             <field name="lot_id"/>
                             <field name="product_id"/>
                             <field name="current_location_id"/>

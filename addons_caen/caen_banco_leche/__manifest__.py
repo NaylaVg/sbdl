@@ -28,6 +28,7 @@ madre -> frasco -> pasteurización -> fraccionamiento -> entrega -> bebé.
     'data': [
         'views/dashboard_views.xml',
         'views/menu_views.xml',
+        'security/security.xml',
         'security/ir.model.access.csv',
         'views/donante_views.xml',
         'views/visita_views.xml',
@@ -42,10 +43,18 @@ madre -> frasco -> pasteurización -> fraccionamiento -> entrega -> bebé.
         'views/bitacora_views.xml',
         'views/alerta_views.xml',
         'views/reportes_views.xml',
+        'views/stock_views.xml',
+
         'data/stock_locations.xml',
         'data/cron_alertas.xml',
         'data/filtros.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'caen_banco_leche/static/src/css/caen_style.css',
+            'caen_banco_leche/static/src/xml/caen_profile.xml',
+        ],
+    },
     'installable': True,
     'application': True,
     'auto_install': False,

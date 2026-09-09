@@ -85,7 +85,7 @@
         <field name="domain">[('severity', '=', 'critical')]</field>
     </record>
     <record id="filter_alerta_solo_stock" model="ir.filters">
-        <field name="name">Solo Alertas de Stock</field>
+        <field name="name">Solo Alertas de Inventario</field>
         <field name="model_id">caen.alerta</field>
         <field name="domain">[('alert_type', '=', 'stock_bajo')]</field>
     </record>

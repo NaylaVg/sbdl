@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================= -->
+    <!-- PERMISOS INDIVIDUALES                         -->
+    <!-- cada uno controla un area especifica           -->
+    <!-- ============================================= -->
+
+    <record id="perm_donantes" model="res.groups">
+        <field name="name">CAEN Donantes</field>
+    </record>
+    <record id="perm_consentimientos" model="res.groups">
+        <field name="name">CAEN Consentimientos</field>
+    </record>
+    <record id="perm_visitas" model="res.groups">
+        <field name="name">CAEN Visitas</field>
+    </record>
+    <record id="perm_laboratorio" model="res.groups">
+        <field name="name">CAEN Laboratorio</field>
+    </record>
+    <record id="perm_frascos" model="res.groups">
+        <field name="name">CAEN Frascos</field>
+    </record>
+    <record id="perm_pasteurizacion" model="res.groups">
+        <field name="name">CAEN Pasteurizacion</field>
+    </record>
+    <record id="perm_distribucion" model="res.groups">
+        <field name="name">CAEN Distribucion</field>
+    </record>
+    <record id="perm_pacientes" model="res.groups">
+        <field name="name">CAEN Pacientes</field>
+    </record>
+    <record id="perm_nutricion" model="res.groups">
+        <field name="name">CAEN Nutricion</field>
+    </record>
+    <record id="perm_stock" model="res.groups">
+        <field name="name">CAEN Inventario</field>
+    </record>
+    <record id="perm_alertas" model="res.groups">
+        <field name="name">CAEN Alertas</field>
+    </record>
+    <record id="perm_reportes" model="res.groups">
+        <field name="name">CAEN Reportes</field>
+    </record>
+    <record id="perm_bitacora" model="res.groups">
+        <field name="name">CAEN Bitacora</field>
+    </record>
+
+    <!-- ============================================= -->
+    <!-- ROLES PREDEFINIDOS                            -->
+    <!-- cada rol hereda (implied_ids) los permisos     -->
+    <!-- que le corresponden, el jefe puede ajustarlos  -->
+    <!-- ============================================= -->
+
+    <!-- ADMIN: todos los permisos -->
+    <record id="role_admin" model="res.groups">
+        <field name="name">CAEN Administrador</field>
+        <field name="implied_ids" eval="[
+            (4, ref('perm_donantes')),
+            (4, ref('perm_consentimientos')),
+            (4, ref('perm_visitas')),
+            (4, ref('perm_laboratorio')),
+            (4, ref('perm_frascos')),
+            (4, ref('perm_pasteurizacion')),
+            (4, ref('perm_distribucion')),
+            (4, ref('perm_pacientes')),
+            (4, ref('perm_nutricion')),
+            (4, ref('perm_stock')),
+            (4, ref('perm_alertas')),
+            (4, ref('perm_reportes')),
+            (4, ref('perm_bitacora')),
+        ]"/>
+    </record>
+
+    <!-- JEFE: gestiona usuarios, ve todo pero no modifica todo -->
+    <record id="role_jefe" model="res.groups">
+        <field name="name">CAEN Jefe</field>
+        <field name="implied_ids" eval="[
+            (4, ref('perm_donantes')),
+            (4, ref('perm_consentimientos')),
+            (4, ref('perm_visitas')),
+            (4, ref('perm_laboratorio')),
+            (4, ref('perm_frascos')),
+            (4, ref('perm_pasteurizacion')),
+            (4, ref('perm_distribucion')),
+            (4, ref('perm_pacientes')),
+            (4, ref('perm_nutricion')),
+            (4, ref('perm_stock')),
+            (4, ref('perm_alertas')),
+            (4, ref('perm_reportes')),
+            (4, ref('perm_bitacora')),
+        ]"/>
+    </record>
+
+    <!-- ENFERMERA: donantes, consentimientos, visitas, frascos -->
+    <record id="role_enfermera" model="res.groups">
+        <field name="name">CAEN Enfermera</field>
+        <field name="implied_ids" eval="[
+            (4, ref('perm_donantes')),
+            (4, ref('perm_consentimientos')),
+            (4, ref('perm_visitas')),
+            (4, ref('perm_frascos')),
+            (4, ref('perm_stock')),
+            (4, ref('perm_alertas')),
+        ]"/>
+    </record>
+
+    <!-- TECNICO DE LABORATORIO: solo serologias y reportes de lab -->
+    <record id="role_tecnico_lab" model="res.groups">
+        <field name="name">CAEN Tecnico de Laboratorio</field>
+        <field name="implied_ids" eval="[
+            (4, ref('perm_laboratorio')),
+            (4, ref('perm_donantes')),
+            (4, ref('perm_stock')),
+            (4, ref('perm_alertas')),
+            (4, ref('perm_reportes')),
+        ]"/>
+    </record>
+
+    <!-- NUTRICIONISTA: pacientes, planes, distribuciones -->
+    <record id="role_nutricionista" model="res.groups">
+        <field name="name">CAEN Nutricionista</field>
+        <field name="implied_ids" eval="[
+            (4, ref('perm_pacientes')),
+            (4, ref('perm_nutricion')),
+            (4, ref('perm_distribucion')),
+            (4, ref('perm_stock')),
+            (4, ref('perm_alertas')),
+            (4, ref('perm_reportes')),
+        ]"/>
+    </record>
+
+    <!-- RECEPCIONISTA: solo consulta basica -->
+    <record id="role_recepcionista" model="res.groups">
+        <field name="name">CAEN Recepcionista</field>
+        <field name="implied_ids" eval="[
+            (4, ref('perm_donantes')),
+            (4, ref('perm_consentimientos')),
+            (4, ref('perm_stock')),
+            (4, ref('perm_alertas')),
+        ]"/>
+    </record>
+
+    <!-- ============================================= -->
+    <!-- REGLAS DE REGISTRO                            -->
+    <!-- ============================================= -->
+
+    <record id="rule_bitacora_read" model="ir.rule">
+        <field name="name">Bitacora: todos leen</field>
+        <field name="model_id" ref="model_caen_bitacora"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="rule_alertas_read" model="ir.rule">
+        <field name="name">Alertas: todos leen</field>
+        <field name="model_id" ref="model_caen_alerta"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="rule_stock_read" model="ir.rule">
+        <field name="name">Inventario: todos leen</field>
+        <field name="model_id" ref="model_caen_stock_leche"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+</odoo>

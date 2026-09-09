@@ -53,12 +53,12 @@
         </field>
     </record>
 
-    <!-- Vista pivot de stock: análisis por producto y ubicación -->
+    <!-- Vista pivot de inventario: análisis por producto y ubicación -->
     <record id="view_caen_stock_pivot" model="ir.ui.view">
         <field name="name">stock.quant.pivot.caen</field>
         <field name="model">stock.quant</field>
         <field name="arch" type="xml">
-            <pivot string="Stock - Análisis por Ubicación">
+            <pivot string="Inventario - Análisis por Ubicación">
                 <field name="location_id" type="row"/>
                 <field name="product_id" type="col"/>
                 <field name="quantity" type="measure"/>
@@ -66,12 +66,12 @@
         </field>
     </record>
 
-    <!-- Vista gráfico de stock: barras por ubicación -->
+    <!-- Vista gráfico de inventario: barras por ubicación -->
     <record id="view_caen_stock_graph" model="ir.ui.view">
         <field name="name">stock.quant.graph.caen</field>
         <field name="model">stock.quant</field>
         <field name="arch" type="xml">
-            <graph string="Stock por Ubicación" type="bar">
+            <graph string="Inventario por Ubicación" type="bar">
                 <field name="location_id"/>
                 <field name="quantity" type="measure"/>
             </graph>
@@ -117,27 +117,27 @@
         <field name="target">current</field>
     </record>
 
-    <!-- 5. Stock Actual por Ubicación (pivot) -->
+    <!-- 5. Inventario Actual por Ubicación (pivot) -->
     <record id="action_reporte_stock_ubicacion" model="ir.actions.act_window">
-        <field name="name">Stock por Ubicación</field>
+        <field name="name">Inventario por Ubicación</field>
         <field name="res_model">stock.quant</field>
         <field name="view_mode">pivot,graph,list</field>
         <field name="domain">[('quantity', '>', 0)]</field>
         <field name="target">current</field>
     </record>
 
-    <!-- 6. Frascos Crudos (stock en recepción) -->
+    <!-- 6. Frascos Crudos (inventario en recepción) -->
     <record id="action_reporte_stock_crudo" model="ir.actions.act_window">
-        <field name="name">Stock Leche Cruda</field>
+        <field name="name">Inventario Leche Cruda</field>
         <field name="res_model">stock.quant</field>
         <field name="view_mode">list,form</field>
         <field name="domain">[('quantity', '>', 0), ('location_id', 'child_of', ref('stock_location_recepcion'))]</field>
         <field name="target">current</field>
     </record>
 
-    <!-- 7. Stock Pasteurizado -->
+    <!-- 7. Inventario Pasteurizado -->
     <record id="action_reporte_stock_pasty" model="ir.actions.act_window">
-        <field name="name">Stock Leche Pasteurizada</field>
+        <field name="name">Inventario Leche Pasteurizada</field>
         <field name="res_model">stock.quant</field>
         <field name="view_mode">list,form</field>
         <field name="domain">[('quantity', '>', 0), ('location_id', 'child_of', ref('stock_location_heladera_pasty'))]</field>
@@ -203,19 +203,19 @@
               action="action_reporte_serologias_pendientes"/>
 
     <menuitem id="menu_reporte_stock"
-              name="Stock"
+              name="Inventario"
               parent="menu_caen_reportes"
               sequence="3"/>
     <menuitem id="menu_reporte_stock_ubicacion"
-              name="Stock por Ubicación"
+              name="Inventario por Ubicación"
               parent="menu_reporte_stock"
               action="action_reporte_stock_ubicacion"/>
     <menuitem id="menu_reporte_stock_crudo"
-              name="Stock Leche Cruda"
+              name="Inventario Leche Cruda"
               parent="menu_reporte_stock"
               action="action_reporte_stock_crudo"/>
     <menuitem id="menu_reporte_stock_pasty"
-              name="Stock Leche Pasteurizada"
+              name="Inventario Leche Pasteurizada"
               parent="menu_reporte_stock"
               action="action_reporte_stock_pasty"/>
 
