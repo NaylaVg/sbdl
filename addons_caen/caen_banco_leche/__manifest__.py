@@ -24,6 +24,7 @@ madre -> frasco -> pasteurización -> fraccionamiento -> entrega -> bebé.
         'mrp',
         'hr',
         'uom',
+        'auth_signup',
     ],
     'data': [
         'views/dashboard_views.xml',
@@ -49,6 +50,7 @@ madre -> frasco -> pasteurización -> fraccionamiento -> entrega -> bebé.
         'data/stock_locations.xml',
         'data/cron_alertas.xml',
         'data/filtros.xml',
+        'data/auth_signup_config.xml',
     ],
     'assets': {
         'web.assets_backend': [

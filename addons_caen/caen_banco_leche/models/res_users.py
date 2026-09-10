@@ -29,6 +29,24 @@ class ResUsers(models.Model):
         string='Rol CAEN',
     )
 
+    # indica si el usuario necesita aprobacion (sin rol asignado)
+    # aparece en la lista de usuarios como filtro y con color amarillo
+    caen_pendiente = fields.Boolean(
+        string='Pendiente de aprobación',
+        compute='_compute_caen_pendiente',
+        search='_search_caen_pendiente',
+    )
+
+    @api.depends('caen_role', 'share')
+    def _compute_caen_pendiente(self):
+        for user in self:
+            user.caen_pendiente = bool(not user.caen_role)
+
+    def _search_caen_pendiente(self, operator, value):
+        if operator in ('=', '!=') and bool(value) == (operator == '='):
+            return [('caen_role', '=', False)]
+        return [('caen_role', '!=', False)]
+
     # al crear un usuario con rol, aplica los permisos del rol
     @api.model_create_multi
     def create(self, vals_list):
@@ -53,6 +71,14 @@ class ResUsers(models.Model):
     def _apply_caen_role(self, role):
         xmlid = ROLE_MAP.get(role)
         new_perms = self.env['res.groups']
+
+        # si se asigna un rol, el usuario deja de ser portal y pasa a ser interno
+        group_user = self.env.ref('base.group_user')
+        group_portal = self.env.ref('base.group_portal')
+
+        # si tiene un rol asignado (no es custom ni vacio), le damos interno y sacamos portal
+        if role and role != 'custom':
+            self.sudo().write({'group_ids': [(4, group_user.id), (3, group_portal.id)]})
 
         if xmlid:
             group = self.env.ref(xmlid, raise_if_not_found=False)

@@ -8,7 +8,14 @@
         <field name="arch" type="xml">
             <!-- agrego la pestana despues de Access Rights -->
             <xpath expr="//page[@name='access_rights']" position="after">
-                <page string="Permisos CAEN" name="caen_permissions">
+                <page string="Portal CAEN" name="caen_permissions">
+                    <!-- contraseña del usuario: se setea directo al crear -->
+                    <!-- al crear es obligatoria, al editar queda vacia y no cambia -->
+                    <group string="Contraseña de acceso">
+                        <field name="new_password" password="True"
+                               required="not id"
+                               placeholder="Escribir la contraseña con la que va a entrar"/>
+                    </group>
                     <!-- selector de rol predefinido con radio buttons -->
                     <group string="Rol predefinido">
                         <field name="caen_role" widget="radio"/>
@@ -28,6 +35,55 @@
             <!-- oculto pestaña Preferences que no sirve -->
             <xpath expr="//page[@name='preferences']" position="attributes">
                 <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- vista de lista de usuarios: agrego filtro de pendientes y color amarillo -->
+    <record id="view_users_list_caen" model="ir.ui.view">
+        <field name="name">res.users.list.caen</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="attributes">
+                <attribute name="decoration-warning">caen_pendiente == True</attribute>
+            </xpath>
+            <xpath expr="//list" position="inside">
+                <field name="caen_pendiente" column_invisible="True"/>
+                <field name="caen_role" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- accion para ver usuarios pendientes de aprobacion -->
+    <record id="action_users_pending" model="ir.actions.act_window">
+        <field name="name">Usuarios Pendientes</field>
+        <field name="res_model">res.users</field>
+        <field name="view_mode">kanban,form</field>
+        <field name="domain">[('caen_role', '=', False), ('share', '=', True)]</field>
+        <field name="context">{'default_search_filter': 'pending'}</field>
+        <field name="search_view_id" ref="base.view_users_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No hay usuarios pendientes de aprobación.
+            </p>
+            <p>
+                Cuando una persona se registre en /web/signup,
+                aparecerá aquí para que le asignes un rol.
+            </p>
+        </field>
+    </record>
+
+    <!-- vista form heredada: agrego campo de aprobacion -->
+    <record id="view_users_form_caen_approval" model="ir.ui.view">
+        <field name="name">res.users.form.caen.approval</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <!-- agrego boton para ver usuarios pendientes en la vista de lista -->
+            <xpath expr="//header" position="before">
+                <field name="caen_pendiente" invisible="1"/>
             </xpath>
         </field>
     </record>

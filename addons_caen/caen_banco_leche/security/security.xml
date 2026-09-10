@@ -114,7 +114,7 @@
         ]"/>
     </record>
 
-    <!-- ENFERMERA: donantes, consentimientos, visitas, frascos -->
+    <!-- ENFERMERA: donantes, consentimientos, visitas, frascos + bitacora -->
     <record id="role_enfermera" model="res.groups">
         <field name="name">CAEN Enfermera</field>
         <field name="implied_ids" eval="[
@@ -124,10 +124,11 @@
             (4, ref('perm_frascos')),
             (4, ref('perm_stock')),
             (4, ref('perm_alertas')),
+            (4, ref('perm_bitacora')),
         ]"/>
     </record>
 
-    <!-- TECNICO DE LABORATORIO: solo serologias y reportes de lab -->
+    <!-- TECNICO DE LABORATORIO: serologias, reportes + bitacora -->
     <record id="role_tecnico_lab" model="res.groups">
         <field name="name">CAEN Tecnico de Laboratorio</field>
         <field name="implied_ids" eval="[
@@ -136,10 +137,11 @@
             (4, ref('perm_stock')),
             (4, ref('perm_alertas')),
             (4, ref('perm_reportes')),
+            (4, ref('perm_bitacora')),
         ]"/>
     </record>
 
-    <!-- NUTRICIONISTA: pacientes, planes, distribuciones -->
+    <!-- NUTRICIONISTA: pacientes, planes, distribuciones + bitacora -->
     <record id="role_nutricionista" model="res.groups">
         <field name="name">CAEN Nutricionista</field>
         <field name="implied_ids" eval="[
@@ -149,10 +151,11 @@
             (4, ref('perm_stock')),
             (4, ref('perm_alertas')),
             (4, ref('perm_reportes')),
+            (4, ref('perm_bitacora')),
         ]"/>
     </record>
 
-    <!-- RECEPCIONISTA: solo consulta basica -->
+    <!-- RECEPCIONISTA: consulta basica + bitacora -->
     <record id="role_recepcionista" model="res.groups">
         <field name="name">CAEN Recepcionista</field>
         <field name="implied_ids" eval="[
@@ -160,6 +163,7 @@
             (4, ref('perm_consentimientos')),
             (4, ref('perm_stock')),
             (4, ref('perm_alertas')),
+            (4, ref('perm_bitacora')),
         ]"/>
     </record>
 

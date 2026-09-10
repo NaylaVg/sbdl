@@ -371,30 +371,6 @@ se registra automáticamente al:
 - cambiar de etapa de la visita (En curso, Completar, Cancelar)
 - confirmar una distribución
 
-
-# errores adicionales a tratar
-
-- el campo "numbercall" ya no existe en ir.cron, hay que quitarlo del xml
-- el campo "type" de product.template solo acepta "consu", "service", "combo"
-  (ya no acepta "product"). para hacer un producto almacenable hay que usar
-  type="consu" + is_storable="True"
-- los campos "property_cost_method" y "uom_po_id" ya no existen en Odoo 19
-- los metodos de python que empiezan con _ son privados y no se pueden llamar
-  via xmlrpc, hay que crear un wrapper publico sin el underscore
-- las ubicaciones de stock deben tener la misma company_id que su padre
-  (no se puede poner company_id=False si el padre tiene una empresa)
-- en ir.filters: user_id ya no existe en Odoo 19, ahora es user_ids (many2many),
-  y model_id ahora es un campo Selection (string) con el nombre del modelo
-  (no un many2one con ref, se pone directamente "caen.frasco")
-- ir.sequence.next_by_code devuelve cadena con prefix+padding si los tiene;
-  para formatear manualmente quitar el prefix del xml. si la secuencia ya
-  existía en la db con prefix, hay que borrar ir_sequence (y su ir.model.data)
-  para que se recree al actualizar el módulo
-- invalidate_cache ya no es método de recordset en Odoo 19: usar
-  invalidate_recordset() (o invalidate_all() del modelo/env)
-- _log_access = False impide usar create_uid/create_date en vistas list;
-  quitar esa restricción si se necesitan esos campos en las vistas
-
 # sidebar lateral
 
 la navbar original de odoo se reconfiguro como sidebar vertical a la izquierda
@@ -443,10 +419,10 @@ esto es mas seguro xq el admin no tiene que saber la contraseña del otro
 hay 6 roles predefinidos y 1 personalizado:
 - caen administrador: todos los permisos 
 - caen jefe: todos los permisos 
-- caen enfermera: donantes, consentimientos, visitas, frascos, inventario, alertas
-- caen tecnico de laboratorio: laboratorio, donantes, inventario, alertas, reportes
-- caen nutricionista: pacientes, nutricion, distribucion, inventario, alertas, reportes
-- caen recepcionista: donantes, consentimientos, inventario, alertas
+- caen enfermera: donantes, consentimientos, visitas, frascos, inventario, alertas, bitacora
+- caen tecnico de laboratorio: laboratorio, donantes, inventario, alertas, reportes, bitacora
+- caen nutricionista: pacientes, nutricion, distribucion, inventario, alertas, reportes, bitacora
+- caen recepcionista: donantes, consentimientos, inventario, alertas, bitacora
 - personalizado: 0 permisos, el jefe elige desde cero
 
 ## permisos individuales (13)
@@ -491,6 +467,29 @@ en el form de usuarios se ven agrupados por privilege
 
 nuestro privilege se llama permisos y esta bajo la categoria banco de leche
 los 13 permisos y los 6 roles usan privilege_id = privilege_caen
+
+
+# Flujo completo de creación de usuario:
+
+La persona se registra sola (tal vez deba agregarle un boton mas visible pero meh)
+Pone: nombre, email, contraseña 
+Se crea como Portal (sin acceso al backend)
+se modifica el sidebar del apartado de Usuarios para cambiarlo a modo acordeon asi
+el jefe/admin ve tanto la gestion de usuarios como la notificación de nuevo usuario
+Nuevo botón "Pendientes de Aprobación" con ícono de usuario
+Al hacer click, ve solo los usuarios nuevos sin rol asignado
+El jefe le asigna un rol en la pestaña "Portal CAEN":
+Elige el rol (Enfermera, Técnico, etc.)
+Las casillas de permisos se marcan solas
+Al guardar, el usuario pasa automáticamente de "Portal" a "Usuario Interno"
+
+Archivos modificados:
+
+- models/res_users.py — campo caen_pendiente para identificar usuarios sin rol
+- views/usuarios_caen_views.xml — vista kanban de pendientes + filtro
+- data/auth_signup_config.xml — habilita registro libre en /web/signup
+- __manifest__.py — agrega dependencia auth_signup
+- static/src/xml/caen_profile.xml — link "Pendientes de Aprobación" en sidebar
 
 
 

@@ -62,9 +62,15 @@
                     <a class="caen-sidebar-btn" href="/odoo/action-431">
                         <i class="fa fa-cube caen-sidebar-icon"/><span>Inventario</span>
                     </a>
-                    <a class="caen-sidebar-btn" href="/odoo/action-70">
-                        <i class="fa fa-user caen-sidebar-icon"/><span>Usuarios</span>
-                    </a>
+                    <details class="caen-sidebar-group">
+                        <summary class="caen-sidebar-btn">
+                            <i class="fa fa-user caen-sidebar-icon"/><span>Usuarios</span>
+                        </summary>
+                        <div class="caen-sidebar-submenu">
+                            <a class="caen-sidebar-child" href="/odoo/action-70">Gestión de Usuarios</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-434">Pendientes de Aprobación</a>
+                        </div>
+                    </details>
                     <a class="caen-sidebar-btn" href="/odoo/action-430">
                         <i class="fa fa-book caen-sidebar-icon"/><span>Bitácora</span>
                     </a>
