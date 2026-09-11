@@ -1,8 +1,25 @@
 /* caen sidebar lateral */
 
+/* variable de colores del sidebar */
+:root {
+    --caen-sidebar-bg: #1b2a4a;
+    --caen-sidebar-dark: #0f1b33;
+    --caen-sidebar-border: #2c3e50;
+    --caen-sidebar-hover: #243b5e;
+    --caen-sidebar-text: #d5dbdb;
+    --caen-sidebar-text-muted: #aeb6bf;
+    --caen-sidebar-accent: #5dade2;
+    --caen-sidebar-subtext: #7f8c8d;
+}
+
 /* pongo el layout en fila */
 .o_web_client {
     flex-flow: row !important;
+}
+
+/* quito el fondo blanco del header donde vive el sidebar */
+header.o_navbar {
+    background-color: var(--caen-sidebar-bg);
 }
 
 /* transformo la navbar de odoo en barra lateral */
@@ -11,33 +28,85 @@
     height: 100vh !important;
     flex: 0 0 260px !important;
     flex-direction: column !important;
-    background-color: #2c3e50 !important;
+    background-color: var(--caen-sidebar-bg) !important;
     padding: 0 !important;
     border-radius: 0 !important;
     border-bottom: 0 !important;
     overflow-y: auto !important;
+    position: relative;
 }
 
 /* oculto el elemento original que no me sirve */
 .o_navbar_apps_menu,
 .o_menu_brand,
 .o_navbar_breadcrumbs,
-.o_menu_systray,
 .o_menu_toggle {
     display: none !important;
 }
 
-/* reservo el lugar para la caja de perfil, capaz un poquito mas grande*/
+/* caja de perfil: foto + nombre + logout */
 .caen-sidebar-profile-box {
     width: 100%;
-    height: 15vh;
+    min-height: 120px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #1a252f;
-    color: #95a5a6;
-    border-bottom: 2px solid #34495e;
+    background-color: var(--caen-sidebar-dark);
+    color: #ecf0f1;
+    border-bottom: 2px solid var(--caen-sidebar-border);
     flex-shrink: 0;
+    position: relative;
+    padding: 12px 16px 8px;
+    gap: 6px;
+}
+
+.caen-sidebar-profile-box img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid #3498db;
+    object-fit: cover;
+}
+
+.caen-sidebar-profile-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #ecf0f1;
+}
+
+.caen-sidebar-profile-role {
+    font-size: 0.75rem;
+    color: var(--caen-sidebar-subtext);
+}
+
+/* contenedor del sidebar */
+.caen-sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* oculto el systray del sidebar (se mueve al header superior) */
+.caen-sidebar-systray {
+    display: none !important;
+}
+
+.caen-sidebar-systray > * {
+    height: auto !important;
+    min-height: auto !important;
+    align-self: center !important;
+    flex-grow: 0 !important;
+}
+
+.o_user_menu {
+    height: auto !important;
+    min-height: auto !important;
+}
+
+.caen-sidebar-systray .o_avatar {
+    height: 1.4em !important;
+    width: 1.4em !important;
 }
 
 /* pongo el contenedor de navegacion */
@@ -53,10 +122,10 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    background: transparent;
+    background: var(--caen-sidebar-dark);
     border: none;
-    border-bottom: 1px solid #34495e;
-    color: white;
+    border-bottom: 1px solid var(--caen-sidebar-border);
+    color: var(--caen-sidebar-text);
     text-align: left;
     cursor: pointer;
     font-size: 0.9rem;
@@ -64,7 +133,8 @@
 }
 
 .caen-sidebar-btn:hover {
-    background-color: #34495e;
+    background-color: var(--caen-sidebar-hover);
+    color: #ffffff;
 }
 
 /* configuro el acordeon sin usar flecha por defecto */
@@ -78,7 +148,7 @@
     content: "\f054";
     font-family: FontAwesome;
     font-size: 0.7rem;
-    color: #7f8c8d;
+    color: var(--caen-sidebar-accent);
     margin-left: auto;
     transition: transform 0.2s;
 }
@@ -88,14 +158,16 @@
 
 /* estilo para el icono de la barra lateral */
 .caen-sidebar-icon {
-    color: #95a5a6;
+    color: var(--caen-sidebar-accent);
     font-size: 1.1rem;
     flex-shrink: 0;
+    width: 20px;
+    text-align: center;
 }
 
 /* configuro el submenu */
 .caen-sidebar-submenu {
-    background-color: #1a252f;
+    background-color: var(--caen-sidebar-dark);
 }
 
 /* estilo para el boton hijo */
@@ -105,8 +177,8 @@
     padding: 11px 16px 11px 40px;
     background: transparent;
     border: none;
-    border-bottom: 1px solid #253545;
-    color: #bdc3c7;
+    border-bottom: 1px solid #1c2e4a;
+    color: var(--caen-sidebar-text-muted);
     text-align: left;
     cursor: pointer;
     font-size: 0.85rem;
@@ -114,13 +186,102 @@
 }
 
 .caen-sidebar-child:hover {
-    background-color: #2c3e50;
-    color: white;
+    background-color: var(--caen-sidebar-hover);
+    color: #ffffff;
 }
 
-/* desplazo el contenido principal a la derecha [ignorar los !importants jejeje] */
+/* desplazo el contenido principal a la derecha y dejo espacio para el header */
 .o_action_manager {
     flex: 1 1 auto !important;
     overflow-y: auto !important;
-    height: 100vh !important;
+    height: calc(100vh - 40px) !important;
+    margin-top: 40px !important;
+}
+
+/* header superior del contenido principal */
+.caen-header {
+    position: fixed;
+    top: 0;
+    left: 260px;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    padding: 0 16px;
+    background-color: var(--caen-sidebar-bg);
+    color: var(--caen-sidebar-text);
+    z-index: 100;
+    border-bottom: 1px solid var(--caen-sidebar-border);
+}
+
+.caen-header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+}
+
+.caen-header-icon {
+    color: var(--caen-sidebar-accent);
+}
+
+.caen-header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.caen-header-username {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.caen-header-menu {
+    position: relative;
+}
+
+.caen-hamburger-btn {
+    background: transparent;
+    border: none;
+    color: var(--caen-sidebar-text);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 4px 8px;
+}
+
+.caen-hamburger-btn:hover {
+    color: #ffffff;
+}
+
+.caen-header-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    min-width: 180px;
+    background-color: var(--caen-sidebar-dark);
+    border: 1px solid var(--caen-sidebar-border);
+    border-radius: 4px;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.caen-header-menu:hover .caen-header-dropdown {
+    display: block;
+}
+
+.caen-header-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    color: var(--caen-sidebar-text);
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.caen-header-dropdown a:hover {
+    background-color: var(--caen-sidebar-hover);
+    color: #ffffff;
 }

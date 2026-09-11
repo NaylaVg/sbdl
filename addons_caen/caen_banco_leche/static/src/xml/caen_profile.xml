@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
     <t t-inherit="web.NavBar" t-inherit-mode="extension">
+        <!-- oculto el systray original que queda dentro de la nav -->
+        <xpath expr="//div[contains(@class, 'o_menu_systray')]" position="attributes">
+            <attribute name="class" separator=" " add="d-none" />
+        </xpath>
+
         <xpath expr="//nav" position="before">
             <div class="caen-sidebar">
-                <div class="caen-sidebar-profile-box">Perfil</div>
+                <div class="caen-sidebar-profile-box" id="caen-profile-box">
+                    <img class="caen-sidebar-profile-img" src="/web/static/img/placeholder.png" alt="avatar"/>
+                    <span class="caen-sidebar-profile-name">Cargando...</span>
+                    <span class="caen-sidebar-profile-role">Banco de Leche Humana</span>
+                </div>
                 <nav class="caen-sidebar-nav">
                     <a class="caen-sidebar-btn" href="/odoo/action-411">
                         <i class="fa fa-home caen-sidebar-icon"/><span>Tablero</span>
@@ -75,6 +84,36 @@
                         <i class="fa fa-book caen-sidebar-icon"/><span>Bitácora</span>
                     </a>
                 </nav>
+                <!-- systray movido aqui dentro del sidebar -->
+                <div class="o_menu_systray caen-sidebar-systray d-flex flex-shrink-0 bg-inherit" role="menu">
+                    <t t-foreach="systrayItems" t-as="item" t-key="item.key">
+                        <div t-att-data-index="item.index"/>
+                        <t t-component="item.Component" t-props="item.props"/>
+                    </t>
+                </div>
+            </div>
+        </xpath>
+    </t>
+
+    <t t-inherit="web.WebClient" t-inherit-mode="extension">
+        <xpath expr="//ActionContainer" position="before">
+            <div class="caen-header">
+                <div class="caen-header-left">
+                    <i class="fa fa-calendar caen-header-icon"/>
+                    <span id="caen-datetime">Cargando fecha...</span>
+                </div>
+                <div class="caen-header-right">
+                    <span id="caen-username" class="caen-header-username">Cargando...</span>
+                    <div class="caen-header-menu">
+                        <button class="caen-hamburger-btn">
+                            <i class="fa fa-bars"/>
+                        </button>
+                        <div class="caen-header-dropdown">
+                            <a href="/odoo/preferences"><i class="fa fa-user"/> Mi perfil</a>
+                            <a href="/web/session/logout"><i class="fa fa-sign-out"/> Cerrar sesión</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </xpath>
     </t>

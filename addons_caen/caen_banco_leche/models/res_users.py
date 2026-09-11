@@ -97,6 +97,15 @@ class ResUsers(models.Model):
     # onChange del radio de rol en el frontend
     # cuando se cambia el rol, las casillas de permisos se actualizan
     @api.onchange('caen_role')
+    @api.model
+    def caen_profile_info(self):
+        user = self.env.user
+        return {
+            'name': user.name,
+            'id': user.id,
+            'email': user.email,
+        }
+
     def _onchange_caen_role(self):
         if not self.caen_role:
             return

@@ -376,12 +376,12 @@ se registra automáticamente al:
 la navbar original de odoo se reconfiguro como sidebar vertical a la izquierda
 
 estructura:
-- caja de perfil reservada arriba (15vh, fondo oscuro, por ahora solo dice "Perfil")
+- caja de perfil arriba con foto y "Hola, {nombre}" (15vh, fondo oscuro)
 - debajo estan los botones de todos los modulos con iconos
 - los modulos con submenus usan acordeon (<details>/<summary> de html puro xq el nativo de odoo era un asco)
 
 esto esta en:
-- static/src/css/caen_style.css -> estilos de la sidebar
+- static/src/css/caen_style.css -> estilos de la sidebar, usa variables css en :root (--caen-sidebar-bg, --caen-sidebar-dark, etc) asi cambiar colores es de una sola linea
 - static/src/xml/caen_profile.xml -> hereda web.NavBar y pone el html del sidebar
 
 como funciona:
@@ -396,8 +396,23 @@ acordeon:
 - al clickear un modulo con submenus se abre y muestra los hijos en forma de acordeon (nativamente es una panel emergente bastante molesto y estupidamente feo, despidan al que decidio eso)
 - la flechita se usa con fontawesome (\f054) y gira cuando se abre
 
-
 si se agrega un modulo nuevo habria que agregar el link a mano en caen_profile.xml
+
+# header superior (barra con fecha y usuario)
+
+encima del contenido principal (a la derecha del sidebar) hay una barra fija de 40px
+
+- a la izquierda: fecha y hora en español, ejemplo "Viernes, 11 de Septiembre de 2026 — Hora 13:52"
+- a la derecha: nombre completo del usuario + icono de hamburguesa
+- al pasar el mouse por la hamburguesa se abre un dropdown con "Mi perfil" y "Cerrar sesion"
+
+esto esta en:
+- static/src/xml/caen_profile.xml -> hereda web.WebClient, inyecta .caen-header antes del ActionContainer
+- static/src/js/caen_profile.js -> actualiza la fecha cada minuto y trae el nombre con el metodo caen_profile_info() de res.users
+- static/src/css/caen_style.css -> estilos de .caen-header (position fixed arriba a la derecha)
+
+el systray original de odoo (discuss, actividades, config) quedo oculto abajo del sidebar,
+las opciones de usuario ahora viven en la hamburguesa del header superior
 
 
 

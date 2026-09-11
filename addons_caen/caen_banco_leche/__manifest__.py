@@ -56,6 +56,7 @@ madre -> frasco -> pasteurización -> fraccionamiento -> entrega -> bebé.
         'web.assets_backend': [
             'caen_banco_leche/static/src/css/caen_style.css',
             'caen_banco_leche/static/src/js/caen_role_watcher.js',
+            'caen_banco_leche/static/src/js/caen_profile.js',
             'caen_banco_leche/static/src/xml/caen_profile.xml',
         ],
     },
