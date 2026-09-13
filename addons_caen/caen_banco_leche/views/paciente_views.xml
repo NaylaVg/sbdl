@@ -6,9 +6,12 @@
         <field name="arch" type="xml">
             <list string="Pacientes">
                 <field name="name"/>
+                <field name="admission_date"/>
+                <field name="state"/>
                 <field name="birth_date"/>
                 <field name="gestational_age_weeks"/>
                 <field name="birth_weight_g"/>
+                <field name="n_evolutions"/>
             </list>
         </field>
     </record>
@@ -20,13 +23,49 @@
             <form string="Paciente">
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="birth_date"/>
-                        <field name="birth_weight_g"/>
-                        <field name="gestational_age_weeks"/>
-                        <field name="mother_id"/>
+                        <group>
+                            <field name="name"/>
+                            <field name="sexo"/>
+                            <field name="birth_date"/>
+                            <field name="record_number"/>
+                            <field name="mother_id"/>
+                        </group>
+                        <group>
+                            <field name="admission_date"/>
+                            <field name="state"/>
+                            <field name="diagnosis"/>
+                        </group>
+                    </group>
+                    <group string="Datos de nacimiento">
+                        <group>
+                            <field name="gestational_age_weeks"/>
+                            <field name="gestational_age_days"/>
+                            <field name="birth_weight_g"/>
+                            <field name="birth_height_cm"/>
+                            <field name="head_circumference_cm"/>
+                        </group>
+                        <group>
+                            <field name="apgar_1min"/>
+                            <field name="apgar_5min"/>
+                        </group>
                     </group>
                     <notebook>
+                        <page string="Evolución diaria">
+                            <field name="evolution_ids">
+                                <list string="Evolución diaria" editable="bottom">
+                                    <field name="record_date"/>
+                                    <field name="weight_g"/>
+                                    <field name="height_cm"/>
+                                    <field name="head_circumference_cm"/>
+                                    <field name="notes"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Tratamientos">
+                            <group>
+                                <field name="treatments" placeholder="Describa aquí la medicación y tratamientos actuales..."/>
+                            </group>
+                        </page>
                         <page string="Planes de alimentación">
                             <field name="plan_ids">
                                 <list string="Planes">

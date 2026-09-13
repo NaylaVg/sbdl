@@ -10,6 +10,7 @@ from . import bitacora
 from . import stock_leche
 from . import paciente
 from . import nutricion
+from . import evolucion
 from . import dashboard
 from . import alerta
 from . import res_users

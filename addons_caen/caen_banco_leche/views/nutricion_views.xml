@@ -21,6 +21,10 @@
                 <sheet>
                     <group>
                         <field name="patient_id"/>
+                        <field name="tipo_alimento"/>
+                        <field name="milk_stage" invisible="tipo_alimento not in ['lh', 'mixta', 'fortificada']"/>
+                        <field name="target" invisible="tipo_alimento not in ['lh', 'mixta', 'fortificada']"/>
+                        <field name="fortifier" invisible="tipo_alimento != 'fortificada'"/>
                         <field name="daily_volume_ml"/>
                         <field name="frequency_per_day"/>
                         <field name="kcal_per_day"/>

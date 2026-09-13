@@ -67,8 +67,9 @@ caen_banco_leche/
         frasco.py                  # frasco de leche cruda con codigo qr etapa destino volumen
         pasteurizacion.py          # pasteurizacion con acidez dornic crema grasa kcal cultivos
         fraccionamiento.py         # fraccionamiento y biberon (biberon es modelo aparte)
-        paciente.py                # bebe receptor con peso talla semanal etc
-        nutricion.py               # plan de alimentacion y seguimiento nutricional
+        paciente.py                # rnar: bebe receptor con sexo, eg, apgar, diagnostico, internacion, tratamientos, evolucion diaria
+        nutricion.py               # plan de alimentacion con tipo de alimento/leche y seguimiento nutricional
+        evolucion.py               # evolucion diaria del rnar peso talla pc observaciones clinicas
     views/
         menu_views.xml             # menu raiz banco de leche con submenus donantes procesos nutricion
         donante_views.xml          # pantalla de donantes con form y lista
@@ -113,9 +114,10 @@ serologia -> los 7 estudios individuales hiv hep b hep c htlv toxo chagas vdrl
 frasco -> frasco de leche cruda con su codigo qr etapa de leche y destino
 pasteurizacion -> proceso de pasteurizacion con control de calidad completo dornic crema grasa kcal cultivos
 fraccionamiento -> cabecera del fraccionamiento y biberon como modelo aparte con su qr
-paciente -> bebe receptor con datos de nacimiento y planes de alimentacion
-plan_alimentacion -> plan individual por paciente con volumen y frecuencia
+paciente -> bebe receptor (rnar) con todos los datos clinicos: nombre, sexo, fecha nacimiento, peso, eg en semanas y dias, apgar 1 y 5, talla, perimetro cefalico, diagnostico, fecha de internacion, expediente, estado (internado/egresado/derivado/fallecido), madre donante vinculada, tratamientos y medicacion
+plan_alimentacion -> plan individual por paciente con tipo de alimento (leche humana, formula, mixta, fortificada), etapa de la leche (calostro, transicion, madura baja/alta), destino (prematuro/termino), fortificante, volumen diario, tomas por dia, kcal por dia
 seguimiento_nutricional -> registros de peso talla y z scores oms
+evolucion_diaria -> registro clinico diario del rnar con peso, talla, perimetro cefalico y observaciones clinicas
 
 # test
 

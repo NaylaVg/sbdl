@@ -7,10 +7,37 @@ class PlanAlimentacion(models.Model):
 
     patient_id = fields.Many2one('caen.paciente', string='Paciente',
                                  required=True)
+    # tipo de alimento que recibe el bebe
+    # leche humana pasteurizada, formula o mixta
+    # en la planilla 15 del contexto se ve que se anota esto por bebe
     daily_volume_ml = fields.Integer(string='Volumen diario (ml)')
     frequency_per_day = fields.Integer(string='Tomas por día')
     kcal_per_day = fields.Integer(string='Kcal por día')
+    # tipo de alimento que recibe el bebe
+    # leche humana pasteurizada, formula o mixta
+    tipo_alimento = fields.Selection([
+        ('lh', 'Leche humana pasteurizada'),
+        ('formula', 'Fórmula'),
+        ('mixta', 'Mixta (leche humana + fórmula)'),
+        ('fortificada', 'Leche humana fortificada'),
+    ], string='Tipo de alimento')
+    # subtipo segun la leche del banco (calostro, transicion, madura)
+    # esto lo maneja el personal segun la donante
+    milk_stage = fields.Selection([
+        ('colostrum', 'Calostro'),
+        ('transition', 'Transición'),
+        ('mature_low', 'Madura baja'),
+        ('mature_high', 'Madura alta'),
+    ], string='Etapa de la leche')
+    # destino: leche para prematuro o para termino
+    target = fields.Selection([
+        ('preterm', 'Prematuro'),
+        ('term', 'Término'),
+    ], string='Destino')
+    # fortificante que se le agrega a la leche humana
+    fortifier = fields.Char(string='Fortificante')
     start_date = fields.Date(string='Fecha de inicio')
+
     end_date = fields.Date(string='Fecha de fin')
 
     tracking_ids = fields.One2many('caen.seguimiento_nutricional',
