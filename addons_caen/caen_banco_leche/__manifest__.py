@@ -27,10 +27,14 @@ madre -> frasco -> pasteurización -> fraccionamiento -> entrega -> bebé.
         'auth_signup',
     ],
     'data': [
-        'views/dashboard_views.xml',
-        'views/menu_views.xml',
         'security/security.xml',
         'security/ir.model.access.csv',
+        'data/stock_locations.xml',
+        'data/cron_alertas.xml',
+        'data/filtros.xml',
+        'data/auth_signup_config.xml',
+        'views/dashboard_views.xml',
+        'views/menu_views.xml',
         'views/donante_views.xml',
         'views/visita_views.xml',
         'views/consentimiento_views.xml',
@@ -43,14 +47,9 @@ madre -> frasco -> pasteurización -> fraccionamiento -> entrega -> bebé.
         'views/nutricion_views.xml',
         'views/bitacora_views.xml',
         'views/alerta_views.xml',
-        'views/reportes_views.xml',
         'views/stock_views.xml',
+        'views/reportes_views.xml',
         'views/usuarios_caen_views.xml',
-
-        'data/stock_locations.xml',
-        'data/cron_alertas.xml',
-        'data/filtros.xml',
-        'data/auth_signup_config.xml',
     ],
     'assets': {
         'web.assets_backend': [

@@ -509,6 +509,14 @@ Archivos modificados:
 - static/src/xml/caen_profile.xml — link "Pendientes de Aprobación" en sidebar
 
 
+# Fix / bugs
+
+- reordenamiento de lista data (securitys van primero y datas van antes de las vistas)
+- eliminado SCSS muerto 
+- arreglo de vistas de alertas
+- bug de falso positivo en frascos
+- reemplazo de links por XML IDs
+
 
 # verificación
 esto se movera siempre hacia abajo de manera que sea mas facil encontrarlo por si me olvido

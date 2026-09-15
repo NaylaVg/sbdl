@@ -14,10 +14,10 @@
                     <span class="caen-sidebar-profile-role">Banco de Leche Humana</span>
                 </div>
                 <nav class="caen-sidebar-nav">
-                    <a class="caen-sidebar-btn" href="/odoo/action-411">
+                    <a class="caen-sidebar-btn" href="/odoo/action-caen_banco_leche.action_caen_dashboard">
                         <i class="fa fa-home caen-sidebar-icon"/><span>Tablero</span>
                     </a>
-                    <a class="caen-sidebar-btn" href="/odoo/action-414">
+                    <a class="caen-sidebar-btn" href="/odoo/action-caen_banco_leche.action_caen_alerta">
                         <i class="fa fa-exclamation-triangle caen-sidebar-icon"/><span>Alertas</span>
                     </a>
                     <details class="caen-sidebar-group">
@@ -25,10 +25,10 @@
                             <i class="fa fa-users caen-sidebar-icon"/><span>Donantes y Consentimientos</span>
                         </summary>
                         <div class="caen-sidebar-submenu">
-                            <a class="caen-sidebar-child" href="/odoo/action-426">Visitas de Donación</a>
-                            <a class="caen-sidebar-child" href="/odoo/action-403">Donantes</a>
-                            <a class="caen-sidebar-child" href="/odoo/action-404">Consentimientos</a>
-                            <a class="caen-sidebar-child" href="/odoo/action-405">Serologías</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_caen_visita">Visitas de Donación</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_caen_donante">Donantes</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_caen_consentimiento">Consentimientos</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_caen_serologia">Serologías</a>
                         </div>
                     </details>
                     <details class="caen-sidebar-group">
@@ -36,10 +36,10 @@
                             <i class="fa fa-cogs caen-sidebar-icon"/><span>Procesamiento</span>
                         </summary>
                         <div class="caen-sidebar-submenu">
-                            <a class="caen-sidebar-child" href="/odoo/action-406">Frascos</a>
-                            <a class="caen-sidebar-child" href="/odoo/action-407">Pasteurizaciones</a>
-                            <a class="caen-sidebar-child" href="/odoo/action-408">Fraccionamientos</a>
-                            <a class="caen-sidebar-child" href="/odoo/action-429">Distribuciones</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_caen_frasco">Frascos</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_caen_pasteurizacion">Pasteurizaciones</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_caen_fraccionamiento">Fraccionamientos</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_caen_distribucion">Distribuciones</a>
                         </div>
                     </details>
                     <details class="caen-sidebar-group">
@@ -47,8 +47,8 @@
                             <i class="fa fa-heartbeat caen-sidebar-icon"/><span>Nutrición</span>
                         </summary>
                         <div class="caen-sidebar-submenu">
-                            <a class="caen-sidebar-child" href="/odoo/action-409">Pacientes</a>
-                            <a class="caen-sidebar-child" href="/odoo/action-410">Planes de Alimentación</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_caen_paciente">Pacientes</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_caen_plan">Planes de Alimentación</a>
                         </div>
                     </details>
                     <details class="caen-sidebar-group">
@@ -56,19 +56,19 @@
                             <i class="fa fa-bar-chart caen-sidebar-icon"/><span>Reportes</span>
                         </summary>
                         <div class="caen-sidebar-submenu">
-                            <a class="caen-sidebar-child" href="/odoo/action-416">Frascos por Donante</a>
-                            <a class="caen-sidebar-child" href="/odoo/action-417">Frascos por Estado</a>
-                            <a class="caen-sidebar-child" href="/odoo/action-418">Serologías por Resultado</a>
-                            <a class="caen-sidebar-child" href="/odoo/action-419">Serologías Pendientes</a>
-                            <a class="caen-sidebar-child" href="/odoo/action-420">Inventario por Ubicación</a>
-                            <a class="caen-sidebar-child" href="/odoo/action-421">Inventario Leche Cruda</a>
-                            <a class="caen-sidebar-child" href="/odoo/action-422">Inventario Leche Pasteurizada</a>
-                            <a class="caen-sidebar-child" href="/odoo/action-423">Donantes por Aptitud</a>
-                            <a class="caen-sidebar-child" href="/odoo/action-424">Historial de Alertas</a>
-                            <a class="caen-sidebar-child" href="/odoo/action-425">Reporte de Nutrición</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_reporte_frascos_donante">Frascos por Donante</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_reporte_frascos_estado">Frascos por Estado</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_reporte_serologias_resultado">Serologías por Resultado</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_reporte_serologias_pendientes">Serologías Pendientes</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_reporte_stock_ubicacion">Inventario por Ubicación</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_reporte_stock_crudo">Inventario Leche Cruda</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_reporte_stock_pasty">Inventario Leche Pasteurizada</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_reporte_donantes_aptitud">Donantes por Aptitud</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_reporte_alertas">Historial de Alertas</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_reporte_nutricion">Reporte de Nutrición</a>
                         </div>
                     </details>
-                    <a class="caen-sidebar-btn" href="/odoo/action-431">
+                    <a class="caen-sidebar-btn" href="/odoo/action-caen_banco_leche.action_caen_stock_resumen">
                         <i class="fa fa-cube caen-sidebar-icon"/><span>Inventario</span>
                     </a>
                     <details class="caen-sidebar-group">
@@ -76,11 +76,11 @@
                             <i class="fa fa-user caen-sidebar-icon"/><span>Usuarios</span>
                         </summary>
                         <div class="caen-sidebar-submenu">
-                            <a class="caen-sidebar-child" href="/odoo/action-70">Gestión de Usuarios</a>
-                            <a class="caen-sidebar-child" href="/odoo/action-434">Pendientes de Aprobación</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-base.action_res_users">Gestión de Usuarios</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_users_pending">Pendientes de Aprobación</a>
                         </div>
                     </details>
-                    <a class="caen-sidebar-btn" href="/odoo/action-430">
+                    <a class="caen-sidebar-btn" href="/odoo/action-caen_banco_leche.action_caen_bitacora">
                         <i class="fa fa-book caen-sidebar-icon"/><span>Bitácora</span>
                     </a>
                 </nav>
@@ -109,7 +109,7 @@
                             <i class="fa fa-bars"/>
                         </button>
                         <div class="caen-header-dropdown">
-                            <a href="/odoo/preferences"><i class="fa fa-user"/> Mi perfil</a>
+                            <a href="/odoo/action-hr.res_users_action_my"><i class="fa fa-user"/> Mi perfil</a>
                             <a href="/web/session/logout"><i class="fa fa-sign-out"/> Cerrar sesión</a>
                         </div>
                     </div>

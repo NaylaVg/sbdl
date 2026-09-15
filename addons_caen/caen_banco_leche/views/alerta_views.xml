@@ -50,12 +50,33 @@
         </field>
     </record>
 
+    <!-- Búsqueda con filtros reutilizables -->
+    <record id="view_caen_alerta_search" model="ir.ui.view">
+        <field name="name">caen.alerta.search</field>
+        <field name="model">caen.alerta</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Alertas">
+                <field name="description"/>
+                <field name="donor_id"/>
+                <separator/>
+                <filter name="active" string="Activas" domain="[('state', '=', 'active')]"/>
+                <filter name="criticas" string="Críticas" domain="[('severity', '=', 'critical')]"/>
+                <filter name="stock_bajo" string="Alertas de Inventario" domain="[('alert_type', '=', 'stock_bajo')]"/>
+                <separator/>
+                <group expand="0" string="Agrupar">
+                    <filter name="group_severity" string="Severidad" context="{'group_by': 'severity'}"/>
+                    <filter name="group_type" string="Tipo" context="{'group_by': 'alert_type'}"/>
+                    <filter name="group_state" string="Estado" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <!-- Acción -->
     <record id="action_caen_alerta" model="ir.actions.act_window">
         <field name="name">Alertas</field>
         <field name="res_model">caen.alerta</field>
         <field name="view_mode">list,form</field>
-        <field name="domain">[('state', '=', 'active')]</field>
         <field name="context">{'search_default_active': 1}</field>
         <field name="target">current</field>
     </record>
