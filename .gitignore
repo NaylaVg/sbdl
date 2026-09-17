@@ -51,3 +51,12 @@ package.json
 /man/
 /share/
 /src/
+venv/
+
+# framework de odoo (se instala aparte, no va en el repo)
+odoo/
+addons/
+odoo-bin
+setup.py
+setup.cfg
+setup/

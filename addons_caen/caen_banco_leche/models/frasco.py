@@ -1,5 +1,6 @@
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
+from .qr_utils import generar_qr_imagen, construir_url_registro
 
 
 class Frasco(models.Model):
@@ -49,6 +50,8 @@ class Frasco(models.Model):
     # relacionado con la aptitud de la donante, lo muestro en el form
     # para que el personal sepa si puede pasteurizar
     donor_apta = fields.Boolean(string='Donante Apta', related='donor_id.apta_donar', readonly=True)
+    # imagen del codigo qr generada a partir del campo name
+    qr_image = fields.Binary('Imagen QR', attachment=True, readonly=True)
 
     # al crear el frasco genero el lote de stock y lo ingreso en recepcion,
     # asi queda registrado en el inventario apenas se crea, sin pasos manuales
@@ -71,12 +74,37 @@ class Frasco(models.Model):
             vals['lot_id'] = lot.id
             vals['product_id'] = product.id
         frascos = super().create(vals_list)
+        # genero el qr para cada frasco nuevo
+        frascos._generar_qr_si_falta()
         # ingreso el stock de cada frasco en recepcion
         for frasco in frascos:
             location = self.env.ref('caen_banco_leche.stock_location_recepcion')
             frasco._quitar_stock()
             frasco._sumar_stock(location)
         return frascos
+
+    def action_generar_qr(self):
+        """Genera (o regenera) la imagen QR con la URL del registro en Odoo.
+        Se llama desde el boton 'Generar QR' en el formulario."""
+        for frasco in self:
+            url = construir_url_registro(
+                self.env, 'caen.frasco', frasco.id)
+            if url:
+                imagen = generar_qr_imagen(url)
+                if imagen:
+                    frasco.qr_image = imagen
+
+    def _generar_qr_si_falta(self):
+        """Genera el QR automaticamente si el campo esta vacio.
+        Se llama desde create."""
+        for frasco in self:
+            if not frasco.qr_image and frasco.id:
+                url = construir_url_registro(
+                    self.env, 'caen.frasco', frasco.id)
+                if url:
+                    imagen = generar_qr_imagen(url)
+                    if imagen:
+                        frasco.qr_image = imagen
 
     # paso el volumen de mililitros a litros, la unidad del inventario
     def _qty_litros(self):
