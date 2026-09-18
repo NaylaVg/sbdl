@@ -59,11 +59,11 @@
                 <field name="description"/>
                 <field name="donor_id"/>
                 <separator/>
-                <filter name="active" string="Activas" domain="[('state', '=', 'active')]"/>
-                <filter name="criticas" string="Críticas" domain="[('severity', '=', 'critical')]"/>
-                <filter name="stock_bajo" string="Alertas de Inventario" domain="[('alert_type', '=', 'stock_bajo')]"/>
+                    <filter name="active" string="Activas" domain="[('state', '=', 'active')]"/>
+                    <filter name="criticas" string="Críticas" domain="[('severity', '=', 'critical')]"/>
+                    <filter name="stock_bajo" string="Alertas de Inventario" domain="[('alert_type', '=', 'stock_bajo')]"/>
                 <separator/>
-                <group expand="0" string="Agrupar">
+                <group name="group_by_alertas">
                     <filter name="group_severity" string="Severidad" context="{'group_by': 'severity'}"/>
                     <filter name="group_type" string="Tipo" context="{'group_by': 'alert_type'}"/>
                     <filter name="group_state" string="Estado" context="{'group_by': 'state'}"/>
