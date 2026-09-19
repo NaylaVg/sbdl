@@ -28,6 +28,7 @@
                             <field name="bottle_ids">
                                 <list string="Biberones" editable="bottom">
                                     <field name="qr_code"/>
+                                    <field name="qr_image" widget="image" width="50" height="50"/>
                                     <field name="volume_ml"/>
                                     <field name="milk_stage"/>
                                     <field name="target"/>
@@ -44,6 +45,37 @@
         <field name="name">Fraccionamientos</field>
         <field name="res_model">caen.fraccionamiento</field>
         <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Vista form de biberon individual (para ver QR completo) -->
+    <record id="view_caen_biberon_form" model="ir.ui.view">
+        <field name="name">caen.biberon.form</field>
+        <field name="model">caen.biberon</field>
+        <field name="arch" type="xml">
+            <form string="Biberón">
+                <sheet>
+                    <div class="row">
+                        <div class="col-4 text-center">
+                            <field name="qr_image" widget="image" class="oe_avatar"
+                                   alt="QR del biberón"/>
+                            <div class="mt-2">
+                                <button name="action_generar_qr" type="object"
+                                        string="Regenerar QR" class="btn-secondary"/>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <group>
+                                <field name="qr_code" readonly="1"/>
+                                <field name="fractionation_id" readonly="1"/>
+                                <field name="volume_ml"/>
+                                <field name="milk_stage"/>
+                                <field name="target"/>
+                            </group>
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
     </record>
 
     <menuitem id="menu_caen_fraccionamiento"

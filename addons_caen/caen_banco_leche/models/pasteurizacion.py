@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from .qr_utils import generar_qr_imagen, construir_url_registro
 
 
 class Pasteurizacion(models.Model):
@@ -10,7 +11,10 @@ class Pasteurizacion(models.Model):
     batch_id = fields.Many2one('caen.frasco', string='Frasco de origen',
                                required=True)
     # nuevo qr que se le asigna al frasco cuando se pasteuriza
+    # se genera automaticamente al crear el registro
     new_barcode = fields.Char(string='QR post-pasteurización', index=True)
+    # imagen del qr post-pasteurizacion
+    qr_image = fields.Binary('Imagen QR', attachment=True, readonly=True)
     # metodo de pasteurizacion usado
     method = fields.Selection([
         ('holder', 'Holder (62.5°C)'),
@@ -38,3 +42,34 @@ class Pasteurizacion(models.Model):
     discard_volume = fields.Integer(string='Volumen descartado (ml)')
     processed_by = fields.Many2one('res.users', string='Responsable')
     processed_at = fields.Datetime(string='Fecha de procesamiento')
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            # si no se provio un barcode, lo genero a partir del frasco
+            if not vals.get('new_barcode'):
+                batch = self.env['caen.frasco'].browse(vals.get('batch_id'))
+                if batch.exists():
+                    vals['new_barcode'] = f"{batch.name}-P"
+        registros = super().create(vals_list)
+        # genero la imagen qr para cada registro nuevo
+        for reg in registros:
+            if reg.id:
+                url = construir_url_registro(
+                    self.env, 'caen.pasteurizacion', reg.id)
+                if url:
+                    imagen = generar_qr_imagen(url)
+                    if imagen:
+                        reg.qr_image = imagen
+        return registros
+
+    def action_generar_qr(self):
+        """Regenera la imagen QR desde la URL del registro."""
+        for reg in self:
+            if reg.id:
+                url = construir_url_registro(
+                    self.env, 'caen.pasteurizacion', reg.id)
+                if url:
+                    imagen = generar_qr_imagen(url)
+                    if imagen:
+                        reg.qr_image = imagen

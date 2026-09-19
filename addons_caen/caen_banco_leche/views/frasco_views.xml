@@ -81,6 +81,32 @@
                         <p><b>¡Atención!</b> Esta donante aún NO está apta.
                         Complete las <b>7 serologías</b> y tenga un <b>consentimiento vigente</b> antes de pasteurizar.</p>
                     </div>
+
+                    <notebook>
+                        <page string="Código QR">
+                            <div class="row mt-3">
+                                <div class="col-4 text-center">
+                                    <field name="qr_image" widget="image" class="oe_avatar"
+                                           alt="Código QR del frasco"/>
+                                    <div class="mt-2">
+                                        <button name="action_generar_qr" type="object"
+                                                string="Regenerar QR" class="btn-secondary"/>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <group string="Identificación">
+                                        <field name="name" readonly="1"/>
+                                        <field name="donor_id" readonly="1"/>
+                                        <field name="center_id" readonly="1"/>
+                                    </group>
+                                    <p class="text-muted mt-2">
+                                        Este código QR identifica el frasco en todo el sistema.
+                                        Imprímalo y péguelo en el frasco físico.
+                                    </p>
+                                </div>
+                            </div>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>

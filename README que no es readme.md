@@ -513,9 +513,50 @@ Archivos modificados:
 
 - reordenamiento de lista data (securitys van primero y datas van antes de las vistas)
 - eliminado SCSS muerto 
-- arreglo de vistas de alertas
-- bug de falso positivo en frascos
-- reemplazo de links por XML IDs
+- arreglo de vistas de alertas (agregada search view con filtros activas/criticas/stock)
+- bug de falso positivo en frascos (n_frascos si existia en donante.py)
+- reemplazo de links hardcodeados por XML IDs en el sidebar (antes action-411, action-403, etc. que solo funcionaban en mi DB de desarrollo)
+
+
+# codigos QR
+
+## que es
+cada frasco, pasteurizacion y biberon tiene un codigo QR que al escanearlo abre directamente el formulario en odoo. asi la enfermera escanea el frasco y ve toda la info de una, sin tener que buscar nada.
+
+## como funciona
+- se crean 3 tipos de QR (uno por cada momento del flujo):
+  1. **frasco crudo** -> apunta a la ficha del frasco (donante, volumen, etapa, destino)
+  2. **post-pasteurizacion** -> apunta al registro de pasteurizacion (acidez dornic, cultivos, kcal/l)
+  3. **biberon fraccionado** -> apunta al fraccionamiento (lista de biberones, volumenes)
+
+- el QR se genera SOLO cuando se crea el registro (no hace falta tocar nada)
+- hay boton "Regenerar QR" por si queres regenerarlo
+- si la donante no tiene las 7 serologias OK y consentimiento vigente, el frasco no se puede pasteurizar (sale aviso rojo)
+
+## archivos involucrados
+- `models/qr_utils.py` -> funciones generar_qr_imagen() y construir_url_registro()
+- `models/frasco.py` -> campo qr_image, auto-generacion en create
+- `models/pasteurizacion.py` -> auto-generacion de new_barcode + qr_image
+- `models/fraccionamiento.py` -> auto-generacion de qr_code secuencial + qr_image en biberones
+
+## dependencias
+qrcode y pillow ya estan en requirements.txt de odoo (qrcode==7.4.2 y Pillow==11.1.0)
+si no estan instaladas: `pip install qrcode[pil]`
+
+## configuracion de la URL del QR
+la URL que va dentro del QR se lee del odoo.conf, ahi pones la IP del servidor del hospital.
+en el odoo.conf hay una linea:
+```
+caen_server_url = http://localhost:8069
+```
+en deploy al hospital, el sysadmin la cambia a la IP real:
+```
+caen_server_url = http://192.168.1.50:8069
+
+## formatos de los codigos QR
+- frasco: el name es el codigo qr (ej: SPE-M01-F123)
+- pasteurizacion: se auto-genera como {name_del_frasco}-P (ej: SPE-M01-F123-P)
+- biberon: se auto-genera como {barcode_pasteurizacion}-B{numero} (ej: SPE-M01-F123-P-B01, -B02, etc.)
 
 
 # verificación
