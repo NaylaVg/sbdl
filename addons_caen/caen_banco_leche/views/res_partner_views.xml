@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_centro_recoleccion" model="ir.ui.view">
+        <field name="name">res.partner.form.centro.recoleccion</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="Centro de Recolección" invisible="not es_centro_recoleccion">
+                    <field name="es_centro_recoleccion"/>
+                    <field name="horario_atencion"/>
+                    <field name="referente_centro"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_centro_recoleccion" model="ir.actions.act_window">
+        <field name="name">Centros de Recolección</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('es_centro_recoleccion', '=', True)]</field>
+        <field name="context">{'default_es_centro_recoleccion': True}</field>
+    </record>
+</odoo>
