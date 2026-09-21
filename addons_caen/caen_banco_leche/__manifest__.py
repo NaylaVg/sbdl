@@ -25,10 +25,12 @@ madre -> frasco -> pasteurización -> fraccionamiento -> entrega -> bebé.
         'hr',
         'uom',
         'auth_signup',
+        'base_geolocalize',
     ],
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
+        'views/res_partner_views.xml',
         'data/stock_locations.xml',
         'data/cron_alertas.xml',
         'data/filtros.xml',
