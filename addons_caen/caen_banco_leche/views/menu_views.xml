@@ -18,7 +18,11 @@
               name="Nutrición"
               parent="menu_caen_root"
               sequence="3"/>
-
+    <menuitem id="menu_centro_recoleccion"
+              name="Centros de Recolección"
+              parent="menu_caen_root"
+              action="action_centro_recoleccion"
+              sequence="4"/>
     <menuitem id="menu_caen_usuarios"
               name="Usuarios"
               parent="menu_caen_root"
