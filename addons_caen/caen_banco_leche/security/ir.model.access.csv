@@ -15,6 +15,7 @@ access_caen_distribucion_read,caen.distribucion,model_caen_distribucion,base.gro
 access_caen_alerta_read,caen.alerta,model_caen_alerta,base.group_user,1,0,0,0
 access_caen_bitacora,caen.bitacora,model_caen_bitacora,base.group_user,1,0,0,0
 access_caen_stock_leche_read,caen.stock_leche,model_caen_stock_leche,base.group_user,1,0,0,0
+access_caen_rendimiento_read,caen.rendimiento,model_caen_rendimiento,base.group_user,1,0,0,0
 access_caen_donante_write,caen.donante,model_caen_donante,caen_banco_leche.perm_donantes,1,1,1,1
 access_caen_consentimiento_write,caen.consentimiento,model_caen_consentimiento,caen_banco_leche.perm_consentimientos,1,1,1,1
 access_caen_visita_write,caen.visita,model_caen_visita,caen_banco_leche.perm_visitas,1,1,1,1

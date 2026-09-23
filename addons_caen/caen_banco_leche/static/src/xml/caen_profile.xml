@@ -51,6 +51,9 @@
                             <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_caen_plan">Planes de Alimentación</a>
                         </div>
                     </details>
+                    <a class="caen-sidebar-btn" href="/odoo/action-caen_banco_leche.action_centro_recoleccion">
+                        <i class="fa fa-map-marker caen-sidebar-icon"/><span>Centros de Recolección</span>
+                    </a>
                     <details class="caen-sidebar-group">
                         <summary class="caen-sidebar-btn">
                             <i class="fa fa-bar-chart caen-sidebar-icon"/><span>Reportes</span>
@@ -64,6 +67,7 @@
                             <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_reporte_stock_crudo">Inventario Leche Cruda</a>
                             <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_reporte_stock_pasty">Inventario Leche Pasteurizada</a>
                             <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_reporte_donantes_aptitud">Donantes por Aptitud</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_reporte_rendimiento">Rendimiento del Banco</a>
                             <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_reporte_alertas">Historial de Alertas</a>
                             <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_reporte_nutricion">Reporte de Nutrición</a>
                         </div>

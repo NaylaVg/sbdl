@@ -237,4 +237,102 @@
               name="Nutrición"
               parent="menu_caen_reportes"
               action="action_reporte_nutricion"/>
+
+    <!-- ======================== -->
+    <!-- REPORTE DE RENDIMIENTO   -->
+    <!-- ======================== -->
+
+    <record id="view_rendimiento_list" model="ir.ui.view">
+        <field name="name">caen.rendimiento.list</field>
+        <field name="model">caen.rendimiento</field>
+        <field name="arch" type="xml">
+            <list string="Rendimiento" create="false" edit="false">
+                <field name="extraction_date"/>
+                <field name="donor_id"/>
+                <field name="center_id"/>
+                <field name="milk_stage"/>
+                <field name="target"/>
+                <field name="state"/>
+                <field name="volume_received" string="Recibido (ml)"/>
+                <field name="volume_pasteurized" string="Procesado (ml)"/>
+                <field name="volume_discarded" string="Descartado (ml)"/>
+                <field name="volume_delivered" string="Entregado (ml)"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_rendimiento_pivot" model="ir.ui.view">
+        <field name="name">caen.rendimiento.pivot</field>
+        <field name="model">caen.rendimiento</field>
+        <field name="arch" type="xml">
+            <pivot string="Rendimiento del Banco">
+                <field name="extraction_date" type="row"/>
+                <field name="state" type="col"/>
+                <field name="volume_received" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_rendimiento_graph" model="ir.ui.view">
+        <field name="name">caen.rendimiento.graph</field>
+        <field name="model">caen.rendimiento</field>
+        <field name="arch" type="xml">
+            <graph string="Rendimiento - Recibido vs Procesado vs Descartado" type="bar">
+                <field name="state"/>
+                <field name="volume_received" type="measure"/>
+                <field name="volume_pasteurized" type="measure"/>
+                <field name="volume_discarded" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_rendimiento_search" model="ir.ui.view">
+        <field name="name">caen.rendimiento.search</field>
+        <field name="model">caen.rendimiento</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Rendimiento">
+                <field name="donor_id"/>
+                <field name="center_id"/>
+                <separator/>
+                <filter name="period_3m" string="Últimos 3 meses"
+                        domain="[('extraction_date', '&gt;=', 'today -3m')]"/>
+                <filter name="period_6m" string="Últimos 6 meses"
+                        domain="[('extraction_date', '&gt;=', 'today -6m')]"/>
+                <filter name="period_9m" string="Últimos 9 meses"
+                        domain="[('extraction_date', '&gt;=', 'today -9m')]"/>
+                <filter name="period_12m" string="Últimos 12 meses"
+                        domain="[('extraction_date', '&gt;=', 'today -12m')]"/>
+                <filter name="period_3m_p" string="Últimos 3 meses (proceso)"
+                        domain="[('pasteurization_date', '&gt;=', 'today -3m')]"/>
+                <filter name="period_12m_p" string="Últimos 12 meses (proceso)"
+                        domain="[('pasteurization_date', '&gt;=', 'today -12m')]"/>
+                <separator/>
+                <filter name="recibidos" string="Recibidos" domain="[('volume_received', '&gt;', 0)]"/>
+                <filter name="descartados" string="Descartados" domain="[('volume_discarded', '&gt;', 0)]"/>
+                <filter name="entregados" string="Entregados" domain="[('state', '=', 'delivered')]"/>
+                <separator/>
+                <filter name="cultivo_positivo" string="Cultivo Positivo" domain="[('culture_result', '=', 'positive')]"/>
+                <separator/>
+                <group>
+                    <filter name="group_date" string="Fecha" context="{'group_by': 'extraction_date'}"/>
+                    <filter name="group_state" string="Estado" context="{'group_by': 'state'}"/>
+                    <filter name="group_donor" string="Donante" context="{'group_by': 'donor_id'}"/>
+                    <filter name="group_stage" string="Etapa" context="{'group_by': 'milk_stage'}"/>
+                    <filter name="group_target" string="Destino" context="{'group_by': 'target'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_reporte_rendimiento" model="ir.actions.act_window">
+        <field name="name">Rendimiento del Banco</field>
+        <field name="res_model">caen.rendimiento</field>
+        <field name="view_mode">pivot,graph,list</field>
+        <field name="target">current</field>
+    </record>
+
+    <menuitem id="menu_reporte_rendimiento"
+              name="Rendimiento del Banco"
+              parent="menu_caen_reportes"
+              action="action_reporte_rendimiento"/>
 </odoo>
