@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="action_caen_consentimiento_nuevo" model="ir.actions.act_window">
+        <field name="name">Nuevo Consentimiento</field>
+        <field name="res_model">caen.consentimiento</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="binding_model_id" ref="model_caen_consentimiento"/>
+    </record>
+
     <record id="view_caen_consentimiento_list" model="ir.ui.view">
         <field name="name">caen.consentimiento.list</field>
         <field name="model">caen.consentimiento</field>
         <field name="arch" type="xml">
             <list string="Consentimientos">
+                <header>
+                    <button name="%(action_caen_consentimiento_nuevo)d" type="action"
+                            string="+ Nuevo Consentimiento" class="o_caen_create_button btn-primary"
+                            display="always" groups="caen_banco_leche.perm_consentimientos"/>
+                </header>
                 <field name="donor_id"/>
                 <field name="start_date"/>
                 <field name="end_date"/>

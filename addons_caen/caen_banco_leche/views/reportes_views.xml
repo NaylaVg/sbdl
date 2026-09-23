@@ -131,7 +131,7 @@
         <field name="name">Inventario Leche Cruda</field>
         <field name="res_model">stock.quant</field>
         <field name="view_mode">list,form</field>
-        <field name="domain">[('quantity', '>', 0), ('location_id', 'child_of', ref('stock_location_recepcion'))]</field>
+        <field name="domain" eval="[('quantity', '&gt;', 0), ('location_id', 'child_of', ref('stock_location_recepcion'))]"/>
         <field name="target">current</field>
     </record>
 
@@ -140,7 +140,7 @@
         <field name="name">Inventario Leche Pasteurizada</field>
         <field name="res_model">stock.quant</field>
         <field name="view_mode">list,form</field>
-        <field name="domain">[('quantity', '>', 0), ('location_id', 'child_of', ref('stock_location_heladera_pasty'))]</field>
+        <field name="domain" eval="[('quantity', '&gt;', 0), ('location_id', 'child_of', ref('stock_location_heladera_pasty'))]"/>
         <field name="target">current</field>
     </record>
 

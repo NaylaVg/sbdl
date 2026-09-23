@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ============================================= -->
+    <!-- USUARIOS DE PRUEBA                            -->
+    <!-- ============================================= -->
+
+    <!-- Recepcionista: solo donantes -->
+    <record id="user_recepcionista" model="res.users">
+        <field name="name">Maria Recepcionista</field>
+        <field name="login">recepcionista</field>
+        <field name="password">recepcionista123</field>
+        <field name="email">recepcionista@caen.com</field>
+        <field name="group_ids" eval="[(4, ref('base.group_user')), (4, ref('role_recepcionista'))]"/>
+    </record>
+
+    <!-- Enfermera: donantes, consentimientos, visitas, frascos -->
+    <record id="user_enfermera" model="res.users">
+        <field name="name">Ana Enfermera</field>
+        <field name="login">enfermera</field>
+        <field name="password">enfermera123</field>
+        <field name="email">enfermera@caen.com</field>
+        <field name="group_ids" eval="[(4, ref('base.group_user')), (4, ref('role_enfermera'))]"/>
+    </record>
+
+    <!-- Tecnico de Laboratorio: serologias + donantes -->
+    <record id="user_tecnico_lab" model="res.users">
+        <field name="name">Carlos Laboratorio</field>
+        <field name="login">tecnico_lab</field>
+        <field name="password">tecnico123</field>
+        <field name="email">lab@caen.com</field>
+        <field name="group_ids" eval="[(4, ref('base.group_user')), (4, ref('role_tecnico_lab'))]"/>
+    </record>
+
+    <!-- Nutricionista: pacientes, planes, distribuciones -->
+    <record id="user_nutricionista" model="res.users">
+        <field name="name">Laura Nutricionista</field>
+        <field name="login">nutricionista</field>
+        <field name="password">nutri123</field>
+        <field name="email">nutricionista@caen.com</field>
+        <field name="group_ids" eval="[(4, ref('base.group_user')), (4, ref('role_nutricionista'))]"/>
+    </record>
+</odoo>

@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="action_caen_serologia_nuevo" model="ir.actions.act_window">
+        <field name="name">Nueva Serología</field>
+        <field name="res_model">caen.serologia</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="binding_model_id" ref="model_caen_serologia"/>
+    </record>
+
     <record id="view_caen_serologia_list" model="ir.ui.view">
         <field name="name">caen.serologia.list</field>
         <field name="model">caen.serologia</field>
         <field name="arch" type="xml">
             <list string="Serologías">
+                <header>
+                    <button name="%(action_caen_serologia_nuevo)d" type="action"
+                            string="+ Nueva Serología" class="o_caen_create_button btn-primary"
+                            display="always" groups="caen_banco_leche.perm_laboratorio"/>
+                </header>
                 <field name="donor_id"/>
                 <field name="study_type"/>
                 <field name="result"/>
