@@ -17,6 +17,7 @@ class DashboardCaen(models.Model):
     pacientes_activos = fields.Integer(string='Pacientes Activos', compute='_compute_stats')
     consentimientos_activos = fields.Integer(string='Consentimientos Activos', compute='_compute_stats')
     alertas_activas = fields.Integer(string='Alertas Activas', compute='_compute_stats')
+    centros_recoleccion = fields.Integer(string='Centros de Recolección', compute='_compute_stats')
 
     # cuenta los registros de cada modelo segun su estado
     @api.depends()
@@ -30,6 +31,7 @@ class DashboardCaen(models.Model):
             rec.pacientes_activos = self.env['caen.paciente'].search_count([])
             rec.consentimientos_activos = self.env['caen.consentimiento'].search_count([('state', '=', 'active')])
             rec.alertas_activas = self.env['caen.alerta'].search_count([('state', '=', 'active')])
+            rec.centros_recoleccion = self.env['res.partner'].search_count([('es_centro_recoleccion', '=', True)])
 
     # metodos action_: cada uno abre la pantalla correspondiente cuando el
     # usuario hace click en el contador del dashboard
@@ -120,3 +122,12 @@ class DashboardCaen(models.Model):
             'view_mode': 'list,form',
             'target': 'current',
         }
+    def action_centros_recoleccion(self):
+        return {
+            'type': 'ir.actions.act_window', 
+            'name': 'Centros de Recolección', 
+            'res_model': 'res.partner',
+            'domain': [('es_centro_recoleccion', '=', True)], 
+            'view_mode': 'list,form', 
+            'target': 'current'}
+
