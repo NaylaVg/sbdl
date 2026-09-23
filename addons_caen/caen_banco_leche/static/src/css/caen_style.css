@@ -285,3 +285,48 @@ header.o_navbar {
     background-color: var(--caen-sidebar-hover);
     color: #ffffff;
 }
+
+/* ===== Dashboard CAEN: tarjetas ===== */
+
+.caen_dashboard_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    padding: 16px;
+}
+
+.caen_card_btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 24px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--caen-sidebar-border);
+    background-color: var(--caen-sidebar-dark);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    cursor: pointer;
+}
+
+.caen_card_btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    border-color: var(--caen-sidebar-accent);
+}
+
+.caen_card_number {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--caen-sidebar-accent);
+}
+
+.caen_card_label {
+    margin-top: 6px;
+    font-size: 0.9rem;
+    color: var(--caen-sidebar-text-muted);
+    text-align: center;
+}
+
+.caen_card_warning .caen_card_number { color: #e0a53f; }
+.caen_card_danger .caen_card_number { color: #e0665f; }

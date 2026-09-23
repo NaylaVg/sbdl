@@ -6,6 +6,62 @@
         <field name="arch" type="xml">
             <form string="Tablero CAEN" create="false" edit="false">
                 <sheet>
+                    <div class="caen_dashboard_grid">
+                        <div class="caen_card">
+                            <button name="action_donantes" type="object" class="caen_card_btn">
+                                <span class="caen_card_number"><field name="donantes_activas"/></span>
+                                <span class="caen_card_label">Donantes Activas</span>
+                            </button>
+                        </div>
+                        <div class="caen_card">
+                            <button name="action_serologias_pendientes" type="object" class="caen_card_btn caen_card_warning">
+                                <span class="caen_card_number"><field name="serologias_pendientes"/></span>
+                                <span class="caen_card_label">Serologías Pendientes</span>
+                            </button>
+                        </div>
+                        <div class="caen_card">
+                            <button name="action_frascos_crudos" type="object" class="caen_card_btn">
+                                <span class="caen_card_number"><field name="frascos_crudos"/></span>
+                                <span class="caen_card_label">Frascos Crudos</span>
+                            </button>
+                        </div>
+                        <div class="caen_card">
+                            <button name="action_pasteurizaciones" type="object" class="caen_card_btn">
+                                <span class="caen_card_number"><field name="frascos_pasteurizados"/></span>
+                                <span class="caen_card_label">Pasteurizados</span>
+                            </button>
+                        </div>
+                        <div class="caen_card">
+                            <button name="action_biberones" type="object" class="caen_card_btn">
+                                <span class="caen_card_number"><field name="biberones_generados"/></span>
+                                <span class="caen_card_label">Biberones Generados</span>
+                            </button>
+                        </div>
+                        <div class="caen_card">
+                            <button name="action_pacientes" type="object" class="caen_card_btn">
+                                <span class="caen_card_number"><field name="pacientes_activos"/></span>
+                                <span class="caen_card_label">Pacientes Activos</span>
+                            </button>
+                        </div>
+                        <div class="caen_card">
+                            <button name="action_consentimientos" type="object" class="caen_card_btn">
+                                <span class="caen_card_number"><field name="consentimientos_activos"/></span>
+                                <span class="caen_card_label">Consentimientos Activos</span>
+                            </button>
+                        </div>
+                        <div class="caen_card">
+                            <button name="action_alertas" type="object" class="caen_card_btn caen_card_danger">
+                                <span class="caen_card_number"><field name="alertas_activas"/></span>
+                                <span class="caen_card_label">Alertas Activas</span>
+                            </button>
+                        </div>
+                        <div class="caen_card">
+                            <button name="action_centros_recoleccion" type="object" class="caen_card_btn">
+                                <span class="caen_card_number"><field name="centros_recoleccion"/></span>
+                                <span class="caen_card_label">Centros de Recolección</span>
+                            </button>
+                        </div>
+                    </div>
                 </sheet>
             </form>
         </field>
