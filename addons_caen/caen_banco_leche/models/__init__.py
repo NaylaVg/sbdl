@@ -8,6 +8,7 @@ from . import fraccionamiento
 from . import distribucion
 from . import bitacora
 from . import stock_leche
+from . import rendimiento
 from . import paciente
 from . import nutricion
 from . import evolucion
