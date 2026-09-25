@@ -33,3 +33,5 @@ access_caen_plan_alimentacion_write,caen.plan_alimentacion,model_caen_plan_alime
 access_caen_seguimiento_nutricional_write,caen.seguimiento_nutricional,model_caen_seguimiento_nutricional,caen_banco_leche.perm_nutricion,1,1,1,1
 access_caen_stock_leche_view,caen.stock_leche,model_caen_stock_leche,caen_banco_leche.perm_stock,1,0,0,0
 access_caen_alerta_write,caen.alerta,model_caen_alerta,caen_banco_leche.perm_alertas,1,1,0,0
+access_caen_asignacion_read,caen.asignacion,model_caen_asignacion,base.group_user,1,0,0,0
+access_caen_asignacion_write,caen.asignacion,model_caen_asignacion,caen_banco_leche.perm_asignaciones,1,1,1,1
