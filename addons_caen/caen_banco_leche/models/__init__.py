@@ -16,3 +16,4 @@ from . import dashboard
 from . import alerta
 from . import res_users
 from . import res_partner
+from . import asignacion
