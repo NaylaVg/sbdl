@@ -54,6 +54,10 @@
                     <a class="caen-sidebar-btn" href="/odoo/action-caen_banco_leche.action_centro_recoleccion">
                         <i class="fa fa-map-marker caen-sidebar-icon"/><span>Centros de Recolección</span>
                     </a>
+                    <a class="caen-sidebar-btn" href="/odoo/action-caen_banco_leche.action_asignacion">
+                        <i class="fa fa-calendar-check-o caen-sidebar-icon"/><span>Asignaciones Diarias</span>
+                    </a>
+                    
                     <details class="caen-sidebar-group">
                         <summary class="caen-sidebar-btn">
                             <i class="fa fa-bar-chart caen-sidebar-icon"/><span>Reportes</span>

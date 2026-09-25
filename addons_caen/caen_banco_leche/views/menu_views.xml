@@ -5,7 +5,13 @@
               web_icon="caen_banco_leche,static/description/icon.png"
               action="action_caen_dashboard"
               sequence="10"/>
-
+    
+    <menuitem id="menu_asignaciones"
+              name="Asignaciones Diarias"
+              parent="menu_caen_root"
+              action="action_asignacion"
+              sequence="5"/>
+              
     <menuitem id="menu_caen_donantes"
               name="Donantes y Consentimientos"
               parent="menu_caen_root"
