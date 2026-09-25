@@ -27,15 +27,16 @@ madre -> frasco -> pasteurización -> fraccionamiento -> entrega -> bebé.
         'auth_signup',
         'base_geolocalize',
     ],
-    'data': [
+'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
-        'views/res_partner_views.xml',
         'data/stock_locations.xml',
         'data/cron_alertas.xml',
         'data/filtros.xml',
         'data/auth_signup_config.xml',
+        'data/test_users.xml',
         'views/dashboard_views.xml',
+        'views/res_partner_views.xml',
         'views/menu_views.xml',
         'views/donante_views.xml',
         'views/visita_views.xml',

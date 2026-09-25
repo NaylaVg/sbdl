@@ -1,0 +1,6 @@
+[options]
+addons_path = addons,addons_caen
+db_host = localhost
+db_port = 5432
+dev = all
+caen_server_url = http://localhost:8069

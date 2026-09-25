@@ -155,15 +155,11 @@
         ]"/>
     </record>
 
-    <!-- RECEPCIONISTA: consulta basica + bitacora -->
+    <!-- RECEPCIONISTA: solo registra donantes -->
     <record id="role_recepcionista" model="res.groups">
         <field name="name">CAEN Recepcionista</field>
         <field name="implied_ids" eval="[
             (4, ref('perm_donantes')),
-            (4, ref('perm_consentimientos')),
-            (4, ref('perm_stock')),
-            (4, ref('perm_alertas')),
-            (4, ref('perm_bitacora')),
         ]"/>
     </record>
 

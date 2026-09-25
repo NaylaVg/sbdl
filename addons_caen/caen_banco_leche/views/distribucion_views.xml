@@ -6,11 +6,24 @@
         <field name="padding">4</field>
     </record>
 
+    <record id="action_caen_distribucion_nuevo" model="ir.actions.act_window">
+        <field name="name">Nueva Distribución</field>
+        <field name="res_model">caen.distribucion</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="binding_model_id" ref="model_caen_distribucion"/>
+    </record>
+
     <record id="view_caen_distribucion_list" model="ir.ui.view">
         <field name="name">caen.distribucion.list</field>
         <field name="model">caen.distribucion</field>
         <field name="arch" type="xml">
             <list string="Distribuciones">
+                <header>
+                    <button name="%(action_caen_distribucion_nuevo)d" type="action"
+                            string="+ Nueva Distribución" class="o_caen_create_button btn-primary"
+                            display="always" groups="caen_banco_leche.perm_distribucion"/>
+                </header>
                 <field name="name"/>
                 <field name="patient_id"/>
                 <field name="frasco_id"/>

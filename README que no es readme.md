@@ -245,12 +245,45 @@ stock:
 donantes:
 - Donantes por Aptitud (gráfico: aptas vs no aptas)
 
-extras:
-- Historial de Alertas
-- Seguimiento Nutricional
+rendimiento:
+- Rendimiento del Banco: reporte maestro que une frascos y procesos
+- Filtros dinámicos de tiempo: 3, 6, 9 y 12 meses (basados en hoy)
+- Análisis de Volumen: Recibido vs Procesado vs Descartado vs Entregado
+- Resultados de Cultivos: gráfico de torta de resultados finales de lab
 
 cada vista pivot tiene botón para descargar Excel (.xlsx)
 se pueden cambiar entre vista pivot, gráfico y lista con los botones de arriba
+
+# interfaz custom (rediseño de botones)
+
+como el botón azul "New" de odoo es medio feo y no se puede controlar bien por permisos en la lista, lo volamos.
+
+1. se ocultó el botón nativo (`button.o_list_button_add`) por CSS global.
+2. se agregaron botones custom en el `<header>` de cada lista XML.
+3. estos botones son más grandes, verdes/azules y dicen "+ Nuevo [Modelo]".
+4. **importante:** estos botones están gateados por grupos de permiso (ej: `perm_donantes`), así que si el usuario no tiene el permiso, directamente no ve el botón de crear.
+
+esto está en:
+- `static/src/css/caen_style.css` -> clase `.o_caen_create_button`
+- `views/*_views.xml` -> en el tag `<header>` de cada `<list>`
+
+# centros de recolección
+
+usamos el modelo `res.partner` (contactos) pero le agregamos un check "Es centro de recolección".
+esto sirve para saber de donde vienen las donantes y los frascos.
+- menu: Banco de Leche > Configuración > Centros de recolección
+- los frascos y visitas se vinculan a un centro.
+
+# fix de configuración (importante para nuevos usuarios)
+
+el archivo `odoo.conf` NO se sube al repo xq tiene tus contraseñas.
+pero si no lo tenés bien configurado, Odoo no encuentra la carpeta `addons_caen` y no ves los botones nuevos.
+
+solución:
+1. clonar el repo.
+2. copiar el archivo `odoo.conf.example` y renombrarlo a `odoo.conf`.
+3. poner tu usuario y pass de postgres ahí.
+4. como el example ya trae la linea `addons_path = addons,addons_caen`, odoo ya va a ver todo el modulo CAEN de entrada.
 
 # filtros guardados
 
@@ -516,6 +549,9 @@ Archivos modificados:
 - arreglo de vistas de alertas (agregada search view con filtros activas/criticas/stock)
 - bug de falso positivo en frascos (n_frascos si existia en donante.py)
 - reemplazo de links hardcodeados por XML IDs en el sidebar (antes action-411, action-403, etc. que solo funcionaban en mi DB de desarrollo)
+- fix de `ref()` en dominios de stock para que se resuelvan correctamente
+- agregado `res_partner_views.xml` al manifest para que los centros de recolección carguen bien
+- fix de botones de creación: ahora son visibles solo para usuarios con permiso, el nativo "New" de odoo quedó oculto
 
 
 # codigos QR

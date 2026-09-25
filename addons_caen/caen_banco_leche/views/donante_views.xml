@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="action_caen_donante_nuevo" model="ir.actions.act_window">
+        <field name="name">Nuevo Donante</field>
+        <field name="res_model">caen.donante</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="binding_model_id" ref="model_caen_donante"/>
+    </record>
+
     <record id="view_caen_donante_list" model="ir.ui.view">
         <field name="name">caen.donante.list</field>
         <field name="model">caen.donante</field>
         <field name="arch" type="xml">
-            <list string="Donantes">
+            <list string="Donantes" create="true">
+                <header>
+                    <button name="%(action_caen_donante_nuevo)d" type="action"
+                            string="+ Nuevo Donante" class="o_caen_create_button btn-primary"
+                            display="always" groups="caen_banco_leche.perm_donantes"/>
+                </header>
                 <field name="name"/>
                 <field name="dni"/>
                 <field name="phone"/>

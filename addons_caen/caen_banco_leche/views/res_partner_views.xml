@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="action_centro_recoleccion_nuevo" model="ir.actions.act_window">
+        <field name="name">Nuevo Centro de Recolección</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="context">{'default_es_centro_recoleccion': True}</field>
+    </record>
+
+    <record id="view_centro_recoleccion_list" model="ir.ui.view">
+        <field name="name">res.partner.list.centro.recoleccion</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <list string="Centros de Recolección">
+                <header>
+                    <button name="%(action_centro_recoleccion_nuevo)d" type="action"
+                            string="+ Nuevo Centro" class="o_caen_create_button btn-primary"
+                            display="always" groups="caen_banco_leche.role_admin,caen_banco_leche.role_jefe"/>
+                </header>
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="horario_atencion"/>
+                <field name="referente_centro"/>
+            </list>
+        </field>
+    </record>
+
     <record id="view_partner_form_centro_recoleccion" model="ir.ui.view">
         <field name="name">res.partner.form.centro.recoleccion</field>
         <field name="model">res.partner</field>
@@ -21,5 +48,6 @@
         <field name="view_mode">list,form</field>
         <field name="domain">[('es_centro_recoleccion', '=', True)]</field>
         <field name="context">{'default_es_centro_recoleccion': True}</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_id': ref('view_centro_recoleccion_list'), 'view_mode': 'list'})]"/>
     </record>
 </odoo>

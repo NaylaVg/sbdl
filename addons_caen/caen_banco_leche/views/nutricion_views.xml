@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="action_caen_plan_nuevo" model="ir.actions.act_window">
+        <field name="name">Nuevo Plan de Alimentación</field>
+        <field name="res_model">caen.plan_alimentacion</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="binding_model_id" ref="model_caen_plan_alimentacion"/>
+    </record>
+
     <record id="view_caen_plan_list" model="ir.ui.view">
         <field name="name">caen.plan_alimentacion.list</field>
         <field name="model">caen.plan_alimentacion</field>
         <field name="arch" type="xml">
             <list string="Planes de Alimentación">
+                <header>
+                    <button name="%(action_caen_plan_nuevo)d" type="action"
+                            string="+ Nuevo Plan" class="o_caen_create_button btn-primary"
+                            display="always" groups="caen_banco_leche.perm_nutricion"/>
+                </header>
                 <field name="patient_id"/>
                 <field name="daily_volume_ml"/>
                 <field name="frequency_per_day"/>

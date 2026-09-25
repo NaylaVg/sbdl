@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="action_caen_fraccionamiento_nuevo" model="ir.actions.act_window">
+        <field name="name">Nuevo Fraccionamiento</field>
+        <field name="res_model">caen.fraccionamiento</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="binding_model_id" ref="model_caen_fraccionamiento"/>
+    </record>
+
     <record id="view_caen_fraccionamiento_list" model="ir.ui.view">
         <field name="name">caen.fraccionamiento.list</field>
         <field name="model">caen.fraccionamiento</field>
         <field name="arch" type="xml">
             <list string="Fraccionamientos">
+                <header>
+                    <button name="%(action_caen_fraccionamiento_nuevo)d" type="action"
+                            string="+ Nuevo Fraccionamiento" class="o_caen_create_button btn-primary"
+                            display="always" groups="caen_banco_leche.perm_pasteurizacion"/>
+                </header>
                 <field name="pasteurization_id"/>
                 <field name="fractionation_date"/>
                 <field name="staff_id"/>

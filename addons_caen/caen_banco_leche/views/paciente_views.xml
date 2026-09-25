@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="action_caen_paciente_nuevo" model="ir.actions.act_window">
+        <field name="name">Nuevo Paciente</field>
+        <field name="res_model">caen.paciente</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="binding_model_id" ref="model_caen_paciente"/>
+    </record>
+
     <record id="view_caen_paciente_list" model="ir.ui.view">
         <field name="name">caen.paciente.list</field>
         <field name="model">caen.paciente</field>
         <field name="arch" type="xml">
             <list string="Pacientes">
+                <header>
+                    <button name="%(action_caen_paciente_nuevo)d" type="action"
+                            string="+ Nuevo Paciente" class="o_caen_create_button btn-primary"
+                            display="always" groups="caen_banco_leche.perm_pacientes"/>
+                </header>
                 <field name="name"/>
                 <field name="admission_date"/>
                 <field name="state"/>

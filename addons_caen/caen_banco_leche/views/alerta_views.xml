@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!-- Acción para crear alerta -->
+    <record id="action_caen_alerta_nuevo" model="ir.actions.act_window">
+        <field name="name">Nueva Alerta</field>
+        <field name="res_model">caen.alerta</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="binding_model_id" ref="model_caen_alerta"/>
+    </record>
+
     <!-- Lista de alertas -->
     <record id="view_caen_alerta_list" model="ir.ui.view">
         <field name="name">caen.alerta.list</field>
         <field name="model">caen.alerta</field>
         <field name="arch" type="xml">
             <list string="Alertas" decoration-danger="severity == 'critical'" decoration-warning="severity == 'warning'">
+                <header>
+                    <button name="%(action_caen_alerta_nuevo)d" type="action"
+                            string="+ Nueva Alerta" class="o_caen_create_button btn-primary"
+                            display="always" groups="caen_banco_leche.perm_alertas"/>
+                </header>
                 <field name="create_date" string="Fecha"/>
                 <field name="alert_type" string="Tipo"/>
                 <field name="severity" string="Severidad" widget="badge" decoration-danger="severity == 'critical'" decoration-warning="severity == 'warning'" decoration-info="severity == 'info'"/>

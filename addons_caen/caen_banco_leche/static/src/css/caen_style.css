@@ -12,6 +12,20 @@
     --caen-sidebar-subtext: #7f8c8d;
 }
 
+/* oculto el botón "New" nativo de Odoo en list views */
+button.o_list_button_add {
+    display: none !important;
+}
+
+/* botón custom para crear registros */
+button.o_caen_create_button {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    padding: 8px 22px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25) !important;
+}
+
 /* pongo el layout en fila */
 .o_web_client {
     flex-flow: row !important;

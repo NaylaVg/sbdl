@@ -6,11 +6,24 @@
         <field name="padding">4</field>
     </record>
 
+    <record id="action_caen_visita_nuevo" model="ir.actions.act_window">
+        <field name="name">Nueva Visita</field>
+        <field name="res_model">caen.visita</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="binding_model_id" ref="model_caen_visita"/>
+    </record>
+
     <record id="view_caen_visita_list" model="ir.ui.view">
         <field name="name">caen.visita.list</field>
         <field name="model">caen.visita</field>
         <field name="arch" type="xml">
             <list string="Visitas de donación">
+                <header>
+                    <button name="%(action_caen_visita_nuevo)d" type="action"
+                            string="+ Nueva Visita" class="o_caen_create_button btn-primary"
+                            display="always" groups="caen_banco_leche.perm_visitas"/>
+                </header>
                 <field name="name"/>
                 <field name="donor_id"/>
                 <field name="center_id"/>
