@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_asignacion_list" model="ir.ui.view">
+        <field name="name">caen.asignacion.list</field>
+        <field name="model">caen.asignacion</field>
+        <field name="arch" type="xml">
+            <list string="Asignaciones">
+                <field name="fecha"/>
+                <field name="turno"/>
+                <field name="empleado_id"/>
+                <field name="area"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_asignacion_form" model="ir.ui.view">
+        <field name="name">caen.asignacion.form</field>
+        <field name="model">caen.asignacion</field>
+        <field name="arch" type="xml">
+            <form string="Asignación">
+                <header>
+                    <button name="action_iniciar" type="object" string="Iniciar" invisible="state != 'pendiente'"/>
+                    <button name="action_completar" type="object" string="Completar" invisible="state != 'en_progreso'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="empleado_id"/>
+                            <field name="encargada_id"/>
+                            <field name="fecha"/>
+                            <field name="turno"/>
+                        </group>
+                        <group>
+                            <field name="area"/>
+                        </group>
+                    </group>
+                    <field name="descripcion" placeholder="Detalle de la tarea..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_asignacion_calendar" model="ir.ui.view">
+        <field name="name">caen.asignacion.calendar</field>
+        <field name="model">caen.asignacion</field>
+        <field name="arch" type="xml">
+            <calendar string="Asignaciones" date_start="fecha" color="empleado_id">
+                <field name="empleado_id"/>
+                <field name="turno"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="action_asignacion" model="ir.actions.act_window">
+        <field name="name">Asignaciones Diarias</field>
+        <field name="res_model">caen.asignacion</field>
+        <field name="view_mode">calendar,list,form</field>
+    </record>
+</odoo>

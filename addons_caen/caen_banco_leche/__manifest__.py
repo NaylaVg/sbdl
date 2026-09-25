@@ -53,6 +53,7 @@ madre -> frasco -> pasteurización -> fraccionamiento -> entrega -> bebé.
         'views/stock_views.xml',
         'views/reportes_views.xml',
         'views/usuarios_caen_views.xml',
+        'views/asignacion_views.xml',
     ],
     'assets': {
         'web.assets_backend': [
