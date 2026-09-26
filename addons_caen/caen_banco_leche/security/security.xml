@@ -65,6 +65,10 @@
         <field name="name">CAEN Reportes</field>
         <field name="privilege_id" ref="privilege_caen"/>
     </record>
+        <record id="perm_asignaciones" model="res.groups">
+        <field name="name">CAEN Asignaciones</field>
+        <field name="privilege_id" ref="privilege_caen"/>
+    </record>
     <record id="perm_bitacora" model="res.groups">
         <field name="name">CAEN Bitacora</field>
         <field name="privilege_id" ref="privilege_caen"/>
@@ -91,6 +95,7 @@
             (4, ref('perm_alertas')),
             (4, ref('perm_reportes')),
             (4, ref('perm_bitacora')),
+            (4, ref('perm_asignaciones')),
         ]"/>
     </record>
 
@@ -111,6 +116,7 @@
             (4, ref('perm_alertas')),
             (4, ref('perm_reportes')),
             (4, ref('perm_bitacora')),
+            (4, ref('perm_asignaciones')),
         ]"/>
     </record>
 
