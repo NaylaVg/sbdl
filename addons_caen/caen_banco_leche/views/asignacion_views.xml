@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="action_caen_asignacion_nueva" model="ir.actions.act_window">
+        <field name="name">Nueva Asignación</field>
+        <field name="res_model">caen.asignacion</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="binding_model_id" ref="model_caen_asignacion"/>
+    </record>
+
     <record id="view_asignacion_list" model="ir.ui.view">
         <field name="name">caen.asignacion.list</field>
         <field name="model">caen.asignacion</field>
         <field name="arch" type="xml">
-            <list string="Asignaciones">
+            <list string="Asignaciones" create="true">
+                <header>
+                    <button name="%(action_caen_asignacion_nueva)d" type="action"
+                            string="+ Nueva Asignación" class="o_caen_create_button btn-primary"
+                            display="always" groups="caen_banco_leche.perm_asignaciones"/>
+                </header>
                 <field name="fecha"/>
                 <field name="turno"/>
                 <field name="empleado_id"/>
