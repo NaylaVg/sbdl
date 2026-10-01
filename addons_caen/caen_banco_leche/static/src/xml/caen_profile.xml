@@ -9,7 +9,7 @@
         <xpath expr="//nav" position="before">
             <div class="caen-sidebar">
                 <div class="caen-sidebar-profile-box" id="caen-profile-box">
-                    <img class="caen-sidebar-profile-img" src="/web/static/img/placeholder.png" alt="avatar"/>
+                    <img class="caen-sidebar-profile-img" src="addons_caen\caen_banco_leche\static\src\img\isotipo.png" alt="avatar"/>
                     <span class="caen-sidebar-profile-name">Cargando...</span>
                     <span class="caen-sidebar-profile-role">Banco de Leche Humana</span>
                 </div>
