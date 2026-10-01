@@ -344,3 +344,29 @@ header.o_navbar {
 
 .caen_card_warning .caen_card_number { color: #e0a53f; }
 .caen_card_danger .caen_card_number { color: #e0665f; }
+
+/* ===== Prioridades submenu "Pendientes de Hoy" ===== */
+
+.caen-priority-urgent {
+    border-left: 3px solid #e0665f !important;
+}
+.caen-priority-urgent .caen-priority-dot { background-color: #e0665f; }
+
+.caen-priority-medium {
+    border-left: 3px solid #e0a53f !important;
+}
+.caen-priority-medium .caen-priority-dot { background-color: #e0a53f; }
+
+.caen-priority-low {
+    border-left: 3px solid #5dade2 !important;
+}
+.caen-priority-low .caen-priority-dot { background-color: #5dade2; }
+
+.caen-priority-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+    flex-shrink: 0;
+}

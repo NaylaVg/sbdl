@@ -16,11 +16,12 @@ class Donante(models.Model):
     phone = fields.Char(string='Teléfono')
     email = fields.Char(string='Email')
     address = fields.Text(string='Domicilio')
-    # centro al que pertenece, reutilizo res.partner (los contactos de odoo)
-    # para no duplicar un modelo de centros
+    # para que al elegir centro en la ficha de la donante, solo aparezcan los contactos marcados 
+    # como centro de recolección (no cualquier contacto de Odoo)
     center_id = fields.Many2one(
-        'res.partner', string='Centro de recolección',
-        help='Centro al que pertenece la donante (SPE, Vidal, etc.)')
+    'res.partner', string='Centro de recolección',
+    domain="[('es_centro_recoleccion', '=', True)]",
+    help='Centro al que pertenece la donante (SPE, Vidal, etc.)')
 
     # relaciones uno a muchos con los hijos, cada hijo guarda un donor_id
     # que apunta de vuelta a esta donante
@@ -82,3 +83,4 @@ class Donante(models.Model):
             # consentimiento vigente
             rec.apta_donar = rec.state == 'active' and rec.serologias_ok >= 7 \
                 and bool(consent_vigente)
+            
