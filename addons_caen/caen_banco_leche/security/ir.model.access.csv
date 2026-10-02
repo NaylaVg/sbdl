@@ -30,8 +30,12 @@ access_caen_paciente_write,caen.paciente,model_caen_paciente,caen_banco_leche.pe
 access_caen_evolucion_diaria_read,caen.evolucion_diaria,model_caen_evolucion_diaria,base.group_user,1,0,0,0
 access_caen_evolucion_diaria_write,caen.evolucion_diaria,model_caen_evolucion_diaria,caen_banco_leche.perm_pacientes,1,1,1,1
 access_caen_plan_alimentacion_write,caen.plan_alimentacion,model_caen_plan_alimentacion,caen_banco_leche.perm_nutricion,1,1,1,1
+access_caen_alimento_read,caen.alimento,model_caen_alimento,base.group_user,1,0,0,0
+access_caen_alimento_write,caen.alimento,model_caen_alimento,caen_banco_leche.perm_nutricion,1,1,1,1
 access_caen_seguimiento_nutricional_write,caen.seguimiento_nutricional,model_caen_seguimiento_nutricional,caen_banco_leche.perm_nutricion,1,1,1,1
 access_caen_stock_leche_view,caen.stock_leche,model_caen_stock_leche,caen_banco_leche.perm_stock,1,0,0,0
 access_caen_alerta_write,caen.alerta,model_caen_alerta,caen_banco_leche.perm_alertas,1,1,0,0
 access_caen_asignacion_read,caen.asignacion,model_caen_asignacion,base.group_user,1,0,0,0
 access_caen_asignacion_write,caen.asignacion,model_caen_asignacion,caen_banco_leche.perm_asignaciones,1,1,1,1
+access_caen_stock_alimento,caen.stock_alimento,model_caen_stock_alimento,base.group_user,1,1,1,1
+access_caen_stock_alimento_resumen,caen.stock_alimento_resumen,model_caen_stock_alimento_resumen,base.group_user,1,0,0,0

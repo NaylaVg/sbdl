@@ -29,7 +29,36 @@
               parent="menu_caen_root"
               action="action_asignacion"
               sequence="5"/>
-              
+    
+    <menuitem id="menu_caen_inventario"
+              name="Inventario"
+              parent="menu_caen_root"
+              sequence="6"/>
+    <menuitem id="menu_caen_stock_leche"
+              name="Stock de Leche"
+              parent="menu_caen_inventario"
+              action="action_caen_stock_resumen"
+              sequence="1"/>
+    <menuitem id="menu_caen_stock_alimento"
+              name="Movimientos de stock alimentario"
+              parent="menu_caen_inventario"
+              action="caen_banco_leche.action_caen_stock_alimento"
+              sequence="2"/>
+    <menuitem id="menu_caen_stock_alimento_resumen"
+              name="Resumen de stock alimentario"
+              parent="menu_caen_inventario"
+              action="caen_banco_leche.action_caen_stock_alimento_resumen"
+              sequence="3"/>
+    
+    <menuitem id="menu_caen_reportes"
+              name="Reportes"
+              parent="menu_caen_root"
+              sequence="80"/>
+    <menuitem id="menu_caen_bitacora"
+              name="Bitácora"
+              parent="menu_caen_root"
+              action="action_caen_bitacora"
+              sequence="85"/>
     <menuitem id="menu_caen_usuarios"
               name="Usuarios"
               parent="menu_caen_root"

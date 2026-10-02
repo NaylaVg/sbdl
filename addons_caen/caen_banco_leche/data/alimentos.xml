@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- alimentos de la planilla 15, composicion por 100 ml -->
+    <record id="alimento_formula_iniciacion1" model="caen.alimento">
+        <field name="name">Formula Polvo Inicio 1</field>
+        <field name="tipo">formula_iniciacion</field>
+        <field name="kcal">70</field>
+        <field name="hc_g">7.4</field>
+        <field name="protein_g">1.5</field>
+        <field name="fat_g">3.8</field>
+        <field name="calcium_mg">56</field>
+        <field name="iron_mg">1.2</field>
+        <field name="phosphorus_mg">29</field>
+        <field name="sodium_mg">24</field>
+        <field name="zinc_mg">0.63</field>
+        <field name="vit_c_mg">8.3</field>
+        <field name="vit_d_mcg">1.3</field>
+        <field name="vit_a_mcg">81</field>
+    </record>
+    <record id="alimento_formula_iniciacion15" model="caen.alimento">
+        <field name="name">Formula Inicio 15%</field>
+        <field name="tipo">formula_iniciacion</field>
+        <field name="kcal">77.8</field>
+        <field name="hc_g">8.2</field>
+        <field name="protein_g">1.7</field>
+        <field name="fat_g">4.2</field>
+        <field name="calcium_mg">62.2</field>
+        <field name="iron_mg">1.3</field>
+        <field name="phosphorus_mg">32.2</field>
+        <field name="sodium_mg">26.7</field>
+        <field name="zinc_mg">0.7</field>
+        <field name="vit_c_mg">9.2</field>
+        <field name="vit_d_mcg">1.4</field>
+        <field name="vit_a_mcg">90</field>
+    </record>
+    <record id="alimento_formula_iniciacion18" model="caen.alimento">
+        <field name="name">Formula Inicio 18%</field>
+        <field name="tipo">formula_iniciacion</field>
+        <field name="kcal">93.3</field>
+        <field name="hc_g">9.9</field>
+        <field name="protein_g">2</field>
+        <field name="fat_g">5.1</field>
+        <field name="calcium_mg">74.7</field>
+        <field name="iron_mg">1.6</field>
+        <field name="phosphorus_mg">38.7</field>
+        <field name="sodium_mg">32</field>
+        <field name="zinc_mg">0.8</field>
+        <field name="vit_c_mg">11.1</field>
+        <field name="vit_d_mcg">1.7</field>
+        <field name="vit_a_mcg">108</field>
+    </record>
+    <record id="alimento_formula_preterm" model="caen.alimento">
+        <field name="name">Formula Preterm Polvo</field>
+        <field name="tipo">formula_pretermino</field>
+        <field name="kcal">210</field>
+        <field name="hc_g">9.3</field>
+        <field name="protein_g">4.6</field>
+        <field name="fat_g">2.3</field>
+        <field name="calcium_mg">136.6</field>
+        <field name="iron_mg">1.76</field>
+        <field name="phosphorus_mg">80</field>
+        <field name="sodium_mg">42</field>
+        <field name="zinc_mg">0.99</field>
+        <field name="vit_c_mg">22</field>
+        <field name="vit_d_mcg">3.33</field>
+        <field name="vit_a_mcg">216</field>
+    </record>
+    <record id="alimento_formula_preterm135" model="caen.alimento">
+        <field name="name">Formula Preterm 13,5%</field>
+        <field name="tipo">formula_pretermino</field>
+        <field name="kcal">80</field>
+        <field name="hc_g">8</field>
+        <field name="protein_g">2.5</field>
+        <field name="fat_g">4.2</field>
+        <field name="calcium_mg">141</field>
+        <field name="iron_mg">2</field>
+        <field name="phosphorus_mg">78</field>
+        <field name="sodium_mg">33</field>
+        <field name="zinc_mg">1.4</field>
+        <field name="vit_c_mg">26</field>
+        <field name="vit_d_mcg">3.5</field>
+        <field name="vit_a_mcg">255</field>
+    </record>
+    <record id="alimento_formula_pm15" model="caen.alimento">
+        <field name="name">Formula PM 15%</field>
+        <field name="tipo">formula_pm</field>
+        <field name="kcal">233.3</field>
+        <field name="hc_g">10.3</field>
+        <field name="protein_g">5.1</field>
+        <field name="fat_g">2.5</field>
+        <field name="calcium_mg">151.8</field>
+        <field name="iron_mg">1.9</field>
+        <field name="phosphorus_mg">88.9</field>
+        <field name="sodium_mg">46.7</field>
+        <field name="zinc_mg">1.1</field>
+        <field name="vit_c_mg">24.4</field>
+        <field name="vit_d_mcg">3.7</field>
+        <field name="vit_a_mcg">240</field>
+    </record>
+    <record id="alimento_formula_pm18" model="caen.alimento">
+        <field name="name">Formula PM 18%</field>
+        <field name="tipo">formula_pm</field>
+        <field name="kcal">280</field>
+        <field name="hc_g">12.4</field>
+        <field name="protein_g">6.1</field>
+        <field name="fat_g">3.1</field>
+        <field name="calcium_mg">182.1</field>
+        <field name="iron_mg">2.3</field>
+        <field name="phosphorus_mg">106.7</field>
+        <field name="sodium_mg">56</field>
+        <field name="zinc_mg">1.32</field>
+        <field name="vit_c_mg">29.3</field>
+        <field name="vit_d_mcg">4.4</field>
+        <field name="vit_a_mcg">288</field>
+    </record>
+    <record id="alimento_kas1000" model="caen.alimento">
+        <field name="name">Kas 1000</field>
+        <field name="tipo">formula_iniciacion</field>
+        <field name="kcal">67</field>
+        <field name="hc_g">7.5</field>
+        <field name="protein_g">2.4</field>
+        <field name="fat_g">3.7</field>
+        <field name="calcium_mg">76.5</field>
+        <field name="iron_mg">0.9</field>
+        <field name="phosphorus_mg">52.5</field>
+        <field name="sodium_mg">81</field>
+        <field name="zinc_mg">0.69</field>
+        <field name="vit_c_mg">50</field>
+        <field name="vit_d_mcg">7.1</field>
+        <field name="vit_a_mcg">61.56</field>
+    </record>
+    <record id="alimento_kas1000_15" model="caen.alimento">
+        <field name="name">Kas 1000 15%</field>
+        <field name="tipo">formula_iniciacion</field>
+        <field name="kcal">74.4</field>
+        <field name="hc_g">8.3</field>
+        <field name="protein_g">2.6</field>
+        <field name="fat_g">4.1</field>
+        <field name="calcium_mg">85</field>
+        <field name="iron_mg">1</field>
+        <field name="phosphorus_mg">58.3</field>
+        <field name="sodium_mg">90</field>
+        <field name="zinc_mg">0.8</field>
+        <field name="vit_c_mg">55.5</field>
+        <field name="vit_d_mcg">7.9</field>
+        <field name="vit_a_mcg">68.4</field>
+    </record>
+    <record id="alimento_kas1000_18" model="caen.alimento">
+        <field name="name">Kas 1000 18%</field>
+        <field name="tipo">formula_iniciacion</field>
+        <field name="kcal">89.3</field>
+        <field name="hc_g">10</field>
+        <field name="protein_g">3.2</field>
+        <field name="fat_g">4.9</field>
+        <field name="calcium_mg">102</field>
+        <field name="iron_mg">1.2</field>
+        <field name="phosphorus_mg">70</field>
+        <field name="sodium_mg">108</field>
+        <field name="zinc_mg">0.9</field>
+        <field name="vit_c_mg">66.7</field>
+        <field name="vit_d_mcg">9.5</field>
+        <field name="vit_a_mcg">82.1</field>
+    </record>
+    <record id="alimento_alfare" model="caen.alimento">
+        <field name="name">Alfare</field>
+        <field name="tipo">formula_iniciacion</field>
+        <field name="kcal">70</field>
+        <field name="hc_g">7.6</field>
+        <field name="protein_g">2.1</field>
+        <field name="fat_g">3.5</field>
+        <field name="calcium_mg">54</field>
+        <field name="iron_mg">0.7</field>
+        <field name="phosphorus_mg">36</field>
+        <field name="sodium_mg">35</field>
+        <field name="zinc_mg">0.7</field>
+        <field name="vit_c_mg">7</field>
+        <field name="vit_d_mcg">1.1</field>
+        <field name="vit_a_mcg">74</field>
+    </record>
+    <record id="alimento_alfare_15" model="caen.alimento">
+        <field name="name">Alfare 15%</field>
+        <field name="tipo">formula_iniciacion</field>
+        <field name="kcal">77.8</field>
+        <field name="hc_g">8.4</field>
+        <field name="protein_g">2.3</field>
+        <field name="fat_g">3.8</field>
+        <field name="calcium_mg">60</field>
+        <field name="iron_mg">0.8</field>
+        <field name="phosphorus_mg">40</field>
+        <field name="sodium_mg">38.9</field>
+        <field name="zinc_mg">0.8</field>
+        <field name="vit_c_mg">7.8</field>
+        <field name="vit_d_mcg">1.2</field>
+        <field name="vit_a_mcg">82.2</field>
+    </record>
+    <record id="alimento_alfare_18" model="caen.alimento">
+        <field name="name">Alfare 18%</field>
+        <field name="tipo">formula_iniciacion</field>
+        <field name="kcal">93.3</field>
+        <field name="hc_g">10.1</field>
+        <field name="protein_g">2.8</field>
+        <field name="fat_g">4.7</field>
+        <field name="calcium_mg">72</field>
+        <field name="iron_mg">0.9</field>
+        <field name="phosphorus_mg">48</field>
+        <field name="sodium_mg">46.7</field>
+        <field name="zinc_mg">0.9</field>
+        <field name="vit_c_mg">9.3</field>
+        <field name="vit_d_mcg">1.5</field>
+        <field name="vit_a_mcg">98.7</field>
+    </record>
+    <record id="alimento_formula_iniciacion1_135" model="caen.alimento">
+        <field name="name">Formula Inicio 1 13,5%</field>
+        <field name="tipo">formula_iniciacion</field>
+        <field name="kcal">66</field>
+        <field name="hc_g">7.4</field>
+        <field name="protein_g">1.5</field>
+        <field name="fat_g">3.8</field>
+        <field name="calcium_mg">56</field>
+        <field name="iron_mg">1.2</field>
+        <field name="phosphorus_mg">29</field>
+        <field name="sodium_mg">24</field>
+        <field name="zinc_mg">0.52</field>
+        <field name="vit_c_mg">8.3</field>
+        <field name="vit_d_mcg">1.3</field>
+        <field name="vit_a_mcg">73</field>
+    </record>
+    <record id="alimento_ar" model="caen.alimento">
+        <field name="name">A.R.</field>
+        <field name="tipo">formula_iniciacion</field>
+        <field name="kcal">60</field>
+        <field name="hc_g">1.2</field>
+        <field name="protein_g">3</field>
+        <field name="fat_g">1.23</field>
+        <field name="calcium_mg">36</field>
+        <field name="iron_mg">0.6</field>
+        <field name="phosphorus_mg">20.4</field>
+        <field name="sodium_mg">16.8</field>
+        <field name="zinc_mg">0.6</field>
+        <field name="vit_c_mg">10.8</field>
+        <field name="vit_d_mcg">0.84</field>
+        <field name="vit_a_mcg">57</field>
+    </record>
+    <record id="alimento_neocate" model="caen.alimento">
+        <field name="name">Neocate</field>
+        <field name="tipo">formula_iniciacion</field>
+        <field name="kcal">67</field>
+        <field name="hc_g">7.2</field>
+        <field name="protein_g">1.8</field>
+        <field name="fat_g">3.4</field>
+        <field name="calcium_mg">65.6</field>
+        <field name="iron_mg">1</field>
+        <field name="phosphorus_mg">47.1</field>
+        <field name="sodium_mg">26.1</field>
+        <field name="zinc_mg">0.73</field>
+        <field name="vit_c_mg">7.1</field>
+        <field name="vit_d_mcg">1.2</field>
+        <field name="vit_a_mcg">56</field>
+    </record>
+    <record id="alimento_leche_humana_madura" model="caen.alimento">
+        <field name="name">Leche humana madura</field>
+        <field name="tipo">lh_madura</field>
+        <field name="kcal">62</field>
+        <field name="hc_g">71</field>
+        <field name="protein_g">10.6</field>
+        <field name="fat_g">45</field>
+        <field name="calcium_mg">340</field>
+        <field name="iron_mg">0.5</field>
+        <field name="phosphorus_mg">140</field>
+        <field name="sodium_mg">50</field>
+        <field name="vit_c_mg">52</field>
+        <field name="vit_d_mcg">300</field>
+        <field name="vit_a_mcg">89</field>
+    </record>
+    <record id="alimento_leche_transicion" model="caen.alimento">
+        <field name="name">Leche de transicion</field>
+        <field name="tipo">lh_transicion</field>
+        <field name="kcal">64</field>
+        <field name="hc_g">45.9</field>
+        <field name="protein_g">35.2</field>
+        <field name="calcium_mg">460</field>
+        <field name="iron_mg">0.59</field>
+        <field name="phosphorus_mg">190</field>
+        <field name="vit_c_mg">71</field>
+        <field name="vit_d_mcg">360</field>
+    </record>
+    <record id="alimento_calostro_termino" model="caen.alimento">
+        <field name="name">Calostro termino</field>
+        <field name="tipo">calostro</field>
+        <field name="kcal">24</field>
+        <field name="hc_g">58</field>
+        <field name="protein_g">57</field>
+        <field name="fat_g">22.9</field>
+        <field name="calcium_mg">29.5</field>
+        <field name="iron_mg">480</field>
+        <field name="phosphorus_mg">1.0</field>
+        <field name="sodium_mg">150</field>
+        <field name="vit_c_mg">15</field>
+        <field name="vit_d_mcg">72</field>
+        <field name="vit_a_mcg">300</field>
+    </record>
+    <record id="alimento_calostro_pretermino" model="caen.alimento">
+        <field name="name">Calostro pretermino</field>
+        <field name="tipo">calostro</field>
+        <field name="kcal">68.5</field>
+        <field name="phosphorus_mg">19.6</field>
+    </record>
+    <record id="alimento_polimerosa" model="caen.alimento">
+        <field name="name">Polimerosa 5,8gr</field>
+        <field name="tipo">otro</field>
+        <field name="kcal">22.3</field>
+        <field name="hc_g">5.6</field>
+        <field name="sodium_mg">5.2</field>
+    </record>
+    <record id="alimento_mct" model="caen.alimento">
+        <field name="name">MCT 100ml</field>
+        <field name="tipo">otro</field>
+        <field name="kcal">855</field>
+        <field name="fat_g">95</field>
+    </record>
+    <record id="alimento_fortificador" model="caen.alimento">
+        <field name="name">Fortificador (1 sobre)</field>
+        <field name="tipo">fortificador</field>
+        <field name="kcal">8</field>
+        <field name="hc_g">1.4</field>
+        <field name="protein_g">0.6</field>
+        <field name="fat_g">0</field>
+        <field name="calcium_mg">66</field>
+        <field name="iron_mg">0</field>
+        <field name="phosphorus_mg">19</field>
+        <field name="sodium_mg">18</field>
+        <field name="zinc_mg">0.31</field>
+        <field name="vit_c_mg">6</field>
+        <field name="vit_d_mcg">379</field>
+        <field name="vit_a_mcg">116</field>
+    </record>
+    <record id="alimento_suplemento_proteico" model="caen.alimento">
+        <field name="name">Suplemento proteico</field>
+        <field name="tipo">suplemento</field>
+        <field name="kcal">14</field>
+        <field name="hc_g">0.02</field>
+        <field name="protein_g">0.82</field>
+        <field name="fat_g">0</field>
+        <field name="calcium_mg">5.2</field>
+        <field name="iron_mg">0</field>
+        <field name="phosphorus_mg">5.2</field>
+        <field name="sodium_mg">7.8</field>
+        <field name="zinc_mg">0</field>
+        <field name="vit_c_mg">0</field>
+        <field name="vit_d_mcg">0</field>
+        <field name="vit_a_mcg">0</field>
+    </record>
+</odoo>
+

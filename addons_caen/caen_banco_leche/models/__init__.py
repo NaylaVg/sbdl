@@ -11,6 +11,9 @@ from . import stock_leche
 from . import rendimiento
 from . import paciente
 from . import nutricion
+from . import alimento
+from . import stock_alimento
+from . import stock_alimento_resumen
 from . import evolucion
 from . import dashboard
 from . import alerta

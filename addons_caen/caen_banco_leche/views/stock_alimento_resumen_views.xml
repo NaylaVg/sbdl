@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_caen_stock_alimento_resumen_list" model="ir.ui.view">
+        <field name="name">caen.stock_alimento_resumen.list</field>
+        <field name="model">caen.stock_alimento_resumen</field>
+        <field name="arch" type="xml">
+            <list string="Resumen de stock de productos alimentarios">
+                <field name="alimento_id"/>
+                <field name="tipo_alimento"/>
+                <field name="cantidad_actual"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_caen_stock_alimento_resumen" model="ir.actions.act_window">
+        <field name="name">Resumen de stock de productos alimentarios</field>
+        <field name="res_model">caen.stock_alimento_resumen</field>
+        <field name="view_mode">list</field>
+    </record>
+</odoo>
