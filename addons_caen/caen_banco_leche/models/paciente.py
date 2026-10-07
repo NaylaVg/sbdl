@@ -54,3 +54,13 @@ class Paciente(models.Model):
     def _compute_n_evolutions(self):
         for rec in self:
             rec.n_evolutions = len(rec.evolution_ids)
+
+    def action_ver_curvas(self):
+        # abro las curvas de crecimiento de este bebe
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'caen_curvas',
+            'name': f'Curvas de {self.name}',
+            'params': {'patient_id': self.id},
+        }

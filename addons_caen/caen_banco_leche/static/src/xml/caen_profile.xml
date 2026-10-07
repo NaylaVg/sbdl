@@ -27,6 +27,7 @@
                         <div class="caen-sidebar-submenu">
                             <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_caen_visita">Visitas de Donación</a>
                             <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_caen_donante">Donantes</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_caen_historia">Historias perinatales</a>
                             <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_caen_consentimiento">Consentimientos</a>
                             <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_caen_serologia">Serologías</a>
                         </div>
@@ -76,9 +77,16 @@
                             <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_reporte_nutricion">Reporte de Nutrición</a>
                         </div>
                     </details>
-                    <a class="caen-sidebar-btn" href="/odoo/action-caen_banco_leche.action_caen_stock_resumen">
-                        <i class="fa fa-cube caen-sidebar-icon"/><span>Inventario</span>
-                    </a>
+                    <details class="caen-sidebar-group">
+                        <summary class="caen-sidebar-btn">
+                            <i class="fa fa-cube caen-sidebar-icon"/><span>Inventario</span>
+                        </summary>
+                        <div class="caen-sidebar-submenu">
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_caen_stock_resumen">Stock de Leche</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_caen_stock_alimento">Movimientos de stock alimentario</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_caen_stock_alimento_resumen">Resumen de stock alimentario</a>
+                        </div>
+                    </details>
                     <details class="caen-sidebar-group">
                         <summary class="caen-sidebar-btn">
                             <i class="fa fa-user caen-sidebar-icon"/><span>Usuarios</span>

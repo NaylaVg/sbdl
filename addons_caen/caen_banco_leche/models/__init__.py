@@ -1,4 +1,5 @@
 from . import donante
+from . import historia
 from . import visita
 from . import consentimiento
 from . import serologia

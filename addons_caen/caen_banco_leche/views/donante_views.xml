@@ -92,6 +92,16 @@
                                 </list>
                             </field>
                         </page>
+                        <page string="Historia perinatal">
+                            <field name="historia_ids">
+                                <list string="Historias perinatales">
+                                    <field name="fecha"/>
+                                    <field name="n_embarazos"/>
+                                    <field name="n_partos"/>
+                                    <field name="patologia"/>
+                                </list>
+                            </field>
+                        </page>
                     </notebook>
                 </sheet>
             </form>

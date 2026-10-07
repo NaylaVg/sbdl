@@ -7,6 +7,9 @@ class Pasteurizacion(models.Model):
     # que se le hacen a un frasco
     _name = 'caen.pasteurizacion'
     _description = 'Registro de pasteurización y control de calidad'
+    # muestro el qr post-pasteurizacion en los desplegables
+    # si no odoo muestra caen.pasteurizacion,9 y no se entiende nada
+    _rec_name = 'new_barcode'
 
     batch_id = fields.Many2one('caen.frasco', string='Frasco de origen',
                                required=True)

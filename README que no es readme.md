@@ -601,3 +601,57 @@ para verificar que todo funciona se puede abrir el navegador en
 http://localhost:8069/odoo/
 el servidor se levanta con:
 python odoo-bin -c odoo.conf -d bdl_odoo
+
+# stock de leche vs movimientos alimentarios (para no marearse)
+
+## por que la enfermera NO carga el stock de leche a mano el stock de leche (menu inventario > stock de leche, modelo caen.stock_leche)
+es una vista sql de solo lectura. el stock nace solo cuando la enfermera registra un frasco:
+crear frasco -> entra lote con su qr a recepcion de crudos 
+pasteurizar -> se mueve a heladera pasteurizada
+fraccionar -> se mueve a fraccionamiento
+entregar -> se mueve a distribucion
+descartar -> se mueve a descarte
+si la enfermera pudiera tipear numeros a mano se rompe la trazabilidad
+(stock sin donante, sin qr, sin serologias), por eso es asi y esta bien
+
+## para que sirven los movimientos de stock alimentario
+son las formulas, fortificadores y suplementos COMPRADOS, no donados
+como no vienen de un frasco ni de una donante, aca si hay carga manual:
+cada movimiento es una entrada o una salida con alimento, cantidad, lote, vencimiento, origen y usuario (modelo caen.stock_alimento)
+la lista tiene boton "+ nuevo movimiento"
+el resumen (caen.stock_alimento_resumen) calcula solo:
+entradas menos salidas por alimento, tambien de solo lectura
+
+
+# cargas de datos reales (octubre 2026)
+
+## lo que se cargo
+- alimentos: 24 unicos en el catalogo
+- donantes: 662 (110 que habia + 282 de past7 + 58 de tesis + 212 de spe/vidal, matcheo por dni con digitos)
+- frascos: 4506 y pasteurizaciones: 4494 (2025 + 2017 planilla 7 + 2015 tesis + P2192 de etiquetas)
+- fraccionamientos: 224 y biberones: 3322 (altas 2025 hoja1 + altas 2017 planilla 8, parser en temp/opencode/gen_altas.py)
+- pacientes: 344 (342 nombres de planilla 14, solo eso trae la planilla)
+- empleados: agus, vane, laura, julieta, maggi (los responsables de las planillas) + 13 domicilios desde hojas de ruta
+- historias perinatales (punto 8): 120 historias y 122 bebes desde spe/vidal
+
+
+## lecciones de las cargas (para no repetir errores)
+- si borras filas con xml-id a mano, vuelven con cada update (me paso con alimentos, se duplicaron solas). borrar solo las manuales
+- postgres no deja agregar columnas en el medio de una vista con or replace, hay que hacer drop + create (me paso con el resumen)
+- los excel traen typos por todos lados (bis, tris, P sin numero, fechas como 60.0069): el parser loguea todo lo que salta en altas_skips.log, leerlo antes de dar por terminado
+- despues de un update con modelos nuevos hay que reiniciar el servidor, el vivo no los toma (da KeyError)
+
+# historia perinatal 
+- modelos nuevos caen.historia_perinatal (embarazos, partos, cesareas, abortos, controles, patologia) y caen.historia_bebe (fecha, semanas, peso, orden)
+- pestana en la ficha de donante + menu + link en sidebar + boton + nueva historia 
+
+# curvas de crecimiento 
+- fenton no publica sus tablas (hay que pedirlas por mail, uso comercial con licencia), decision: intergrowth-21st para prematuros (abierto) + oms para termino (abierta)
+- tablas en data/referencias (who2006.csv + 6 csv de intergrowth), motor en models/curvas.py verificado contra ejemplos publicados
+- ruta /caen/curvas/<id> + componente owl con chartjs + boton en ficha del paciente + z automatico en seguimiento (antes se cargaba a mano)
+
+# fixes chicos que fueron saliendo
+- sidebar inventario era un solo boton, ahora es acordeon con stock de leche + movimientos + resumen
+- la pasteurizacion no tenia nombre visible (mostraba caen.pasteurizacion,9 en los desplegables), le puse _rec_name al qr
+- borre el menu duplicado menu_caen_stock_resumen que habia quedado huerfano
+- el resumen de stock alimentario mandaba a /odoo/discuss por la columna faltante (dicho arriba)

@@ -33,6 +33,7 @@
     <menuitem id="menu_caen_inventario"
               name="Inventario"
               parent="menu_caen_root"
+              action="action_caen_stock_resumen"
               sequence="6"/>
     <menuitem id="menu_caen_stock_leche"
               name="Stock de Leche"

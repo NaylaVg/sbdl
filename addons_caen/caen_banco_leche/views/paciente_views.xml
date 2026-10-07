@@ -35,6 +35,12 @@
         <field name="arch" type="xml">
             <form string="Paciente">
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_ver_curvas" type="object"
+                                class="oe_stat_button" icon="fa-line-chart">
+                            <span>Curvas de crecimiento</span>
+                        </button>
+                    </div>
                     <group>
                         <group>
                             <field name="name"/>

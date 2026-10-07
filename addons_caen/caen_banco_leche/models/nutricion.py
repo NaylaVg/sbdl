@@ -1,5 +1,7 @@
 from odoo import api, fields, models
 
+from . import curvas
+
 
 class PlanAlimentacion(models.Model):
     # plan de alimentacion de un paciente rn
@@ -135,5 +137,33 @@ class SeguimientoNutricional(models.Model):
     weight_g = fields.Integer(string='Peso (g)')
     height_cm = fields.Float(string='Talla (cm)')
     head_circumference_cm = fields.Float(string='Perímetro cefálico (cm)')
-    z_score_weight = fields.Float(string='Z-score peso')
-    z_score_height = fields.Float(string='Z-score talla')
+    # el z lo calculo solo con las tablas, antes se cargaba a mano
+    # si falta algun dato queda vacio en vez de inventar un cero
+    z_score_weight = fields.Float(string='Z-score peso',
+                                  compute='_compute_z', store=True)
+    z_score_height = fields.Float(string='Z-score talla',
+                                  compute='_compute_z', store=True)
+
+    @api.depends('tracking_date', 'weight_g', 'height_cm',
+                 'head_circumference_cm', 'plan_id.patient_id')
+    def _compute_z(self):
+        for rec in self:
+            rec.z_score_weight = False
+            rec.z_score_height = False
+            bebe = rec.plan_id.patient_id
+            if not bebe or not bebe.birth_date or not rec.tracking_date:
+                continue
+            eg = (bebe.gestational_age_weeks or 0) + (bebe.gestational_age_days or 0) / 7.0
+            dias = (rec.tracking_date - bebe.birth_date).days
+            if dias < 0:
+                continue
+            pma = eg + dias / 7.0
+            sexo = bebe.sexo or 'm'
+            if rec.weight_g:
+                rec.z_score_weight = curvas.z_score(
+                    sexo, 'peso', edad_dias=dias, pma_semanas=pma,
+                    valor=rec.weight_g, eg_semanas=eg)
+            if rec.height_cm:
+                rec.z_score_height = curvas.z_score(
+                    sexo, 'talla', edad_dias=dias, pma_semanas=pma,
+                    valor=rec.height_cm, eg_semanas=eg)

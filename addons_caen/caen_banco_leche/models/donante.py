@@ -30,6 +30,8 @@ class Donante(models.Model):
                                    string='Serologías')
     batch_ids = fields.One2many('caen.frasco', 'donor_id',
                                 string='Frascos')
+    historia_ids = fields.One2many('caen.historia_perinatal', 'donor_id',
+                                   string='Historias perinatales')
     visit_ids = fields.One2many('caen.visita', 'donor_id',
                                 string='Visitas de donación')
 

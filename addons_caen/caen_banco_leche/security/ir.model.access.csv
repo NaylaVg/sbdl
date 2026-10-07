@@ -39,3 +39,7 @@ access_caen_asignacion_read,caen.asignacion,model_caen_asignacion,base.group_use
 access_caen_asignacion_write,caen.asignacion,model_caen_asignacion,caen_banco_leche.perm_asignaciones,1,1,1,1
 access_caen_stock_alimento,caen.stock_alimento,model_caen_stock_alimento,base.group_user,1,1,1,1
 access_caen_stock_alimento_resumen,caen.stock_alimento_resumen,model_caen_stock_alimento_resumen,base.group_user,1,0,0,0
+access_caen_historia_perinatal_read,caen.historia_perinatal,model_caen_historia_perinatal,base.group_user,1,0,0,0
+access_caen_historia_bebe_read,caen.historia_bebe,model_caen_historia_bebe,base.group_user,1,0,0,0
+access_caen_historia_perinatal_write,caen.historia_perinatal,model_caen_historia_perinatal,caen_banco_leche.perm_donantes,1,1,1,1
+access_caen_historia_bebe_write,caen.historia_bebe,model_caen_historia_bebe,caen_banco_leche.perm_donantes,1,1,1,1

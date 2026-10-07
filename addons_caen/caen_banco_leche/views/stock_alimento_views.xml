@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="action_caen_stock_alimento_nuevo" model="ir.actions.act_window">
+        <field name="name">Nuevo movimiento</field>
+        <field name="res_model">caen.stock_alimento</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="binding_model_id" ref="model_caen_stock_alimento"/>
+    </record>
+
     <record id="view_caen_stock_alimento_list" model="ir.ui.view">
         <field name="name">caen.stock_alimento.list</field>
         <field name="model">caen.stock_alimento</field>
         <field name="arch" type="xml">
             <list string="Stock de productos alimentarios">
+                <header>
+                    <button name="%(action_caen_stock_alimento_nuevo)d" type="action"
+                            string="+ Nuevo movimiento" class="o_caen_create_button btn-primary"
+                            display="always" groups="caen_banco_leche.perm_stock"/>
+                </header>
                 <field name="fecha"/>
                 <field name="alimento_id"/>
                 <field name="tipo_movimiento"/>
