@@ -9,7 +9,7 @@
         <xpath expr="//nav" position="before">
             <div class="caen-sidebar">
                 <div class="caen-sidebar-profile-box" id="caen-profile-box">
-                    <img class="caen-sidebar-profile-img" src="/web/static/img/placeholder.png" alt="avatar"/>
+                    <img class="caen-sidebar-profile-img" src="addons_caen\caen_banco_leche\static\src\img\isotipo.png" alt="avatar"/>
                     <span class="caen-sidebar-profile-name">Cargando...</span>
                     <span class="caen-sidebar-profile-role">Banco de Leche Humana</span>
                 </div>
@@ -20,6 +20,28 @@
                     <a class="caen-sidebar-btn" href="/odoo/action-caen_banco_leche.action_caen_alerta">
                         <i class="fa fa-exclamation-triangle caen-sidebar-icon"/><span>Alertas</span>
                     </a>
+                    <details class="caen-sidebar-group">
+                        <summary class="caen-sidebar-btn">
+                            <i class="fa fa-clock-o caen-sidebar-icon"/><span>Pendientes de Hoy</span>
+                        </summary>
+                        <div class="caen-sidebar-submenu">
+                            <a class="caen-sidebar-child caen-priority-urgent" href="/odoo/action-caen_banco_leche.action_reporte_serologias_pendientes">
+                                <span class="caen-priority-dot"/>Serologías Pendientes
+                            </a>
+                            <a class="caen-sidebar-child caen-priority-urgent" href="/odoo/action-caen_banco_leche.action_caen_alerta">
+                                <span class="caen-priority-dot"/>Alertas Activas
+                            </a>
+                            <a class="caen-sidebar-child caen-priority-medium" href="/odoo/action-caen_banco_leche.action_asignacion">
+                                <span class="caen-priority-dot"/>Asignaciones Diarias
+                            </a>
+                            <a class="caen-sidebar-child caen-priority-medium" href="/odoo/action-caen_banco_leche.action_caen_stock_resumen">
+                                <span class="caen-priority-dot"/>Inventario
+                            </a>
+                            <a class="caen-sidebar-child caen-priority-low" href="/odoo/action-caen_banco_leche.action_centro_recoleccion">
+                                <span class="caen-priority-dot"/>Centros de Recolección
+                            </a>
+                        </div>
+                    </details>
                     <details class="caen-sidebar-group">
                         <summary class="caen-sidebar-btn">
                             <i class="fa fa-users caen-sidebar-icon"/><span>Donantes y Consentimientos</span>

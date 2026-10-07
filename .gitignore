@@ -62,3 +62,9 @@ setup.py
 setup.cfg
 setup/
 #NO SÉ SI SE BORRA O NO JEJE >>>>>>> a003a0f2eac94240d3ce24c467ef0d4e18d15725
+
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd

@@ -1,0 +1,64 @@
+Total messages: 27 (Errors: 22, Warnings: 5)
+Returning 22 messages for level "error"
+
+[ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:8069/web/webclient/load_menus:0
+[ERROR] TypeError: Failed to fetch
+    at odoo.reloadMenus (http://localhost:8069/odoo/action-411/1:30:50)
+    at http://localhost:8069/odoo/action-411/1:31:54 @ http://localhost:8069/web/assets/860e014/web.assets_web.min.js:2564
+[ERROR] ConnectionLostError: Connection couldn't be established or was interrupted
+    Error: Connection couldn't be established or was interrupted
+        at http://localhost:8069/web/assets/860e014/web.assets_web.min.js:10886:709 @ http://localhost:8069/web/assets/860e014/web.assets_web.min.js:2564
+[ERROR] TypeError: Failed to fetch
+    at odoo.reloadMenus (http://localhost:8069/odoo/action-411/1:30:50)
+    at http://localhost:8069/odoo/action-411/1:31:54 @ http://localhost:8069/web/assets/860e014/web.assets_web.min.js:2564
+[ERROR] ConnectionLostError: Connection couldn't be established or was interrupted
+    Error: Connection couldn't be established or was interrupted
+        at http://localhost:8069/web/assets/860e014/web.assets_web.min.js:10886:709 @ http://localhost:8069/web/assets/860e014/web.assets_web.min.js:2564
+[ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:8069/web/webclient/translations?hash=d6f85be497872460ad2aeefce60364ea468b172e&lang=en_US:0
+[ERROR] TypeError: Failed to fetch
+    at fetchTranslations (http://localhost:8069/web/assets/860e014/web.assets_web.min.js:2901:1835)
+    at Object.start (http://localhost:8069/web/assets/860e014/web.assets_web.min.js:2903:672)
+    at async Promise.all (index 9)
+    at async start (http://localhost:8069/web/assets/860e014/web.assets_web.min.js:1462:1)
+    at async _startServices (http://localhost:8069/web/assets/860e014/web.assets_web.min.js:1463:72)
+    at async startServices (http://localhost:8069/web/assets/860e014/web.assets_web.min.js:1456:157)
+    at async mountComponent (http://localhost:8069/web/assets/860e014/web.assets_web.min.js:1475:305)
+    at async startWebClient (http://localhost:8069/web/assets/860e014/web.assets_web.min.js:22034:29) @ http://localhost:8069/web/assets/860e014/web.assets_web.min.js:2564
+[ERROR] ConnectionLostError: Connection couldn't be established or was interrupted
+    Error: Connection couldn't be established or was interrupted
+        at http://localhost:8069/web/assets/860e014/web.assets_web.min.js:10886:709 @ http://localhost:8069/web/assets/860e014/web.assets_web.min.js:2564
+[ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:8069/web/bundle/web_tour.interactive?lang=en_US:0
+[ERROR] AssetsLoadingError: The loading of http://localhost:8069/web/bundle/web_tour.interactive?lang=en_US failed
+    Error: The loading of http://localhost:8069/web/bundle/web_tour.interactive?lang=en_US failed
+        at http://localhost:8069/web/assets/860e014/web.assets_web.min.js:1517:78
+        at async resumeTour (http://localhost:8069/web/assets/860e014/web.assets_web.min.js:11580:130)
+
+Caused by: TypeError: Failed to fetch
+    at Object.getBundle (http://localhost:8069/web/assets/860e014/web.assets_web.min.js:1516:15)
+    at getBundle (http://localhost:8069/web/assets/860e014/web.assets_web.min.js:1507:562)
+    at Object.loadBundle (http://localhost:8069/web/assets/860e014/web.assets_web.min.js:1520:8)
+    at loadBundle (http://localhost:8069/web/assets/860e014/web.assets_web.min.js:1508:69)
+    at resumeTour (http://localhost:8069/web/assets/860e014/web.assets_web.min.js:11580:136)
+    at Object.start (http://localhost:8069/web/assets/860e014/web.assets_web.min.js:11586:93)
+    at async Promise.all (index 7)
+    at async start (http://localhost:8069/web/assets/860e014/web.assets_web.min.js:1462:1)
+    at async _startServices (http://localhost:8069/web/assets/860e014/web.assets_web.min.js:1463:72)
+    at async startServices (http://localhost:8069/web/assets/860e014/web.assets_web.min.js:1456:157) @ http://localhost:8069/web/assets/860e014/web.assets_web.min.js:2564
+[ERROR] ConnectionLostError: Connection couldn't be established or was interrupted
+    Error: Connection couldn't be established or was interrupted
+        at http://localhost:8069/web/assets/860e014/web.assets_web.min.js:10886:709 @ http://localhost:8069/web/assets/860e014/web.assets_web.min.js:2564
+[ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:8069/web/action/load:0
+[ERROR] ConnectionLostError: Connection to "/web/action/load" couldn't be established or was interrupted
+    Error: Connection to "/web/action/load" couldn't be established or was interrupted
+        at XMLHttpRequest.<anonymous> (http://localhost:8069/web/assets/860e014/web.assets_web.min.js:3202:200) @ http://localhost:8069/web/assets/860e014/web.assets_web.min.js:2564
+[ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:8069/mail/data:0
+[ERROR] ConnectionLostError: Connection to "/mail/data" couldn't be established or was interrupted
+    Error: Connection to "/mail/data" couldn't be established or was interrupted
+        at XMLHttpRequest.<anonymous> (http://localhost:8069/web/assets/860e014/web.assets_web.min.js:3202:200) @ http://localhost:8069/web/assets/860e014/web.assets_web.min.js:2564
+[ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:8069/web/webclient/version_info:0
+[ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:8069/web/manifest.webmanifest:0
+[ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:8069/web/image?model=res.users&field=avatar_128&id=2:0
+[ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:8069/web/webclient/version_info:0
+[ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:8069/web/webclient/version_info:0
+[ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:8069/web/webclient/version_info:0
+[ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:8069/web/webclient/version_info:0
