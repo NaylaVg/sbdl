@@ -60,12 +60,38 @@ class Distribucion(models.Model):
                 vals['name'] = f'DIS-{seq:0>4d}'
         return super().create(vals_list)
 
-    # boton confirmar, cierra la distribucion y lo anota en la bitacora
+    # boton confirmar, descuenta el stock, cierra la distribucion y lo anota en la bitacora
     def action_confirmar(self):
         for rec in self:
-            rec.state = 'done'
-            rec._bitacora('stage', f'Distribución confirmada: {rec.frasco_id.name} -> {rec.patient_id.name}')
+            # solo descuento si todavia esta en borrador, asi no resto dos veces
+            if rec.state != 'done':
+                rec._descontar_stock()
+                rec.state = 'done'
+                rec._bitacora('stage', f'Distribución confirmada: {rec.frasco_id.name} -> {rec.patient_id.name}')
         return True
+
+    def _descontar_stock(self):
+        # saco del inventario lo que se entrego, asi el stock baja solo
+        # uso los datos del frasco (producto, ubicacion y lote) como hace _quitar_stock
+        # si no alcanza el stock no dejo confirmar, aviso con error
+        self.ensure_one()
+        frasco = self.frasco_id
+        if not frasco.product_id or not frasco.current_location_id or not frasco.lot_id:
+            raise ValidationError(
+                'El frasco no tiene stock registrado (le falta producto, ubicación o lote).\n'
+                'No se puede confirmar la entrega.')
+        # paso ml a litros porque el stock esta en litros
+        qty = (frasco.volume_ml or 0) / 1000.0
+        if qty <= 0:
+            return
+        disponible = self.env['stock.quant']._get_available_quantity(
+            frasco.product_id, frasco.current_location_id, lot_id=frasco.lot_id)
+        if disponible < qty:
+            raise ValidationError(
+                f'No hay stock suficiente del lote {frasco.name}.\n'
+                f'Disponible: {disponible} L, necesita: {qty} L.')
+        self.env['stock.quant']._update_available_quantity(
+            frasco.product_id, frasco.current_location_id, -qty, lot_id=frasco.lot_id)
 
     def _bitacora(self, action_type, changes):
         self.env['caen.bitacora']._registrar(
