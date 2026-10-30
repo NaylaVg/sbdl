@@ -72,6 +72,9 @@
                         <div class="caen-sidebar-submenu">
                             <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_caen_paciente">Pacientes</a>
                             <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_caen_plan">Planes de Alimentación</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_caen_distribucion_alimento">Distribuciones de Fórmula</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_caen_stock_alimento_vencimiento">Alimentos por Vencer</a>
+                            <a class="caen-sidebar-child" href="/odoo/action-caen_banco_leche.action_caen_stock_cruda_alerta">Leche cruda sin pasteurizar</a>
                         </div>
                     </details>
                     <a class="caen-sidebar-btn" href="/odoo/action-caen_banco_leche.action_centro_recoleccion">

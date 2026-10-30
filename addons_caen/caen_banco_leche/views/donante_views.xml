@@ -21,8 +21,10 @@
                 <field name="name"/>
                 <field name="dni"/>
                 <field name="phone"/>
+                <field name="cell_phone"/>
                 <field name="center_id"/>
                 <field name="apta_donar"/>
+                <field name="age"/>
                 <field name="state"/>
             </list>
         </field>
@@ -35,24 +37,46 @@
             <form string="Donante">
                 <sheet>
                     <group>
-                        <group>
+                        <group string="Datos personales">
                             <field name="name"/>
                             <field name="dni"/>
                             <field name="birth_date"/>
+                            <field name="age" readonly="1"/>
                             <field name="phone"/>
+                            <field name="cell_phone"/>
                             <field name="email"/>
-                            <field name="address"/>
                         </group>
-                        <group>
+                        <group string="Dirección y centro">
+                            <field name="address"/>
+                            <field name="street2"/>
+                            <field name="city"/>
+                            <field name="state_id"/>
                             <field name="center_id"/>
-                            <field name="next_visit_due"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Estado de donación">
                             <field name="state"/>
                             <field name="serologias_ok"/>
                             <field name="serologias_pendientes"/>
                             <field name="apta_donar"/>
+                            <field name="next_visit_due"/>
+                        </group>
+                        <group string="Origen y comentarios">
+                            <field name="how_knew"/>
+                            <field name="comments"/>
                         </group>
                     </group>
                     <notebook>
+                        <page string="Datos del bebé">
+                            <group>
+                                <field name="baby_name"/>
+                                <field name="baby_birth_date"/>
+                                <field name="baby_eg_weeks"/>
+                                <field name="baby_eg_days"/>
+                                <field name="baby_birth_place"/>
+                            </group>
+                        </page>
                         <page string="Consentimientos">
                             <field name="consent_ids">
                                 <list string="Consentimientos">

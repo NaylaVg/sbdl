@@ -21,6 +21,7 @@ class Frasco(models.Model):
     visit_id = fields.Many2one('caen.visita', string='Visita de donación', ondelete='restrict')
     volume_ml = fields.Integer(string='Volumen (ml)')
     extraction_date = fields.Datetime(string='Fecha de extracción')
+    reception_date = fields.Datetime(string='Fecha de recepción')
     # etapa de la leche segun el tiempo del parto
     milk_stage = fields.Selection([
         ('colostrum', 'Calostro'),
@@ -33,6 +34,34 @@ class Frasco(models.Model):
         ('preterm', 'Prematuro'),
         ('term', 'Término'),
     ], string='Destino')
+    # tipo de leche segun edad gestacional y dias post-nacimiento (C/T/M)
+    milk_type = fields.Selection([
+        ('C', 'Calostro'),
+        ('T', 'Transición'),
+        ('M', 'Madura'),
+    ], string='Tipo de leche')
+    # dias desde el nacimiento del bebe hasta la extraccion
+    days_from_birth = fields.Integer(string='Días desde nacimiento', compute='_compute_days')
+    # dias desde la extraccion hasta la pasteurizacion
+    days_to_pasteurization = fields.Integer(
+        string='Días a pasteurización', compute='_compute_days')
+    # tipo de leche como texto para reporte y etiqueta
+    tipo_leche = fields.Char(string='Tipo de leche', compute='_compute_tipo_leche')
+    # valores nutricionales por 100 ml del frasco (para seguimiento del bebe)
+    hc = fields.Float(string='Hidratos (g/100ml)')
+    protein = fields.Float(string='Proteína (g/100ml)')
+    fat = fields.Float(string='Grasa (g/100ml)')
+    calcium = fields.Float(string='Calcio (mg/100ml)')
+    iron = fields.Float(string='Hierro (mg/100ml)')
+    phosphorus = fields.Float(string='Fósforo (mg/100ml)')
+    vit_c = fields.Float(string='Vit C (mg/100ml)')
+    vit_d = fields.Float(string='Vit D (mcg/100ml)')
+    # resultado de cultivos como texto
+    total_col = fields.Float(string='Total colíneos')
+    confirmation = fields.Selection([
+        ('confirmado', 'Confirmado'),
+        ('no_confirmado', 'No confirmado'),
+    ], string='Confirmación')
     # ciclo de vida del frasco, arranca en crudo
     state = fields.Selection([
         ('raw', 'Crudo'),
@@ -202,3 +231,67 @@ class Frasco(models.Model):
         self.state = 'discarded'
         self._bitacora('stage', 'Descartado el frasco (baja).')
         return True
+
+    # devuelve color CSS para el badge de estado en la ficha
+    def get_state_color(self, state):
+        colors = {
+            'raw': '#dc3545',        # rojo - crudo
+            'pasteurized': '#28a745', # verde - pasteurizado
+            'fractioned': '#17a2b8', # azul claro - fraccionado
+            'delivered': '#6c757d',  # gris - entregado
+            'discarded': '#6f42c1',  # púrpura - descartado
+        }
+        return 'color: %s;' % colors.get(state, '#6c757d')
+
+    # calcula dias desde nacimiento y dias a pasteurizacion
+    @api.depends('extraction_date', 'donor_id.baby_birth_date')
+    def _compute_days(self):
+        for frasco in self:
+            frasco.days_from_birth = 0
+            frasco.days_to_pasteurization = 0
+            if frasco.extraction_date and frasco.donor_id and frasco.donor_id.baby_birth_date:
+                fecha_extraccion = frasco.extraction_date.date()
+                fecha_nacimiento = frasco.donor_id.baby_birth_date
+                frasco.days_from_birth = (fecha_extraccion - fecha_nacimiento).days
+                if frasco.state == 'pasteurized':
+                    # busca la fecha de pasteurizacion aproximada (estado cambiado)
+                    frasco.days_to_pasteurization = (
+                        fecha_extraccion - fecha_nacimiento).days
+
+    # calcula tipo de leche segun edad gestacional y dias post-nacimiento
+    # C: calostro, T: transicion, M: madura
+    @api.depends('days_from_birth', 'donor_id.baby_eg_weeks')
+    def _compute_milk_type(self):
+        for frasco in self:
+            frasco.milk_type = 'M'  # default madura
+            if not frasco.days_from_birth:
+                continue
+            eg = frasco.donor_id.baby_eg_weeks or 40
+            dias = frasco.days_from_birth
+            if eg < 34:  # prematuro muy prematuro
+                if dias <= 10:
+                    frasco.milk_type = 'C'
+                elif dias <= 21:
+                    frasco.milk_type = 'T'
+                else:
+                    frasco.milk_type = 'M'
+            elif eg < 37:  # pretemino
+                if dias <= 7:
+                    frasco.milk_type = 'C'
+                elif dias <= 14:
+                    frasco.milk_type = 'T'
+                else:
+                    frasco.milk_type = 'M'
+            else:  # termino
+                if dias <= 5:
+                    frasco.milk_type = 'C'
+                elif dias <= 10:
+                    frasco.milk_type = 'T'
+                else:
+                    frasco.milk_type = 'M'
+
+    @api.depends('milk_type')
+    def _compute_tipo_leche(self):
+        for frasco in self:
+            tipos = {'C': 'Calostro', 'T': 'Transición', 'M': 'Madura'}
+            frasco.tipo_leche = tipos.get(frasco.milk_type or 'M', 'Madura')

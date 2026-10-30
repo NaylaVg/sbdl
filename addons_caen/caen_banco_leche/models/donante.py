@@ -16,12 +16,36 @@ class Donante(models.Model):
     phone = fields.Char(string='Teléfono')
     email = fields.Char(string='Email')
     address = fields.Text(string='Domicilio')
+    street2 = fields.Char(string='Barrio')
+    city = fields.Char(string='Localidad')
+    state_id = fields.Many2one(
+        'res.country.state', string='Provincia')
+    cell_phone = fields.Char(string='Celular')
+    email = fields.Char(string='Email')
+    how_knew = fields.Selection([
+        ('medico', 'Médico'),
+        ('enfermera', 'Enfermera'),
+        ('amiga', 'Amiga/Familiar'),
+        ('web', 'Redes sociales / Web'),
+        ('otro', 'Otro'),
+    ], string='¿Cómo se enteró del BLH?')
+    comments = fields.Text(string='Comentarios')
     # para que al elegir centro en la ficha de la donante, solo aparezcan los contactos marcados 
     # como centro de recolección (no cualquier contacto de Odoo)
     center_id = fields.Many2one(
     'res.partner', string='Centro de recolección',
     domain="[('es_centro_recoleccion', '=', True)]",
     help='Centro al que pertenece la donante (SPE, Vidal, etc.)')
+
+    # datos del bebé de la madre donante (documento de requisitos BLH)
+    baby_name = fields.Char(string='Nombre del bebé')
+    baby_birth_date = fields.Date(string='Fecha de nacimiento del bebé')
+    baby_eg_weeks = fields.Integer(string='Semanas de gestación')
+    baby_eg_days = fields.Integer(string='Días de gestación')
+    baby_birth_place = fields.Char(string='¿Dónde nació el bebé?')
+
+    # edad auto-recalculable desde la fecha de nacimiento de la madre
+    age = fields.Integer(string='Edad', compute='_compute_age')
 
     # relaciones uno a muchos con los hijos, cada hijo guarda un donor_id
     # que apunta de vuelta a esta donante
@@ -85,4 +109,17 @@ class Donante(models.Model):
             # consentimiento vigente
             rec.apta_donar = rec.state == 'active' and rec.serologias_ok >= 7 \
                 and bool(consent_vigente)
+
+    # edad auto-recalculable desde la fecha de nacimiento de la madre
+    @api.depends('birth_date')
+    def _compute_age(self):
+        today = fields.Date.context_today(self)
+        for rec in self:
+            if rec.birth_date:
+                rec.age = today.year - rec.birth_date.year - (
+                    (today.month, today.day) <
+                    (rec.birth_date.month, rec.birth_date.day))
+            else:
+                rec.age = 0
+
             

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- secuencia para las referencias de distribucion_alimento -->
+    <record id="seq_caen_distribucion_alimento" model="ir.sequence">
+        <field name="name">Secuencia Distribución Alimento</field>
+        <field name="code">caen.distribucion_alimento</field>
+        <field name="prefix">DFA</field>
+        <field name="padding">4</field>
+        <field name="number_increment">1</field>
+        <field name="number_next">1</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <record id="action_caen_distribucion_alimento_nuevo" model="ir.actions.act_window">
+        <field name="name">Nueva distribución de fórmula</field>
+        <field name="res_model">caen.distribucion_alimento</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="binding_model_id" ref="model_caen_distribucion_alimento"/>
+    </record>
+
+    <record id="view_caen_distribucion_alimento_list" model="ir.ui.view">
+        <field name="name">caen.distribucion_alimento.list</field>
+        <field name="model">caen.distribucion_alimento</field>
+        <field name="arch" type="xml">
+            <list string="Distribuciones de fórmula">
+                <header>
+                    <button name="%(action_caen_distribucion_alimento_nuevo)d" type="action"
+                            string="+ Nueva distribución" class="o_caen_create_button btn-primary"
+                            display="always" groups="caen_banco_leche.perm_nutricion"/>
+                </header>
+                <field name="name"/>
+                <field name="fecha"/>
+                <field name="paciente_id"/>
+                <field name="alimento_id"/>
+                <field name="cantidad_ml"/>
+                <field name="lote"/>
+                <field name="fecha_vencimiento"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_caen_distribucion_alimento_form" model="ir.ui.view">
+        <field name="name">caen.distribucion_alimento.form</field>
+        <field name="model">caen.distribucion_alimento</field>
+        <field name="arch" type="xml">
+            <form string="Distribución de fórmula">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" readonly="1"/>
+                            <field name="paciente_id"/>
+                            <field name="alimento_id"/>
+                            <field name="cantidad_ml"/>
+                            <field name="fecha"/>
+                        </group>
+                        <group>
+                            <field name="lote"/>
+                            <field name="fecha_vencimiento"/>
+                            <field name="usuario_id" readonly="1"/>
+                            <field name="state" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="observaciones"/>
+                    </group>
+                </sheet>
+                <header>
+                    <button name="action_confirmar" type="object"
+                            string="Confirmar entrega" class="oe_highlight"
+                            invisible="state != 'draft'"/>
+                    <field name="state" widget="statusbar" readonly="1"/>
+                </header>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_caen_distribucion_alimento" model="ir.actions.act_window">
+        <field name="name">Distribuciones de fórmula</field>
+        <field name="res_model">caen.distribucion_alimento</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_caen_distribucion_alimento"
+              name="Distribuciones de fórmula"
+              parent="menu_caen_nutricion"
+              action="action_caen_distribucion_alimento"/>
+</odoo>

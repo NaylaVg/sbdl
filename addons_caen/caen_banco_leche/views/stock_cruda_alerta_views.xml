@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_caen_stock_cruda_alerta_list" model="ir.ui.view">
+        <field name="name">caen.stock_cruda_alerta.list</field>
+        <field name="model">caen.stock_cruda_alerta</field>
+        <field name="arch" type="xml">
+            <list string="Leche cruda por antigüedad" create="false" edit="false" delete="false">
+                <field name="name"/>
+                <field name="donor_name"/>
+                <field name="volume_ml"/>
+                <field name="extraction_date"/>
+                <field name="dias_antiguedad"/>
+                <field name="lot_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_caen_stock_cruda_alerta" model="ir.actions.act_window">
+        <field name="name">Leche cruda sin pasteurizar</field>
+        <field name="res_model">caen.stock_cruda_alerta</field>
+        <field name="view_mode">list</field>
+        <field name="help">Muestra la leche cruda en recepcion con los dias que lleva sin pasteurizar. Sirve para saber que leche hay que pasteurizar pronto.</field>
+    </record>
+
+    <menuitem id="menu_caen_stock_cruda_alerta"
+              name="Leche cruda sin pasteurizar"
+              parent="menu_caen_nutricion"
+              action="action_caen_stock_cruda_alerta"/>
+</odoo>

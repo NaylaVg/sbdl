@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_caen_stock_alimento_vencimiento_list" model="ir.ui.view">
+        <field name="name">caen.stock_alimento_vencimiento.list</field>
+        <field name="model">caen.stock_alimento_vencimiento</field>
+        <field name="arch" type="xml">
+            <list string="Alimentos por vencer (FEFO)" create="false" edit="false" delete="false">
+                <field name="alimento_nombre"/>
+                <field name="lote"/>
+                <field name="fecha_vencimiento"/>
+                <field name="stock_actual"/>
+                <field name="dias_para_vencer"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_caen_stock_alimento_vencimiento" model="ir.actions.act_window">
+        <field name="name">Alimentos por vencer</field>
+        <field name="res_model">caen.stock_alimento_vencimiento</field>
+        <field name="view_mode">list</field>
+        <field name="help">Lista de fórmulas y suplementos con stock y fecha de vencimiento. Se ordena por fecha más cercana primero (FEFO).</field>
+    </record>
+
+    <menuitem id="menu_caen_stock_alimento_vencimiento"
+              name="Alimentos por vencer"
+              parent="menu_caen_nutricion"
+              action="action_caen_stock_alimento_vencimiento"/>
+</odoo>

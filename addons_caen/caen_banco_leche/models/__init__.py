@@ -7,6 +7,7 @@ from . import frasco
 from . import pasteurizacion
 from . import fraccionamiento
 from . import distribucion
+from . import distribucion_alimento
 from . import bitacora
 from . import stock_leche
 from . import rendimiento
@@ -15,6 +16,8 @@ from . import nutricion
 from . import alimento
 from . import stock_alimento
 from . import stock_alimento_resumen
+from . import stock_alimento_vencimiento
+from . import stock_cruda_alerta
 from . import evolucion
 from . import dashboard
 from . import alerta

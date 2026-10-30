@@ -16,6 +16,7 @@ class Alerta(models.Model):
         ('consentimiento_por_vencer', 'Consentimiento por Vencer'),
         ('consentimiento_vencido', 'Consentimiento Vencido'),
         ('stock_bajo', 'Stock Bajo'),
+        ('stock_crudo_viejo', 'Leche Cruda Sin Pasteurizar'),
     ], string='Tipo', required=True, index=True)
 
     # que tan urgente es
@@ -114,6 +115,22 @@ class Alerta(models.Model):
                 'alert_type': 'stock_bajo',
                 'severity': 'warning',
                 'description': f'Stock bajo: solo {qty_total:.1f}L de leche cruda en recepción.',
+            })
+
+        # 5 leche cruda sin pasteurizar: frascos crudos con mas de 5 dias de antiguedad
+        crudos_viejos = self.env['caen.frasco'].search([
+            ('state', '=', 'raw'),
+            ('extraction_date', '<=', (today - timedelta(days=5)).strftime('%Y-%m-%d')),
+        ])
+        for frasco in crudos_viejos:
+            dias = (today - frasco.extraction_date.date()).days
+            Alerta.create({
+                'alert_type': 'stock_crudo_viejo',
+                'severity': 'warning' if dias <= 7 else 'critical',
+                'donor_id': frasco.donor_id.id,
+                'related_model': 'caen.frasco',
+                'related_id': frasco.id,
+                'description': f'Frasco {frasco.name} de {frasco.donor_name or frasco.donor_id.name} lleva {dias} dias como leche cruda sin pasteurizar ({frasco.volume_ml} ml).',
             })
 
         return True
